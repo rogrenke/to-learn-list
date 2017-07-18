@@ -13,11 +13,13 @@ var users = require('./routes/users');
 var app = express();
 
 
+
 // import environmental variables from our development.env file
 require('dotenv').config();
+const ENVIRONMENT = process.env.NODE_ENV.toUpperCase();
 
 // Connect to our Database and handle an bad connections
-mongoose.connect(process.env.DATABASE);
+mongoose.connect(process.env[`DATABASE_${ENVIRONMENT}`])
 mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
 mongoose.connection.on('error', (err) => {
   console.error(`🙅 🚫 🙅 🚫 🙅 🚫 🙅 🚫 → ${err.message}`);

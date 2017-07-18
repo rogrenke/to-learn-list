@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./app.js",
-    "test": "mocha"
+    "start": "env NODE_ENV=development node ./app.js",
+    "test": "env NODE_ENV=test mocha"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
