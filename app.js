@@ -5,24 +5,29 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var sassMiddleware = require('node-sass-middleware');
+var mongoose = require('mongoose');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
 
-//Import the mongoose module
-var mongoose = require('mongoose');
 
-//Set up default mongoose connection
-var mongoDB = 'mongodb://127.0.0.1/to-learn-list_development';
-mongoose.connect(mongoDB);
+// import environmental variables from our development.env file
+require('dotenv').config();
 
-//Get the default connection
-var db = mongoose.connection;
+// Connect to our Database and handle an bad connections
+mongoose.connect(process.env.DATABASE);
+mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
+mongoose.connection.on('error', (err) => {
+  console.error(`🙅 🚫 🙅 🚫 🙅 🚫 🙅 🚫 → ${err.message}`);
+});
 
-//Bind connection to error event (to get notification of connection errors)
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+// Start our app!
+app.set('port', process.env.PORT || 7777);
+const server = app.listen(app.get('port'), () => {
+  console.log(`Express running → PORT ${server.address().port}`);
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -64,3 +69,4 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+module.exports = mongoose;
