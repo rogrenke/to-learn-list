@@ -1,4 +1,5 @@
 const Browser = require('zombie');
+var app = require('../app');
 var assert = require('assert');
 
 Browser.localhost('localhost', 7777);
