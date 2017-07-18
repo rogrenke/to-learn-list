@@ -1,0 +1,21 @@
+const Browser = require('zombie');
+var assert = require('assert');
+
+Browser.localhost('localhost', 7777);
+
+  describe('User visits index page', function() {
+
+  const browser = new Browser();
+
+  before(function() {
+    return browser.visit('/');
+  })
+
+  describe('submits form', function() {
+
+    it('should see the index page', function() {
+      browser.assert.text('p','Welcome to Express')
+    });
+
+  })
+})
