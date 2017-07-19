@@ -9,13 +9,14 @@ Browser.localhost('localhost', 7777);
 describe('List creation page', () => {
   const browser = new Browser();
 
-  before(() => {
-    return browser.visit('/');
+  before((done) => {
+    browser.visit('/', done);
   });
 
   describe('User visits the create list page from the homepage', () => {
-    before(() => {
-      browser.clickLink('Create List');
+
+    before((done) => {
+      browser.clickLink('Create List', done);
     });
 
     it('should get the new list page', () => {
