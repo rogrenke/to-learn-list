@@ -5,32 +5,29 @@ var chai = require('chai'),
   expect = chai.expect;
 
 
-describe('User', function() {
+describe('User', () => {
   var User = require('../models/user');
 
-  describe('User creation', function() {
-    it('creates user', function(done) {
-      var testUser = new User({
-        name: 'Testy',
-        email: 'testy@test.com',
-        password: 'testytest'
-      });
-      testUser.save(function() {
-        User.find({ email: 'testy@test.com' }, function(err, users) {
-          expect(users[0].name).to.equal('Testy');
-          done();
-        });
-      });
+  before((done) => {
+    var existingUser = new User({
+      name: 'user',
+      email: 'test@test.com',
+      password: 'whatever'
     });
+    existingUser.save(done);
+  });
 
-    after(function(done) {
-      mongoose.connection.collections.users.drop(function() {
+  describe('User creation', () => {
+    it('creates user', (done) => {
+      User.find({}, (err, users) => {
+        expect(users[0].name).to.equal('user');
         done();
       });
     });
   });
 
   describe('User validation', () => {
+
     it('throws an error if an email is not provided', (done) => {
       var testUser = new User({ name: 'testing', password: 'test_password' });
       testUser.validate((err) => {
@@ -40,8 +37,29 @@ describe('User', function() {
       });
     });
 
-    after(function(done) {
-      mongoose.connection.collections.users.drop(function() {
+    it('throws an error if a name is not provided', (done) => {
+      var testUser = new User({ email: 'testy@test.com', password: 'test_password' });
+      testUser.validate((err) => {
+        expect(err.errors.name).to.exist;
+        expect(err.errors.name.properties.message).to.equal('Please provide a name')
+        done();
+      });
+    });
+
+    it('does not create a user if email is not unique', (done) => {
+      var newUser = new User({
+      name: 'newuser',
+      email: 'test@test.com',
+      password: 'somethingelse'
+      });
+      newUser.validate((err) => {
+        expect(err.errors).to.exist;
+        done();
+      });
+    });
+
+    after((done) =>  {
+      mongoose.connection.collections.users.drop(() => {
         done();
       });
     });
