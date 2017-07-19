@@ -4,7 +4,8 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    nav
-      ul
-        li: a(href='/lists/new') Create List
+    block header
+      nav
+        ul
+          li: a(href='/lists/new') Create List
     block content
