@@ -29,4 +29,21 @@ describe('User', function() {
       });
     });
   });
+
+  describe('User validation', () => {
+    it('throws an error if an email is not provided', (done) => {
+      var testUser = new User({ name: 'testing', password: 'test_password' });
+      testUser.validate((err) => {
+        expect(err.errors.email).to.exist;
+        expect(err.errors.email.properties.message).to.equal('Please provide an email address')
+        done();
+      });
+    });
+
+    after(function(done) {
+      mongoose.connection.collections.users.drop(function() {
+        done();
+      });
+    });
+  });
 });
