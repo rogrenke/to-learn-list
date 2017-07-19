@@ -55,7 +55,7 @@ describe('List Creation form', () => {
     });
 
     it('should display the new list', () => {
-      browser.assert.text('h3', 'Reading List')
+      browser.assert.text('h1', 'Reading List')
     });
   });
 
