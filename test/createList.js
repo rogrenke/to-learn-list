@@ -1,8 +1,12 @@
+const mongoose = require('mongoose');
 const Browser = require('zombie');
 const chai = require('chai'),
   assert = chai.assert,
   expect = chai.expect;
 var app = require('../app');
+const Cleaner = require('database-cleaner');
+const dbCleaner = new Cleaner('mongodb');
+global.dbCleaner = dbCleaner;
 
 Browser.localhost('localhost', 7777);
 
@@ -23,29 +27,36 @@ describe('List creation page', () => {
       browser.assert.text('h1', 'Create List');
       browser.assert.url({ pathname: '/lists/new' });
     });
-    
+
     it('should display the form', () =>{
       browser.assert.element('form');
-    })
+    });
   });
 });
 
 describe('List Creation form', () => {
   const browser = new Browser();
-  
+
   before((done) => {
     browser.visit('/lists/new', done);
   });
-  
+
+  afterEach((done) => {
+    dbCleaner.clean(mongoose.connection.db, () => {
+      done();
+    });
+  });
+
   describe('User creates a new list', () =>{
     before((done) => {
       browser
         .fill('name', 'Reading List')
         .pressButton('Create', done);
-    })
-  
+    });
+
     it('should display the new list', () => {
       browser.assert.text('h3', 'Reading List')
-    })
-  })
-})
+    });
+  });
+
+});

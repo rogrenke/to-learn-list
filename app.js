@@ -7,9 +7,12 @@ var bodyParser = require('body-parser');
 var sassMiddleware = require('node-sass-middleware');
 var mongoose = require('mongoose');
 
+
+// Routes
 var index = require('./routes/index');
 var users = require('./routes/users');
 var lists = require('./routes/lists');
+
 
 var app = express();
 

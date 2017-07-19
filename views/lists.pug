@@ -2,4 +2,5 @@ extends layout
 
 block content
   h1= title
-  h3 Reading List
+  each list in lists
+    h3= list.name

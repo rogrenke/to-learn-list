@@ -2,14 +2,10 @@ const express = require('express');
 const router = express.Router();
 const listController = require('../controllers/listController')
 
-router.get('/new', (req, res, next) => {
-  res.render('listForm', { title: 'Create List' });
-});
+router.get('/new', listController.createForm)
 
 router.post('/new', listController.createList)
 
-router.get('/', (req, res, next) => {
-  res.render('lists', { title: 'Lists' })
-})
+router.get('/', listController.getLists)
 
 module.exports = router;
