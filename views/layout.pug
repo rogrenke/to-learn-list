@@ -4,6 +4,7 @@ html
     title= title
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src='/scripts/scripts.js')
 
   body
     block header
@@ -12,11 +13,16 @@ html
           .navbar-brand
             a.navbar-item(href='/')
               img.navbar-logo(src='/images/ductu.png')
-          .navbar-start
-            a.navbar-item Home
-            .navbar-item.has-dropdown.is-hoverable
-              a.navbar-link Lists
-              .navbar-dropdown.is-boxed
-                a.navbar-item(href='/lists/new') Create List
+            .navbar-burger.burger(data-target='navMenu')
+              span
+              span
+              span
+          #navMenu.navbar-menu
+            .navbar-start
+              a.navbar-item Home
+              .navbar-item.has-dropdown.is-hoverable
+                a.navbar-link Lists
+                .navbar-dropdown.is-boxed
+                  a.navbar-item(href='/lists/new') Create List
       
     block content
