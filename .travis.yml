@@ -1,0 +1,8 @@
+language: node_js
+
+before_script:
+  - npm install -g mocha
+  - npm install
+  - mongo to-learn-list_test --eval 'db.addUser("travis", "test");'
+
+services: mongodb
