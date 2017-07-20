@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const List = require('../models/List');
-const Item = require('../models/Item');
+const List = mongoose.model('List');
+const Item = mongoose.model('Item');
 
 exports.createForm = (req, res) => {
   res.render('listForm', { title: 'Create List' });
