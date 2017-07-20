@@ -14,7 +14,6 @@ exports.createList = async (req, res) => {
 
 exports.getLists = async (req, res) => {
   const lists = await List.find();
-  // const items = await Item.find({});
   res.render('lists', { lists, title: 'Lists' });
 };
 
