@@ -15,9 +15,12 @@ describe('User signup', function() {
   })
 
   describe('normal sign up', function() {
+    it ('should have a sign up form', () => {
+      browser.assert.element('form')
+    })
 
-    it('should sign up successfully', function() {
-      // browser.assert.text('p','Welcome to Express')
+    it('should sign up successfully', () => {
+
     });
 
   })
