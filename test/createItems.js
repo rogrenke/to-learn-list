@@ -11,29 +11,56 @@ describe('Item creation page', () => {
   const browser = new Browser();
 
   before((done) => {
-    browser.visit('/lists/new', done);
+    browser.visit('/')
+    console.log(browser.location.href);
+    browser.visit('/lists/new', done)
   });
 
-  afterEach((done) => {
-    dbCleaner.clean(mongoose.connection.db, () => {
+  before((done) => {
+    browser
+      .fill('name', 'Reading List')
+      .pressButton('Create', done);
+  });
+
+  after((done) =>  {
+    mongoose.connection.collections.items.drop(() => {
       done();
     });
   });
 
   describe('User sees a form on the new items page', () => {
 
-    before((done) => {
-      browser
-        .fill('name', 'Reading List')
-        .pressButton('Create', done);
-    });
-
     it('should get the new list page', () => {
-      browser.assert.text('button', 'Create Item');
+      browser.assert.text('button', 'Add Item');
     });
 
     it('should display the items form', () => {
       browser.assert.element('form');
+    });
+
+    it('should have an input field for new items', () => {
+      browser.assert.element('form input[name=text]');
+      browser.assert.element('form button');
+    });
+  });
+
+  describe('User can create a new Item', () => {
+
+    before((done) => {
+      browser
+        .fill('text', 'First Item')
+        .pressButton('Add Item', done);
+    });
+
+
+    it('should display the items form', () => {
+      browser.assert.element('form');
+      browser.assert.element('form input[name=text]');
+      browser.assert.element('form button');
+    });
+
+    it('should display the item on the list', () => {
+      browser.assert.text('h2', 'First Item');
     });
   });
 

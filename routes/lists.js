@@ -10,4 +10,6 @@ router.get('/', listController.getLists)
 
 router.get('/:id', listController.getListById)
 
+router.post('/:id', listController.createItem)
+
 module.exports = router;

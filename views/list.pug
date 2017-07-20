@@ -3,9 +3,12 @@ extends layout
 block content
   h1=name
   p Please add items to this list
-
-
-  block content
+  
   form(method='POST')
-    input(type="text" name="item")
-    button(type="submit") Create Item
+    label(for="text") text
+    input(type="text" name="text")
+    button(type="submit") Add Item
+  
+  if items 
+    each item in items
+      h2= item.text
