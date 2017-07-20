@@ -1,4 +1,4 @@
-# To-Learn-List
+# To-Learn-List [![Build Status](https://travis-ci.org/rogrenke/to-learn-list.svg?branch=master)](https://travis-ci.org/rogrenke/to-learn-list)
 
 Final Project of the ProjectX Group. Makers Academy, May 2017 Cohort.
 
