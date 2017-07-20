@@ -1,12 +1,9 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 const Browser = require('zombie');
 const chai = require('chai'),
   assert = chai.assert,
   expect = chai.expect;
 var app = require('../app');
-const Cleaner = require('database-cleaner');
-const dbCleaner = new Cleaner('mongodb');
-global.dbCleaner = dbCleaner;
 
 Browser.localhost('localhost', 7777);
 
@@ -55,7 +52,7 @@ describe('List Creation form', () => {
     });
 
     it('should display the new list', () => {
-      browser.assert.text('h1', 'Reading List')
+      browser.assert.text('h1', 'Reading List');
     });
   });
 

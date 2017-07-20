@@ -23,7 +23,7 @@ require('dotenv').config();
 const ENVIRONMENT = process.env.NODE_ENV.toUpperCase();
 
 // Connect to our Database and handle an bad connections
-mongoose.connect(process.env[`DATABASE_${ENVIRONMENT}`])
+mongoose.connect(process.env[`DATABASE_${ENVIRONMENT}`], {useMongoClient: true});
 mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
 mongoose.connection.on('error', (err) => {
   console.error(`🙅 🚫 🙅 🚫 🙅 🚫 🙅 🚫 → ${err.message}`);
