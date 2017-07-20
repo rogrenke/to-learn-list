@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  h1=name
+  p Please add items to this list
+  
+  form(method='POST')
+    label(for="text") text
+    input(type="text" name="text")
+    button(type="submit") Add Item
+  
+  if items 
+    each item in items
+      h2= item.text

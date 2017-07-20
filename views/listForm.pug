@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  h1= title
+
+  form(method='POST')
+    label(for="name") name
+    input(type="text" name="name")
+    button(type="submit") Create
