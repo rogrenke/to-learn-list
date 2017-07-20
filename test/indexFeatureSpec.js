@@ -12,7 +12,7 @@ Browser.localhost('localhost', 7777);
     return browser.visit('/');
   })
 
-  describe('submits form', function() {
+  describe('checks content on index', function() {
 
     it('should see the index page', function() {
       browser.assert.text('h1','Welcome to Ductu')

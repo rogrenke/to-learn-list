@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const List = require('../models/List');
+const Item = require('../models/Item');
 
 exports.createForm = (req, res) => {
   res.render('listForm', { title: 'Create List' });
@@ -18,5 +19,12 @@ exports.getLists = async (req, res) => {
 
 exports.getListById = async (req, res) => {
   const list = await List.findOne({ _id: req.params.id });
-  res.render('list', { list, name: list.name });
+  const items = await Item.find({});
+  res.render('list', { list, items, name: list.name });
 };
+
+exports.createItem = async (req, res) => {
+  const newItem = new Item(req.body);
+  await newItem.save();
+  res.redirect(`/lists/${req.params.id}`);
+}
