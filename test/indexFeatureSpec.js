@@ -15,7 +15,7 @@ Browser.localhost('localhost', 7777);
   describe('submits form', function() {
 
     it('should see the index page', function() {
-      browser.assert.text('p','Welcome to Express')
+      browser.assert.text('h1','Welcome to Ductu')
     });
 
   })

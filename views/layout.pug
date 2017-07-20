@@ -2,10 +2,21 @@ doctype html
 html
   head
     title= title
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
+
   body
     block header
-      nav
-        ul
-          li: a(href='/lists/new') Create List
+      .container
+        .navbar.is-transparent
+          .navbar-brand
+            a.navbar-item(href='/')
+              img.navbar-logo(src='/images/ductu.png')
+          .navbar-start
+            a.navbar-item Home
+            .navbar-item.has-dropdown.is-hoverable
+              a.navbar-link Lists
+              .navbar-dropdown.is-boxed
+                a.navbar-item(href='/lists/new') Create List
+
     block content
