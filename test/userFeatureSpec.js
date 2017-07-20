@@ -10,8 +10,8 @@ describe('User signup', function() {
 
   const browser = new Browser();
 
-  before(function() {
-    return browser.visit('/users/new');
+  before((done) => {
+    return browser.visit('/users/new', done);
   })
 
   describe('normal sign up', function() {
