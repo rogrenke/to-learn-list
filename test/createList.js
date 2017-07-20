@@ -14,6 +14,12 @@ describe('List creation page', () => {
     browser.visit('/', done);
   });
 
+  after((done) =>  {
+    mongoose.connection.collections.lists.drop(() => {
+      done();
+    });
+  });
+
   describe('User visits the create list page from the homepage', () => {
 
     before((done) => {
@@ -36,12 +42,6 @@ describe('List Creation form', () => {
 
   before((done) => {
     browser.visit('/lists/new', done);
-  });
-
-  afterEach((done) =>  {
-    mongoose.connection.collections.users.drop(() => {
-      done();
-    });
   });
 
   describe('User creates a new list', () =>{
