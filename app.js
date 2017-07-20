@@ -5,18 +5,23 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const passport = require('passport');
 const sassMiddleware = require('node-sass-middleware');
 const mongoose = require('mongoose');
 const expressValidator = require('express-validator');
 const flash = require('connect-flash');
+
 // Routes
+const User = require('./models/User');
+
 const index = require('./routes/index');
 const users = require('./routes/users');
 const lists = require('./routes/lists');
 
+require('./handlers/passport');
 
 
-const User = require('./models/user');
+
 
 const app = express();
 
@@ -57,7 +62,11 @@ app.use(session({
   key: 'keys',
   resave: false,
   saveUninitialized: false,
-}))
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(flash());
 
 app.use(sassMiddleware({
