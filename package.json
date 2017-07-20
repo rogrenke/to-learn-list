@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "env NODE_ENV=development node ./app.js",
-    "test": "env NODE_ENV=test mocha"
+    "test": "env NODE_ENV=test nyc mocha"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
@@ -22,6 +22,7 @@
   "devDependencies": {
     "chai": "^4.1.0",
     "mocha": "^3.4.2",
+    "nyc": "^11.0.3",
     "zombie": "^5.0.7"
   }
 }

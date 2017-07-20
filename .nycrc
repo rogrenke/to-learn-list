@@ -1,0 +1,7 @@
+{
+  "description": "Istanbul Configs",
+  "nyc": {
+    "check-coverage": true,
+    "reporter": ["lcov", "text-summary", "html"]
+  }
+}
