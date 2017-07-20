@@ -13,6 +13,8 @@ const flash = require('connect-flash');
 
 // Models
 const User = require('./models/User');
+const List = require('./models/List');
+const Item = require('./models/Item');
 
 // Routes
 const index = require('./routes/index');
@@ -21,11 +23,7 @@ const lists = require('./routes/lists');
 
 require('./handlers/passport');
 
-
-
-
 const app = express();
-
 
 
 // import environmental variables from our development.env file
