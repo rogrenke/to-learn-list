@@ -12,7 +12,7 @@ const expressValidator = require('express-validator');
 const flash = require('connect-flash');
 
 // Routes
-const User = require('./models/User');
+// const User = require('./models/User');
 
 const index = require('./routes/index');
 const users = require('./routes/users');
