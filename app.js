@@ -11,9 +11,10 @@ const mongoose = require('mongoose');
 const expressValidator = require('express-validator');
 const flash = require('connect-flash');
 
-// Routes
-// const User = require('./models/User');
+// Models
+const User = require('./models/User');
 
+// Routes
 const index = require('./routes/index');
 const users = require('./routes/users');
 const lists = require('./routes/lists');
