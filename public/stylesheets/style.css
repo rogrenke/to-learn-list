@@ -4799,4 +4799,21 @@ label.panel-block {
   background-color: whitesmoke;
   padding: 3rem 1.5rem 6rem; }
 
+html {
+  height: 100%; }
+
+body {
+  min-height: 100%; }
+
+.footer {
+  margin-top: 20px; }
+
+.wrap-line {
+  flex-wrap: wrap; }
+
+.create-list-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; }
+
 /*# sourceMappingURL=style.css.map */
