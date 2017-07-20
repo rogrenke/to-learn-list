@@ -7,8 +7,12 @@ var bodyParser = require('body-parser');
 var sassMiddleware = require('node-sass-middleware');
 var mongoose = require('mongoose');
 
+
+// Routes
 var index = require('./routes/index');
 var users = require('./routes/users');
+var lists = require('./routes/lists');
+
 
 var app = express();
 
@@ -19,7 +23,7 @@ require('dotenv').config();
 const ENVIRONMENT = process.env.NODE_ENV.toUpperCase();
 
 // Connect to our Database and handle an bad connections
-mongoose.connect(process.env[`DATABASE_${ENVIRONMENT}`])
+mongoose.connect(process.env[`DATABASE_${ENVIRONMENT}`], {useMongoClient: true});
 mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
 mongoose.connection.on('error', (err) => {
   console.error(`🙅 🚫 🙅 🚫 🙅 🚫 🙅 🚫 → ${err.message}`);
@@ -51,6 +55,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/lists', lists);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
