@@ -1,14 +1,22 @@
 extends layout
 
 block content
-  h1=name
-  p Please add items to this list
-  
-  form(method='POST')
-    label(for="text") text
-    input(type="text" name="text")
-    button(type="submit") Add Item
-  
-  if items 
-    each item in items
-      h2= item.text
+  section.section
+    .container
+      h1.title.is-2=name
+      .columns
+        .column.is-half
+          if items.length > 0
+            p Your list items:
+            .content
+              ul
+              each item in items
+                li=item.text
+          form(method='POST')
+            .field
+              label.label(for="text") Item
+              .control
+                input.input(type="text" name="text")
+            .field
+              .control
+              button.button.is-primary(type="submit") Add Item   

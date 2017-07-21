@@ -61,7 +61,7 @@ describe('Item creation page', () => {
     });
 
     it('should display the item on the list', () => {
-      browser.assert.text('h2', 'First Item');
+      browser.assert.text('li', 'First Item');
     });
   });
 

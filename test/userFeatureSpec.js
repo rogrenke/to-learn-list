@@ -46,7 +46,7 @@ describe('User signup', function() {
     });
 
     it('should redirect to index page after successfully signing up', () => {
-      browser.assert.text('p','Welcome to Express')
+      browser.assert.text('h1','Welcome to Ductu')
     });
 
     after((done) =>  {
