@@ -4430,10 +4430,10 @@ label.panel-block {
       border-color: #363636;
       color: whitesmoke; }
     .hero.is-light.is-bold {
-      background-image: linear-gradient(141deg, #dfd8d8 0%, whitesmoke 71%, white 100%); }
+      background-image: linear-gradient(141deg, #dfd8d9 0%, whitesmoke 71%, white 100%); }
       @media screen and (max-width: 768px) {
         .hero.is-light.is-bold .nav-menu {
-          background-image: linear-gradient(141deg, #dfd8d8 0%, whitesmoke 71%, white 100%); } }
+          background-image: linear-gradient(141deg, #dfd8d9 0%, whitesmoke 71%, white 100%); } }
     @media screen and (max-width: 768px) {
       .hero.is-light .nav-toggle span {
         background-color: #363636; }
@@ -4484,10 +4484,10 @@ label.panel-block {
       border-color: whitesmoke;
       color: #363636; }
     .hero.is-dark.is-bold {
-      background-image: linear-gradient(141deg, #1f1919 0%, #363636 71%, #463f3f 100%); }
+      background-image: linear-gradient(141deg, #1f191a 0%, #363636 71%, #46403f 100%); }
       @media screen and (max-width: 768px) {
         .hero.is-dark.is-bold .nav-menu {
-          background-image: linear-gradient(141deg, #1f1919 0%, #363636 71%, #463f3f 100%); } }
+          background-image: linear-gradient(141deg, #1f191a 0%, #363636 71%, #46403f 100%); } }
     @media screen and (max-width: 768px) {
       .hero.is-dark .nav-toggle span {
         background-color: whitesmoke; }
@@ -4804,9 +4804,6 @@ html {
 
 body {
   min-height: 100%; }
-
-.footer {
-  margin-top: 20px; }
 
 .wrap-line {
   flex-wrap: wrap; }
