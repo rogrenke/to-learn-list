@@ -1,18 +1,14 @@
-extends layout 
+extends ../layout 
 
 block content 
   section.section
     .container
-    form.form(action='/users' method='POST')
+    form.form(action='/sessions' method='POST')
       .container
         h1.title= title
         .columns
           .column.is-half.is-offset-3
             form(action='/users' method='POST')
-              .field
-                label(for='name').label Name
-                  .control
-                    input.input(type='text', name='name' placeholder='e.g. Jeff Bezos')
               .field
                 label(for='email').label Email
                   p.control.has-icons-left.has-icons-right
@@ -25,16 +21,9 @@ block content
                     input.input(type='password', name='password' placeholder='Password')
                     span.icon.is-small.is-left
                       i.fa.fa-lock
-
-              .field
-                label(for='password').label Confirm Password
-                  p.control.has-icons-left
-                    input.input(type='password', name='password-confirm', placeholder='Confirm Password')
-                    span.icon.is-small.is-left
-                      i.fa.fa-lock
               .control 
-                button.button.is-primary(type='submit') Sign Up
+                button.button.is-primary(type='submit') Sign In
             br
-            p Already have an account?
+            p Don't have an account yet?
               span 
-                a(href='/sessions/signin') Sign In
+                a(href='/users/new') Sign Up

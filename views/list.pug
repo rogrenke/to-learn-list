@@ -11,7 +11,8 @@ block content
             .content
               ul
               each item in items
-                li=item.text
+                li
+                  a(href=`/items/edit?item=${item._id}&status=${item.status}` class=item.status)=item.text
           form(method='POST')
             .field
               label.label(for="text") Item
@@ -19,4 +20,4 @@ block content
                 input.input(type="text" name="text")
             .field
               .control
-              button.button.is-primary(type="submit") Add Item   
+              button.button.is-primary(type="submit") Add Item
