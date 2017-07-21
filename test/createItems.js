@@ -11,9 +11,21 @@ describe('Item creation page', () => {
   const browser = new Browser();
 
   before((done) => {
-    browser.visit('/')
-    console.log(browser.location.href);
-    browser.visit('/lists/new', done)
+    browser.visit('/users/new', done);
+  });
+
+  before((done) => {
+    browser
+           .fill("name", "Jelly Chris")
+           .fill("email", "welljell@gmail.com")
+           .fill("password", "gangsta")
+           .fill("password-confirm", "gangsta")
+           .pressButton("Sign Up", done);
+  });
+
+  before((done) => {
+    browser
+      .clickLink('Create List', done);
   });
 
   before((done) => {

@@ -38,15 +38,15 @@ describe('User signup', function() {
   describe('normal signup', () => {
     before((done) => {
       browser
-             .fill("name", "Ghetto Chris")
-             .fill("email", "ghettochris@gmail.com")
+             .fill("name", "Ghetto Christopher")
+             .fill("email", "ghetto.c@gmail.com")
              .fill("password", "gangsta")
              .fill("password-confirm", "gangsta")
              .pressButton("Sign Up", done)
     });
 
     it('should redirect to index page after successfully signing up', () => {
-      browser.assert.text('p','Welcome to Express')
+      browser.assert.text('p','Welcome to Express');
     });
 
     after((done) =>  {
@@ -55,5 +55,4 @@ describe('User signup', function() {
       });
     });
   });
-
 });

@@ -11,13 +11,22 @@ describe('List creation page', () => {
   const browser = new Browser();
 
   before((done) => {
-    browser.visit('/', done);
+    browser.visit('/users/new', done);
   });
 
   after((done) =>  {
     mongoose.connection.collections.lists.drop(() => {
       done();
     });
+  });
+
+  before((done) => {
+    browser
+           .fill("name", "Ghetto Chris")
+           .fill("email", "ghettochris@gmail.com")
+           .fill("password", "gangsta")
+           .fill("password-confirm", "gangsta")
+           .pressButton("Sign Up", done)
   });
 
   describe('User visits the create list page from the homepage', () => {
@@ -37,14 +46,35 @@ describe('List creation page', () => {
   });
 });
 
+// ---------------------
+
 describe('List Creation form', () => {
   const browser = new Browser();
 
   before((done) => {
-    browser.visit('/lists/new', done);
+    browser.visit('/users/new', done);
   });
 
-  describe('User creates a new list', () =>{
+  after((done) =>  {
+    mongoose.connection.collections.lists.drop(() => {
+      done();
+    });
+  });
+
+  before((done) => {
+    browser
+           .fill("name", "G Chris")
+           .fill("email", "gchris@gmail.com")
+           .fill("password", "gangsta")
+           .fill("password-confirm", "gangsta")
+           .pressButton("Sign Up", done);
+  });
+
+  describe('User creates a new list', () => {
+    before((done) => {
+      browser.clickLink('Create List', done);
+    });
+
     before((done) => {
       browser
         .fill('name', 'Reading List')
