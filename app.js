@@ -17,6 +17,7 @@ const User = require('./models/User');
 // Routes
 const index = require('./routes/index');
 const users = require('./routes/users');
+const sessions = require('./routes/sessions');
 const lists = require('./routes/lists');
 
 require('./handlers/passport');
@@ -70,6 +71,13 @@ app.use(passport.session());
 
 app.use(flash());
 
+app.use((req, res, next) => {
+  res.locals.flashes = req.flash();
+  res.locals.user = req.user || null;
+  res.locals.currentPath = req.path;
+  next();
+});
+
 app.use(sassMiddleware({
   src: path.join(__dirname, 'public'),
   dest: path.join(__dirname, 'public'),
@@ -80,6 +88,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/sessions', sessions);
 app.use('/lists', lists);
 
 // catch 404 and forward to error handler

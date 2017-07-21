@@ -1,21 +1,15 @@
-if locals.flashes
-       .inner
-         .flash-messages
-           - const categories = Object.keys(locals.flashes)
-           each category in categories
-             each message in flashes[category]
-               .flash(class=`flash--${category}`)
-                 p.flash__text!= message
-                 button.flash__remove(onClick="this.parentElement.remove()") &times;
+extends ../layout
 
-form.form(action="/users" method="POST")
-  h2 Sign Up
-  label(for="name") Name
-  input(type="text" name="name")
-  label(for="email") Email
-  input(type="text" name="email")
-  label(for="password") Password
-  input(type="password" name="password")
-  label(for="password-confirm") Confirm Password
-  input(type="password" name="password-confirm")
-  input(type="submit" value="Sign Up")
+block content
+
+  form.form(action="/users" method="POST")
+    h2 Sign Up
+    label(for="name") Name
+    input(type="text" name="name")
+    label(for="email") Email
+    input(type="text" name="email")
+    label(for="password") Password
+    input(type="password" name="password")
+    label(for="password-confirm") Confirm Password
+    input(type="password" name="password-confirm")
+    input(type="submit" value="Sign Up")

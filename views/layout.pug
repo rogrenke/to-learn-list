@@ -8,4 +8,17 @@ html
       nav
         ul
           li: a(href='/lists/new') Create List
+          if user
+            li: a#signout(href='/sessions/logout') Sign Out
+          else
+            li: a#signin(href='/sessions/new') Sign In   
+    if locals.flashes
+      .inner
+       .flash-messages
+         - const categories = Object.keys(locals.flashes)
+         each category in categories
+           each message in flashes[category]
+             .flash(class=`flash--${category}`)
+               p.flash__text!= message
+               button.flash__remove(onClick="this.parentElement.remove()") &times;
     block content
