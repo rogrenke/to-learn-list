@@ -42,4 +42,19 @@ describe('Item status', () => {
     });
   });
 
+  describe('and can change to Complete', () => {
+
+    before((done) => {
+      browser.clickLink('Item to be completed', done)
+    });
+
+    it('has a status of complete', (done) => {
+    Item.find({}, (err, items) => {
+      expect(items[0].status).equal('complete')
+      done();
+    });
+  });
+    
+  })
+
 })
