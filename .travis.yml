@@ -13,5 +13,14 @@ before_script:
   - npm install -g mocha
   - npm install
 
+after_success:
+  - npm install -g codeclimate-test-reporter
+  - codeclimate-test-reporter < ./coverage/lcov.info
+
+addons:
+  code_climate:
+  repo_token:
+    secure:
+
 notifications:
   email: false
