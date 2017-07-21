@@ -1,11 +1,29 @@
-extends ../layout
-  
-block content
+extends ../layout 
 
-  form.form(action="/sessions" method="POST")
-    h2 Sign In
-    label(for="email") Email
-    input(type="text" name="email")
-    label(for="password") Password
-    input(type="password" name="password")
-    input(type="submit" value="Sign In")
+block content 
+  section.section
+    .container
+    form.form(action='/sessions' method='POST')
+      .container
+        h1.title= title
+        .columns
+          .column.is-half.is-offset-3
+            form(action='/users' method='POST')
+              .field
+                label(for='email').label Email
+                  p.control.has-icons-left.has-icons-right
+                    input.input(type='email', name='email' placeholder='Email')
+                    span.icon.is-small.is-left
+                      i.fa.fa-envelope
+              .field
+                label(for='password').label Password
+                  p.control.has-icons-left
+                    input.input(type='password', name='password' placeholder='Password')
+                    span.icon.is-small.is-left
+                      i.fa.fa-lock
+              .control 
+                button.button.is-primary(type='submit') Sign In
+            br
+            p Don't have an account yet?
+              span 
+                a(href='/users/new') Sign Up

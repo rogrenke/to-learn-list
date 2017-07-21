@@ -7,7 +7,7 @@ block content
       .container
         h1.title= title
         .columns
-          .column.is-half
+          .column.is-half.is-offset-3
             form(action='/users' method='POST')
               .field
                 label(for='name').label Name
@@ -34,3 +34,7 @@ block content
                       i.fa.fa-lock
               .control 
                 button.button.is-primary(type='submit') Sign Up
+            br
+            p Already have an account?
+              span 
+                a(href='/sessions/signin') Sign In

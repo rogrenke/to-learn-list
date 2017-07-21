@@ -31,7 +31,7 @@ describe('User signup', function() {
     });
 
     it('should throw an error if name left blank', () => {
-      browser.assert.text('p','Please supply a name!')
+      browser.assert.text('p.flash__text','Please supply a name!')
     });
   });
 
