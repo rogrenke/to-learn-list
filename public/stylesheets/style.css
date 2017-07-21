@@ -4813,4 +4813,7 @@ body {
   flex-direction: column;
   justify-content: center; }
 
+.complete {
+  text-decoration: line-through; }
+
 /*# sourceMappingURL=style.css.map */

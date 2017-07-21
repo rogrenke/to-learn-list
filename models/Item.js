@@ -9,6 +9,12 @@ const itemSchema = new mongoose.Schema({
       required: 'Please enter the item text'
   },
 
+  status: {
+    type: String,
+    trim: true,
+    default: 'incomplete'
+  },
+
   list: {
     type: mongoose.Schema.ObjectId,
     ref: 'List',

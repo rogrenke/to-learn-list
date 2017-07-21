@@ -14,7 +14,6 @@ describe('Item creation page', () => {
 
   before((done) => {
     browser.visit('/')
-    console.log(browser.location.href);
     browser.visit('/lists/new', done)
   });
 

@@ -21,6 +21,7 @@ const index = require('./routes/index');
 const users = require('./routes/users');
 const sessions = require('./routes/sessions');
 const lists = require('./routes/lists');
+const items = require('./routes/items');
 
 require('./handlers/passport');
 
@@ -88,6 +89,7 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/sessions', sessions);
 app.use('/lists', lists);
+app.use('/items', items);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
