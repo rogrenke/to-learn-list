@@ -4,4 +4,6 @@ const sessionController = require('../controllers/sessionController');
 
 router.get('/logout', sessionController.logout);
 
+router.get('/signin', sessionController.signinForm);
+
 module.exports = router;

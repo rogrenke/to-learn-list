@@ -1,0 +1,11 @@
+extends ../layout
+  
+block content
+
+  form.form(action="/sessions" method="POST")
+    h2 Sign In
+    label(for="email") Email
+    input(type="text" name="email")
+    label(for="password") Password
+    input(type="password" name="password")
+    input(type="submit" value="Sign In")

@@ -91,3 +91,39 @@ describe('User sign out', function() {
       });
     });
 });
+
+describe('User sign in', function() {
+
+  const browser = new Browser();
+
+  var User = mongoose.model('User');
+
+  before((done) => {
+    return browser.visit('/', done);
+  })
+
+  before((done) => {
+    var existingUser = new User({
+      name: 'user',
+      email: 'test@test.com',
+      password: 'whatever'
+    });
+    existingUser.save(done);
+  });
+
+  describe('redirects to sign in form', () => {
+    before((done) => {
+      browser.clickLink("Sign In", done)
+    });
+
+    it ('should have a sign in form', () => {
+      browser.assert.element('form')
+    });
+  });
+
+  after((done) =>  {
+    mongoose.connection.collections.users.drop(() => {
+      done();
+    });
+  });
+});
