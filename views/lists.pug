@@ -18,14 +18,15 @@ block content
           .tile.is-parent.column.is-one-third
             .card.tile.is-child
               header.card-header
-                p.card-header-title=list.name
+                p.card-header-title
+                  a(href=`lists/${list._id}`)=list.name
               .card-content
                 .content
-                  p This is the list contents
-                .content
-                  p.progress-label Progress:
-                  progress.progress.is-small.is-success(value=index, max='3') #{index}%
-              footer.card-footer
-                a.card-footer-item Save
-                a.card-footer-item Edit
-                a.card-footer-item Delete
+                  p This is the list description
+              //-   .content
+              //-     p.progress-label Progress:
+              //-     progress.progress.is-small.is-success(value=index, max='3') #{index}%
+              //- footer.card-footer
+              //-   a.card-footer-item Save
+              //-   a.card-footer-item Edit
+              //-   a.card-footer-item Delete
