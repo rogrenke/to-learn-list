@@ -60,7 +60,7 @@ app.use(session({
   secret: 'password',
   key: 'keys',
   resave: false,
-  saveUninitialized: false,
+  saveUninitialized: false
 }));
 
 app.use(passport.initialize());
