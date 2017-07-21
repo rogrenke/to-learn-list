@@ -57,3 +57,37 @@ describe('User signup', function() {
   });
 
 });
+
+describe('User sign out', function() {
+
+  const browser = new Browser();
+
+  before((done) => {
+    browser.visit('/users/new', done);
+  })
+
+  before((done) => {
+    browser
+          .fill("name", "Ghetto Chris")
+          .fill("email", "ghettochris@gmail.com")
+          .fill("password", "gangsta")
+          .fill("password-confirm", "gangsta")
+          .pressButton("Sign Up", done)
+  });
+
+  describe('user signs out successfully', () => {
+    before((done) => {
+      browser.clickLink("Sign Out", done)
+    });
+
+    it('should redirect to the sign-in page', () => {
+      browser.assert.text('#signin','Sign In')
+    });
+  });
+
+    after((done) =>  {
+      mongoose.connection.collections.users.drop(() => {
+        done();
+      });
+    });
+});

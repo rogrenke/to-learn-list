@@ -26,9 +26,25 @@ html
                   a.navbar-item(href='/lists/new') Create List
             .navbar-end
               .navbar-item
-                a.button.is-primary(href='/users/new')
-                  span.icon
-                    i.fa.fa-user
-                  span Sign Up
+                if user
+                  a#signout.button.is-primary(href='/sessions/logout')
+                    span.icon
+                      i.fa.fa-sign-out
+                    span Sign Out
+                else  
+                  a#signin.button.is-primary(href='/sessions/new')
+                    span.icon
+                      i.fa.fa-user
+                    span Sign In
       
+    .container
+      if locals.flashes
+        .inner
+         .flash-messages
+           - const categories = Object.keys(locals.flashes)
+           each category in categories
+             each message in flashes[category]
+               .flash(class=`flash--${category}`)
+                 p.flash__text!= message
+                 button.flash__remove(onClick="this.parentElement.remove()") &times;
     block content
