@@ -6,6 +6,14 @@
     "start": "env NODE_ENV=development node ./app.js",
     "test": "env NODE_ENV=test nyc mocha"
   },
+  "nyc": {
+  "check-coverage": true,
+  "reporter": [
+        "lcov",
+        "text",
+        "html"
+    ]
+  },
   "dependencies": {
     "body-parser": "~1.17.1",
     "bulma": "^0.4.3",
