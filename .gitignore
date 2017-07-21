@@ -35,3 +35,7 @@ public/stylesheets/style.map
 
 # The annoying stuff
 .DS_Store
+
+coverage
+
+.nyc_output
