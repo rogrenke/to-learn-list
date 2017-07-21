@@ -1,9 +1,16 @@
 extends layout
 
 block content
-  h1= title
-
-  form(method='POST')
-    label(for="name") name
-    input(type="text" name="name")
-    button(type="submit") Create
+  section.section
+    .container
+      h1.title.is-3= title
+      .columns
+        .column.is-half
+          form(method='POST')
+            .field
+              label.label(for="name") Name
+              .control
+                input.input(type="text" name="name")
+            .field
+              .control
+                button.button.is-primary(type="submit") Create

@@ -1,0 +1,36 @@
+extends layout 
+
+block content 
+  section.section
+    .container
+    form.form(action='/users' method='POST')
+      .container
+        h1.title= title
+        .columns
+          .column.is-half
+            form(action='/users' method='POST')
+              .field
+                label(for='name').label Name
+                  .control
+                    input.input(type='text', name='name' placeholder='e.g. Jeff Bezos')
+              .field
+                label(for='email').label Email
+                  p.control.has-icons-left.has-icons-right
+                    input.input(type='email', name='email' placeholder='Email')
+                    span.icon.is-small.is-left
+                      i.fa.fa-envelope
+              .field
+                label(for='password').label Password
+                  p.control.has-icons-left
+                    input.input(type='password', name='password' placeholder='Password')
+                    span.icon.is-small.is-left
+                      i.fa.fa-lock
+
+              .field
+                label(for='password').label Confirm Password
+                  p.control.has-icons-left
+                    input.input(type='password', name='password-confirm', placeholder='Confirm Password')
+                    span.icon.is-small.is-left
+                      i.fa.fa-lock
+              .control 
+                button.button.is-primary(type='submit') Sign Up

@@ -2,23 +2,49 @@ doctype html
 html
   head
     title= title
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src='/scripts/scripts.js')
+
   body
     block header
-      nav
-        ul
-          li: a(href='/lists/new') Create List
-          if user
-            li: a#signout(href='/sessions/logout') Sign Out
-          else
-            li: a#signin(href='/sessions/new') Sign In   
-    if locals.flashes
-      .inner
-       .flash-messages
-         - const categories = Object.keys(locals.flashes)
-         each category in categories
-           each message in flashes[category]
-             .flash(class=`flash--${category}`)
-               p.flash__text!= message
-               button.flash__remove(onClick="this.parentElement.remove()") &times;
+      .container
+        .navbar.is-transparent
+          .navbar-brand
+            a.navbar-item(href='/')
+              img.navbar-logo(src='/images/ductu.png')
+            .navbar-burger.burger(data-target='navMenu')
+              span
+              span
+              span
+          #navMenu.navbar-menu
+            .navbar-start
+              a.navbar-item Home
+              .navbar-item.has-dropdown.is-hoverable
+                a.navbar-link(href='/lists') Lists
+                .navbar-dropdown.is-boxed
+                  a.navbar-item(href='/lists/new') Create List
+            .navbar-end
+              .navbar-item
+                if user
+                  a#signout.button.is-primary(href='/sessions/logout')
+                    span.icon
+                      i.fa.fa-sign-out
+                    span Sign Out
+                else  
+                  a#signin.button.is-primary(href='/sessions/new')
+                    span.icon
+                      i.fa.fa-user
+                    span Sign In
+      
+    .container
+      if locals.flashes
+        .inner
+         .flash-messages
+           - const categories = Object.keys(locals.flashes)
+           each category in categories
+             each message in flashes[category]
+               .flash(class=`flash--${category}`)
+                 p.flash__text!= message
+                 button.flash__remove(onClick="this.parentElement.remove()") &times;
     block content
