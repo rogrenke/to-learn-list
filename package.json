@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "chai": "^4.1.0",
+    "codeclimate-test-reporter": "^0.5.0",
     "mocha": "^3.4.2",
     "nyc": "^11.0.3",
     "zombie": "^5.0.7"
