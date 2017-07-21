@@ -84,7 +84,7 @@ describe('Item creation page', () => {
     });
 
     it('should display the item on the list', () => {
-      expect(browser.assert.text('h2', 'Seed text')).to.not.be
+      expect(browser.html('h2')).to.not.be
     });
   });
 
