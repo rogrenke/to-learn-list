@@ -1,6 +1,32 @@
 extends layout
 
 block content
-  h1= title
-  each list in lists
-    h3= list.name
+  section.section
+    .container
+      h1.title.is-2= title
+      .tile.is-ancestor.wrap-line
+        .tile.is-parent.column.is-one-third
+          .card.tile.is-child.create-list-info
+            .card-content
+              .content.has-text-centered
+                p Adding a list is great way for keeping track of your activities!
+                a.button.is-primary(href='/lists/new')
+                  span.icon
+                    i.fa.fa-plus-square-o
+                  span Create List
+        each list, index in lists
+          .tile.is-parent.column.is-one-third
+            .card.tile.is-child
+              header.card-header
+                p.card-header-title
+                  a(href=`lists/${list._id}`)=list.name
+              .card-content
+                .content
+                  p This is the list description
+              //-   .content
+              //-     p.progress-label Progress:
+              //-     progress.progress.is-small.is-success(value=index, max='3') #{index}%
+              //- footer.card-footer
+              //-   a.card-footer-item Save
+              //-   a.card-footer-item Edit
+              //-   a.card-footer-item Delete
