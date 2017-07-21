@@ -6,7 +6,7 @@ var chai = require('chai'),
 
 
 describe('User', () => {
-  var User = require('../models/User');
+  var User = mongoose.model('User');
 
   before((done) => {
     var existingUser = new User({

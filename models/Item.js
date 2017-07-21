@@ -7,6 +7,12 @@ const itemSchema = new mongoose.Schema({
       type: String,
       trim: true,
       required: 'Please enter the item text'
+  },
+
+  list: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'List',
+    required: 'Please assign to a list'
   }
 });
 
