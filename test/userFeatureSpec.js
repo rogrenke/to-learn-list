@@ -99,16 +99,19 @@ describe('User sign in', function() {
   var User = mongoose.model('User');
 
   before((done) => {
-    return browser.visit('/', done);
+    return browser.visit('/users/new', done);
   })
 
   before((done) => {
-    var existingUser = new User({
-      name: 'user',
-      email: 'test@test.com',
-      password: 'whatever'
-    });
-    existingUser.save(done);
+
+    browser
+           .fill("name", "Ghetto Chris")
+           .fill("email", "ghettochris@gmail.com")
+           .fill("password", "gangsta")
+           .fill("password-confirm", "gangsta")
+           .pressButton("Sign Up", () => {
+             browser.clickLink('Sign Out', done)
+           })
   });
 
   describe('redirects to sign in form', () => {
@@ -118,6 +121,24 @@ describe('User sign in', function() {
 
     it ('should have a sign in form', () => {
       browser.assert.element('form')
+    });
+  });
+
+  describe('successfully signs in', () => {
+    before((done) => {
+      browser.clickLink("Sign In", done)
+    });
+
+    before((done) => {
+
+      browser
+        .fill("email", "ghettochris@gmail.com")
+        .fill("password", "gangsta")
+        .pressButton("Sign In", done);
+    });
+
+    it('should have signed in user', () => {
+      browser.assert.text('#signout','Sign Out')
     });
   });
 

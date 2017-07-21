@@ -6,4 +6,6 @@ router.get('/logout', sessionController.logout);
 
 router.get('/signin', sessionController.signinForm);
 
+router.post('/', sessionController.login);
+
 module.exports = router;
