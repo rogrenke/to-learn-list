@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 const Browser = require('zombie');
 const chai = require('chai'),
   assert = chai.assert,
@@ -22,11 +22,11 @@ describe('List creation page', () => {
 
   before((done) => {
     browser
-           .fill("name", "Ghetto Chris")
-           .fill("email", "ghettochris@gmail.com")
-           .fill("password", "gangsta")
-           .fill("password-confirm", "gangsta")
-           .pressButton("Sign Up", done)
+      .fill("name", "Ghetto Chris")
+      .fill("email", "ghettochris@gmail.com")
+      .fill("password", "gangsta")
+      .fill("password-confirm", "gangsta")
+      .pressButton("Sign Up", done);
   });
 
   describe('User visits the create list page from the homepage', () => {
@@ -46,8 +46,6 @@ describe('List creation page', () => {
   });
 });
 
-// ---------------------
-
 describe('List Creation form', () => {
   const browser = new Browser();
 
@@ -63,11 +61,11 @@ describe('List Creation form', () => {
 
   before((done) => {
     browser
-           .fill("name", "G Chris")
-           .fill("email", "gchris@gmail.com")
-           .fill("password", "gangsta")
-           .fill("password-confirm", "gangsta")
-           .pressButton("Sign Up", done);
+      .fill("name", "G Chris")
+      .fill("email", "gchris@gmail.com")
+      .fill("password", "gangsta")
+      .fill("password-confirm", "gangsta")
+      .pressButton("Sign Up", done);
   });
 
   describe('User creates a new list', () => {

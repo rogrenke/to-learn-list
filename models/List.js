@@ -13,28 +13,11 @@ const listSchema = new mongoose.Schema({
     type: mongoose.Schema.ObjectId,
     ref: 'User'
   },
-}, {
-  toObject: { virtuals: true },
-  toJSON: { virtuals: true }
 });
 
-// listSchema.methods.authorName = (author) => {
-//     const user = User.findById(author, function(err, user) {
-//   });
-//   return user.name
-// };
-
-listSchema.virtual('authorName', {
-  ref: 'User',
-  localField: '_id',
-  foreignField: 'name'
-});
-
-function autopopulate(next) {
-  this.populate('authorName');
-  next();
-}
-listSchema.pre('find', autopopulate);
-listSchema.pre('findOne', autopopulate);
+listSchema.methods.authorName = async function() {
+  const user = await User.findById(this.author);
+  return user.name;
+};
 
 module.exports = mongoose.model('List', listSchema);

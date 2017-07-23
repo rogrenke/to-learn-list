@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const List = mongoose.model('List');
 const Item = mongoose.model('Item');
-const User = mongoose.model('User');
 
 exports.createForm = (req, res) => {
   res.render('listForm', { title: 'Create List' });
@@ -15,17 +14,17 @@ exports.createList = async (req, res) => {
 };
 
 exports.getLists = async (req, res) => {
-  const lists = await List.find();
-  lists.forEach = function (list) {
-    console.log(list.authorName)
+  async function listWithAuthor(lists){
+    let result = {};
+    for(let list of lists) {
+      result[list.name] = await list.authorName();
+    }
+    return result;
   }
-  res.render('lists', { lists, title: 'Lists' });
+  const lists = await List.find();
+  const listAndAuthorName = await listWithAuthor(lists);
+  res.render('lists', { lists: listAndAuthorName, title: 'Lists' });
 };
-
-// exports.getUsers = async (req, res) => {
-//   const users = await User.find();
-//   res.render('users', { users, title: 'Users' });
-// };
 
 exports.getListById = async (req, res) => {
   const list = await List.findOne({ _id: req.params.id });
@@ -37,4 +36,4 @@ exports.createItem = async (req, res) => {
   const newItem = new Item(req.body);
   await newItem.save();
   res.redirect(`/lists/${req.params.id}`);
-}
+};

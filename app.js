@@ -10,6 +10,7 @@ const sassMiddleware = require('node-sass-middleware');
 const mongoose = require('mongoose');
 const expressValidator = require('express-validator');
 const flash = require('connect-flash');
+const helpers = require('./helpers');
 
 // Models
 const User = require('./models/User');
@@ -49,7 +50,9 @@ app.set('view engine', 'pug');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
+if (process.env.NODE_ENV !== 'test') {
+  app.use(logger('dev'));
+}
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());
@@ -66,7 +69,16 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+
 app.use(flash());
+
+app.use((req, res, next) => {
+  res.locals.h = helpers;
+  res.locals.flashes = req.flash();
+  res.locals.user = req.user || null;
+  res.locals.currentPath = req.path;
+  next();
+});
 
 app.use(sassMiddleware({
   src: path.join(__dirname, 'public'),

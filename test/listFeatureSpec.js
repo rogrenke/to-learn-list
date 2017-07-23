@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 const Browser = require('zombie');
 const chai = require('chai'),
   assert = chai.assert,
@@ -7,14 +7,12 @@ var app = require('../app');
 
 Browser.localhost('localhost', 7777);
 
-  describe('User creates list and is assigned as author', function() {
+describe('User creates list and is assigned as author', function() {
   const browser = new Browser();
-
 
   before((done) => {
     browser.visit('/users/new', done);
   });
-
 
   after((done) =>  {
     mongoose.connection.collections.lists.drop(() => {
@@ -25,11 +23,11 @@ Browser.localhost('localhost', 7777);
   describe('User creates a new list', () => {
     before((done) => {
       browser
-             .fill("name", "Jeff Chris")
-             .fill("email", "jeff@gmail.com")
-             .fill("password", "gangsta")
-             .fill("password-confirm", "gangsta")
-             .pressButton("Sign Up", done);
+        .fill("name", "Jeff Chris")
+        .fill("email", "jeff@gmail.com")
+        .fill("password", "gangsta")
+        .fill("password-confirm", "gangsta")
+        .pressButton("Sign Up", done);
     });
 
     before((done) => {
@@ -40,12 +38,14 @@ Browser.localhost('localhost', 7777);
     before((done) => {
       browser
         .fill('name', 'Reading List')
-        .pressButton('Create', done);
+        .pressButton('Create', () => {
+          browser.visit('/lists', done);
+        });
     });
 
     it('should display the new list and author', () => {
-      browser.assert.text('h1', 'Reading List');
-      browser.assert.text('p', 'Jeff');
+      browser.assert.text('h3', 'Reading List');
+      browser.assert.text('p', 'Jeff Chris');
     });
   });
 });
