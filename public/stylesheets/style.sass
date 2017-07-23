@@ -1,6 +1,25 @@
-body
-  padding: 50px
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
+$primary-blue: #58A5F0
+$primary: $primary-blue
 
-a
-  color: #00B7FF
+@import "../../node_modules/bulma/bulma.sass"
+@import "partials/flashes"
+
+html
+  height: 100%
+
+body
+  min-height: 100%
+
+.wrap-line
+  flex-wrap: wrap
+
+.create-list-info
+  display: flex
+  flex-direction: column
+  justify-content: center
+
+.complete
+  text-decoration: line-through
+
+p.card-header-title.author
+  text-align: right

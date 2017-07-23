@@ -1,3 +1,8 @@
+[![Build Status](https://travis-ci.org/rogrenke/to-learn-list.svg?branch=master)](https://travis-ci.org/rogrenke/to-learn-list)
+[![Code Climate](https://codeclimate.com/github/rogrenke/to-learn-list/badges/gpa.svg)](https://codeclimate.com/github/rogrenke/to-learn-list)
+[![Test Coverage](https://codeclimate.com/github/rogrenke/to-learn-list/badges/coverage.svg)](https://codeclimate.com/github/rogrenke/to-learn-list/coverage)
+
+
 # To-Learn-List
 
 Final Project of the ProjectX Group. Makers Academy, May 2017 Cohort.

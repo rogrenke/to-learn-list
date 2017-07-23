@@ -6,7 +6,7 @@ var chai = require('chai'),
 
 
 describe('User', () => {
-  var User = require('../models/User');
+  var User = mongoose.model('User');
 
   before((done) => {
     var existingUser = new User({
@@ -32,7 +32,7 @@ describe('User', () => {
       var testUser = new User({ name: 'testing', password: 'test_password' });
       testUser.validate((err) => {
         expect(err.errors.email).to.exist;
-        expect(err.errors.email.properties.message).to.equal('Please provide an email address')
+        expect(err.errors.email.properties.message).to.equal('Please provide an email address');
         done();
       });
     });
@@ -41,16 +41,16 @@ describe('User', () => {
       var testUser = new User({ email: 'testy@test.com', password: 'test_password' });
       testUser.validate((err) => {
         expect(err.errors.name).to.exist;
-        expect(err.errors.name.properties.message).to.equal('Please provide a name')
+        expect(err.errors.name.properties.message).to.equal('Please provide a name');
         done();
       });
     });
 
     it('does not create a user if email is not unique', (done) => {
       var newUser = new User({
-      name: 'newuser',
-      email: 'test@test.com',
-      password: 'somethingelse'
+        name: 'newuser',
+        email: 'test@test.com',
+        password: 'somethingelse'
       });
       newUser.validate((err) => {
         expect(err.errors).to.exist;

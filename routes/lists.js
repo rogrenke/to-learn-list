@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const listController = require('../controllers/listController')
+const itemController = require('../controllers/itemController')
 
 router.get('/new', listController.createForm)
 
@@ -10,6 +11,6 @@ router.get('/', listController.getLists)
 
 router.get('/:id', listController.getListById)
 
-router.post('/:id', listController.createItem)
+router.post('/:id', itemController.createItem, listController.getListById)
 
 module.exports = router;

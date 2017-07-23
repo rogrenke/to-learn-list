@@ -1,7 +1,7 @@
 language: node_js
 
 node_js:
-  - "8"
+  - node
 
 cache:
   directories:
@@ -12,6 +12,18 @@ services: mongodb
 before_script:
   - npm install -g mocha
   - npm install
+
+script:
+  - npm test
+
+after_success:
+  - npm install -g codeclimate-test-reporter
+  - codeclimate-test-reporter < ./coverage/lcov.info
+
+addons:
+  code_climate:
+  repo_token:
+    secure: ezk8tTT3WWF69YaFFiomSzbgZhQUmk6XPtCiGdN+Ijyv/TcrsPyDomi+gNn3elE+Rdgei0+E1r0aRy7QBWLPqCZuJE7wAQUs/9e6ZdYqw0rSsVXX1bkoDeOd30B6n6JWYr4UN1tWanrmXVbtYoRwz2PWkfIoR3fzZvivEp/qKFBS15qe9D/Ch3Pzr8TjSvusZSx2idqjBdKPpQ/dgbLNNfBQ3oe4HcD4XDupZ0/Z4UPhmXD8StT1RBqW3dYEjrACD8eYHBNl/Ln4w/iA8yMrvpmLOALLUtdwTn4OILYiVaLKQZLHk/r25aFXwj2V+KIh7gLJKzfiA6saOp42hYcQwugi7evnMNt84QszEj3xXFLh2nhaRT2S9UYL9WUBuOxssOP6bbe8uO5UeHTTjHrvfjNcQfndpuq9K1PyeK2uosnGKiiJNpQzPXV3gCp5vI40gE/WcGc+Gnr+qIKPWoG8zntgqAp9afYQGlNWhEEaQIREAXZYCPdMrLvvNGfyU0LY9w7vTU9bsYXrzovL0toVvzlX23F8vulq2F5My9JmQE//bHWrGGorgvnCJ6Gb7Jb+IL7Cy9SA0BXy5Z8+nJ8QIT/MWumjil9GJJXufGKFQoaaNMiH8fYT3O7T2p3GxwFfsUGrAQtbDTbg38I9XUHWr4g8VbaTZbKn+tjDuYQR5Xw=
 
 notifications:
   email: false

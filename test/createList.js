@@ -14,12 +14,6 @@ describe('List creation page', () => {
     browser.visit('/users/new', done);
   });
 
-  after((done) =>  {
-    mongoose.connection.collections.lists.drop(() => {
-      done();
-    });
-  });
-
   before((done) => {
     browser
       .fill("name", "Ghetto Chris")
@@ -27,6 +21,12 @@ describe('List creation page', () => {
       .fill("password", "gangsta")
       .fill("password-confirm", "gangsta")
       .pressButton("Sign Up", done);
+  });
+
+  after((done) => {
+    mongoose.connection.collections.lists.drop(() => {
+      done();
+    });
   });
 
   describe('User visits the create list page from the homepage', () => {
@@ -53,12 +53,6 @@ describe('List Creation form', () => {
     browser.visit('/users/new', done);
   });
 
-  after((done) =>  {
-    mongoose.connection.collections.lists.drop(() => {
-      done();
-    });
-  });
-
   before((done) => {
     browser
       .fill("name", "G Chris")
@@ -66,6 +60,12 @@ describe('List Creation form', () => {
       .fill("password", "gangsta")
       .fill("password-confirm", "gangsta")
       .pressButton("Sign Up", done);
+  });
+
+  after((done) =>  {
+    mongoose.connection.collections.lists.drop(() => {
+      done();
+    });
   });
 
   describe('User creates a new list', () => {
@@ -83,5 +83,4 @@ describe('List Creation form', () => {
       browser.assert.text('h1', 'Reading List');
     });
   });
-
 });

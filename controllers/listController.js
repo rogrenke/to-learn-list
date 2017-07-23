@@ -14,21 +14,15 @@ exports.createList = async (req, res) => {
 };
 
 exports.getLists = async (req, res) => {
-  async function listWithAuthor(lists){
-    let result = {};
-    for(let list of lists) {
-      result[list.name] = await list.authorName();
-    }
-    return result;
-  }
-  const lists = await List.find();
-  const listAndAuthorName = await listWithAuthor(lists);
-  res.render('lists', { lists: listAndAuthorName, title: 'Lists' });
+  const lists = await List
+                        .find()
+                        .populate('author', 'name');
+  res.render('lists', { lists, title: 'Lists' });
 };
 
 exports.getListById = async (req, res) => {
   const list = await List.findOne({ _id: req.params.id });
-  const items = await Item.find({});
+  const items = await Item.find({ list: req.params.id });
   res.render('list', { list, items, name: list.name });
 };
 

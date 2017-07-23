@@ -29,4 +29,13 @@ node_modules
 # Debug log from npm
 npm-debug.log
 
+# CSS
+public/stylesheets/style.css
+public/stylesheets/style.map
+
+# The annoying stuff
 .DS_Store
+
+coverage
+
+.nyc_output

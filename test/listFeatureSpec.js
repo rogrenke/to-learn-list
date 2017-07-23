@@ -14,12 +14,6 @@ describe('User creates list and is assigned as author', function() {
     browser.visit('/users/new', done);
   });
 
-  after((done) =>  {
-    mongoose.connection.collections.lists.drop(() => {
-      done();
-    });
-  });
-
   describe('User creates a new list', () => {
     before((done) => {
       browser
@@ -38,14 +32,22 @@ describe('User creates list and is assigned as author', function() {
     before((done) => {
       browser
         .fill('name', 'Reading List')
-        .pressButton('Create', () => {
-          browser.visit('/lists', done);
-        });
+        .pressButton('Create', done);
+    });
+
+    before((done)=> {
+      browser.visit('/lists', done);
+    });
+
+    after((done) =>  {
+      mongoose.connection.collections.lists.drop(() => {
+        done();
+      });
     });
 
     it('should display the new list and author', () => {
-      browser.assert.text('h3', 'Reading List');
-      browser.assert.text('p', 'Jeff Chris');
+      browser.assert.text('p.card-header-title', 'Reading List');
+      browser.assert.text('p.card-header-title.author', 'Jeff Chris');
     });
   });
 });

@@ -3,7 +3,7 @@ const User = mongoose.model('User');
 const promisify = require('es6-promisify');
 
 exports.signupForm = (req, res) => {
-  res.render('./users/new');
+  res.render('newUser');
 }
 
 exports.validateRegister = (req, res, next) => {
@@ -22,7 +22,7 @@ exports.validateRegister = (req, res, next) => {
   const errors = req.validationErrors();
   if (errors) {
     req.flash('error', errors.map(err => err.msg));
-    res.render('users/new', {body: req.body, flashes: req.flash()});
+    res.render('newUser', {body: req.body, flashes: req.flash()});
     return;
   }
   next();

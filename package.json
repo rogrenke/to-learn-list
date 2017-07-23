@@ -4,10 +4,19 @@
   "private": true,
   "scripts": {
     "start": "env NODE_ENV=development node ./app.js",
-    "test": "env NODE_ENV=test mocha"
+    "test": "env NODE_ENV=test nyc mocha"
+  },
+  "nyc": {
+    "check-coverage": true,
+    "reporter": [
+      "lcov",
+      "text",
+      "html"
+    ]
   },
   "dependencies": {
     "body-parser": "~1.17.1",
+    "bulma": "^0.4.3",
     "connect-flash": "^0.1.1",
     "cookie-parser": "~1.4.3",
     "database-cleaner": "^1.2.0",
@@ -22,6 +31,7 @@
     "mongoose-mongodb-errors": "0.0.2",
     "mongoose-unique-validator": "^1.0.5",
     "morgan": "~1.8.1",
+    "node-sass": "^4.5.3",
     "node-sass-middleware": "0.11.0",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
@@ -32,7 +42,9 @@
   },
   "devDependencies": {
     "chai": "^4.1.0",
+    "codeclimate-test-reporter": "^0.5.0",
     "mocha": "^3.4.2",
+    "nyc": "^11.0.3",
     "zombie": "^5.0.7"
   }
 }
