@@ -59,7 +59,7 @@ describe('User', () => {
     });
 
     after((done) =>  {
-      mongoose.connection.collections.users.drop(() => {
+      mongoose.connection.db.dropDatabase(() => {
         done();
       });
     });

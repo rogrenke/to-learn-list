@@ -24,7 +24,7 @@ describe('List creation page', () => {
   });
 
   after((done) => {
-    mongoose.connection.collections.lists.drop(() => {
+    mongoose.connection.db.dropDatabase(() => {
       done();
     });
   });
@@ -63,7 +63,7 @@ describe('List Creation form', () => {
   });
 
   after((done) =>  {
-    mongoose.connection.collections.lists.drop(() => {
+    mongoose.connection.db.dropDatabase(() => {
       done();
     });
   });
