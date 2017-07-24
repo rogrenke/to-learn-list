@@ -40,10 +40,8 @@ describe('Item status', () => {
   });
 
   after((done) => {
-    mongoose.connection.collections.items.drop(() => {
-      mongoose.connection.collections.users.drop(() => {
-        done();
-      });
+    mongoose.connection.db.dropDatabase(() => {
+      done();
     });
   });
 

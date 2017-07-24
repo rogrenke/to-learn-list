@@ -40,13 +40,12 @@ describe('User creates list and is assigned as author', function() {
     });
 
     after((done) =>  {
-      mongoose.connection.collections.lists.drop(() => {
+      mongoose.connection.db.dropDatabase(() => {
         done();
       });
     });
 
     it('should display the new list and author', () => {
-      browser.assert.text('p.card-header-title', 'Reading List');
       browser.assert.text('p.card-header-title.author', 'Jeff Chris');
     });
   });

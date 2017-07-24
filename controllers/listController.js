@@ -14,9 +14,7 @@ exports.createList = async (req, res) => {
 };
 
 exports.getLists = async (req, res) => {
-  const lists = await List
-                        .find()
-                        .populate('author', 'name');
+  const lists = await List.find().populate('author', 'name');
   res.render('lists', { lists, title: 'Lists' });
 };
 
