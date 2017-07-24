@@ -36,6 +36,8 @@ public/stylesheets/style.map
 # The annoying stuff
 .DS_Store
 
+package-lock.json
+
 coverage
 
 .nyc_output
