@@ -2,6 +2,7 @@ doctype html
 html
   head
     title= title
+    meta(name='viewport', content='width=device-width, initial-scale=1, user=scalable=no')
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
     script(src='/scripts/scripts.js')
@@ -36,15 +37,18 @@ html
                     span.icon
                       i.fa.fa-user
                     span Sign In
-      
-    .container
-      if locals.flashes
-        .inner
-         .flash-messages
-           - const categories = Object.keys(locals.flashes)
-           each category in categories
-             each message in flashes[category]
-               .flash(class=`flash--${category}`)
-                 p.flash__text!= message
-                 button.flash__remove(onClick="this.parentElement.remove()") &times;
+    block messages
+      if Object.keys(locals.flashes).length > 0
+        .container
+          .columns
+            .column.is-half.is-offset-3
+              if locals.flashes
+                .inner
+                .flash-messages
+                  - const categories = Object.keys(locals.flashes)
+                  each category in categories
+                    each message in flashes[category]
+                      .flash(class=`flash--${category}`)
+                        p.flash__text!= message
+                        button.flash__remove(onClick="this.parentElement.remove()") &times;
     block content

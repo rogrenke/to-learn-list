@@ -14,16 +14,18 @@ block content
                   span.icon
                     i.fa.fa-plus-square-o
                   span Create List
-        each list, index in lists
-          .tile.is-parent.column.is-one-third
-            .card.tile.is-child
-              header.card-header
-                p.card-header-title
-                  a(href=`lists/${list._id}`)=list.name
-              .card-content
-                .content
-                  p This is the list description
-              //-   .content
+        if lists.length > 0 
+          each list, index in lists
+            .tile.is-parent.column.is-one-third
+              .card.tile.is-child
+                header.card-header
+                  p.card-header-title
+                    a(href=`lists/${list._id}`)=list.name
+                  p.card-header-title.author= list.author.name
+                .card-content
+                  .content
+                    p This is the list description
+                //-   .content
               //-     p.progress-label Progress:
               //-     progress.progress.is-small.is-success(value=index, max='3') #{index}%
               //- footer.card-footer

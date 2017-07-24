@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 const Browser = require('zombie');
 const chai = require('chai'),
   assert = chai.assert,
@@ -11,11 +11,20 @@ describe('List creation page', () => {
   const browser = new Browser();
 
   before((done) => {
-    browser.visit('/', done);
+    browser.visit('/users/new', done);
   });
 
-  after((done) =>  {
-    mongoose.connection.collections.lists.drop(() => {
+  before((done) => {
+    browser
+      .fill("name", "Ghetto Chris")
+      .fill("email", "ghettochris@gmail.com")
+      .fill("password", "gangsta")
+      .fill("password-confirm", "gangsta")
+      .pressButton("Sign Up", done);
+  });
+
+  after((done) => {
+    mongoose.connection.db.dropDatabase(() => {
       done();
     });
   });
@@ -41,10 +50,29 @@ describe('List Creation form', () => {
   const browser = new Browser();
 
   before((done) => {
-    browser.visit('/lists/new', done);
+    browser.visit('/users/new', done);
   });
 
-  describe('User creates a new list', () =>{
+  before((done) => {
+    browser
+      .fill("name", "G Chris")
+      .fill("email", "gchris@gmail.com")
+      .fill("password", "gangsta")
+      .fill("password-confirm", "gangsta")
+      .pressButton("Sign Up", done);
+  });
+
+  after((done) =>  {
+    mongoose.connection.db.dropDatabase(() => {
+      done();
+    });
+  });
+
+  describe('User creates a new list', () => {
+    before((done) => {
+      browser.clickLink('Create List', done);
+    });
+
     before((done) => {
       browser
         .fill('name', 'Reading List')
@@ -55,5 +83,4 @@ describe('List Creation form', () => {
       browser.assert.text('h1', 'Reading List');
     });
   });
-
 });

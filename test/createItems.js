@@ -1,11 +1,11 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 const Browser = require('zombie');
 const chai = require('chai'),
   assert = chai.assert,
   expect = chai.expect;
 var app = require('../app');
-const List = mongoose.model('List')
-const Item = mongoose.model('Item')
+const List = mongoose.model('List');
+const Item = mongoose.model('Item');
 
 Browser.localhost('localhost', 7777);
 
@@ -13,7 +13,21 @@ describe('Item creation page', () => {
   const browser = new Browser();
 
   before((done) => {
-    browser.visit('/lists/new', done)
+    browser.visit('/users/new', done);
+  });
+
+  before((done) => {
+    browser
+      .fill("name", "Jelly Chris")
+      .fill("email", "welljell@gmail.com")
+      .fill("password", "gangsta")
+      .fill("password-confirm", "gangsta")
+      .pressButton("Sign Up", done);
+  });
+
+  before((done) => {
+    browser
+      .clickLink('Create List', done);
   });
 
   before((done) => {
@@ -22,8 +36,8 @@ describe('Item creation page', () => {
       .pressButton('Create', done);
   });
 
-  after((done) =>  {
-    mongoose.connection.collections.items.drop(() => {
+  after((done) => {
+    mongoose.connection.db.dropDatabase(() => {
       done();
     });
   });
@@ -67,13 +81,13 @@ describe('Item creation page', () => {
 
     // TODO: The following test is not really working. Refactoring needed. Kind regards, Ghetto Chris & Rappin' Roland
     before((done) => {
-      const seedList = new List({name: 'Seed List'}).save()
-      const seedItem = new Item({text: 'Seed text', list: seedList._id}).save()
+      const seedList = new List({name: 'Seed List'}).save();
+      const seedItem = new Item({text: 'Seed text', list: seedList._id}).save();
       done();
     });
 
     before((done) => {
-      browser.visit('/lists/new', done)
+      browser.visit('/lists/new', done);
     });
 
     before((done) => {
@@ -83,7 +97,7 @@ describe('Item creation page', () => {
     });
 
     it('should display the item on the list', () => {
-      expect(browser.html('h2')).to.not.be
+      expect(browser.html('h2')).to.not.be;
     });
   });
 
