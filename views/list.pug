@@ -14,7 +14,7 @@ block content
                 li
                   a(href=`/items/edit?item=${item._id}&status=${item.status}` class=item.status)=item.text
                   span
-                  a(href=`/items/${item._id}`).itemDetail   (Show details)
+                  a(href=`/items/${item._id}`).itemDetail (Show details)
           form(method='POST')
             .field
               label.label(for="text") Item

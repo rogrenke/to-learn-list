@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const List = mongoose.model('List');
 const Item = mongoose.model('Item');
+const embed = require('embed-video');
 
 exports.createItem = async (req, res, next) => {
   req.body.list = req.params.id;
@@ -23,6 +24,7 @@ exports.updateItem = async (req, res, next) => {
 
 exports.getItemById = async (req, res, next) => {
   const itemToGet = await Item.findById(req.params.id);
-  res.render('item', { itemToGet, text: itemToGet.text });
+  youtubeVideoIframe = embed(itemToGet.youtubeVideo,{ attr: { width:800, height: 400}});
+  res.render('item', { itemToGet, youtubeVideoIframe });
   next();
 }
