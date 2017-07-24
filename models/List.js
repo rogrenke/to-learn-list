@@ -12,6 +12,10 @@ const listSchema = new mongoose.Schema({
     type: mongoose.Schema.ObjectId,
     ref: 'User'
   },
+  mentee: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'User'
+  },
 });
 
 module.exports = mongoose.model('List', listSchema);

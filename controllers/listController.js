@@ -14,8 +14,10 @@ exports.createList = async (req, res) => {
 };
 
 exports.getLists = async (req, res) => {
-  const lists = await List.find().populate('author', 'name');
-  res.render('lists', { lists, title: 'Lists' });
+  const curretUserId = req.user._id;
+  const currentUserAuthoredLists = await List.find({author: curretUserId}).populate('author', 'name');
+  const listsAssignedToCurrentUser = await List.find({mentee: currenUserId}).populate('mentee', 'name');
+  res.render('lists', { currentUserAuthoredLists, listsAssignedToCurrentUser, title: 'Lists' });
 };
 
 exports.getListById = async (req, res) => {

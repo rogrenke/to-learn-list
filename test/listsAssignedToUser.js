@@ -55,8 +55,12 @@ describe('Assign a list to a mentee', function() {
           .pressButton('Create', done);
       });
 
+      before((done) => {
+        browser.visit('/lists', done);
+      })
+
       it('Shows the list with the name of the mentee', () => {
-        expect(1).equal(1);
+        browser.assert.text('.atuhored_list > p.card-header-title.author', 'Ghetto Chris');
       });
     });
   });
