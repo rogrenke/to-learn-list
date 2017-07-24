@@ -136,8 +136,8 @@ describe('User sign in', function() {
     });
   });
 
-  after((done) =>  {
-    mongoose.connection.collections.users.drop(() => {
+  after((done) => {
+    mongoose.connection.db.dropDatabase(() => {
       done();
     });
   });
