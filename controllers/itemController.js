@@ -12,7 +12,7 @@ exports.createItem = async (req, res, next) => {
 
 exports.updateItem = async (req, res, next) => {
   let newStatus = req.query.status == 'incomplete' ? 'complete' : 'incomplete';
-    const updatedItem = await Item.findOneAndUpdate(
+  const updatedItem = await Item.findOneAndUpdate(
     { _id: req.query.item },
     { status: newStatus },
     { new: true }
@@ -25,4 +25,4 @@ exports.getItemById = async (req, res, next) => {
   const itemToGet = await Item.findById(req.params.id);
   res.render('item', { itemToGet, text: itemToGet.text });
   next();
-}
+};

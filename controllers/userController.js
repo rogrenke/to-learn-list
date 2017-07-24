@@ -4,7 +4,7 @@ const promisify = require('es6-promisify');
 
 exports.signupForm = (req, res) => {
   res.render('newUser');
-}
+};
 
 exports.validateRegister = (req, res, next) => {
   req.sanitizeBody('name');

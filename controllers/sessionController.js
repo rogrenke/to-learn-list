@@ -11,8 +11,8 @@ exports.signout = (req, res) => {
   req.logout();
   req.flash('success', 'You signed out successfully');
   res.redirect('/');
-}
+};
 
 exports.signinForm  = (req, res) => {
   res.render('sessions/signin');
-}
+};
