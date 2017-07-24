@@ -103,45 +103,4 @@ describe('Item creation page', () => {
       browser.assert.text('h1', 'doing gangsta stuff');
     });
   });
-
-  // describe('User can visit item details page', () => {
-  //
-  //   var itemID;
-  //
-  //   before((done) => {
-  //     Item.find({}, (err, items) => {
-  //       itemID = items[0]._id;
-  //       done();
-  //     });
-  //   })
-  //
-  //   before((done) => {
-  //     console.log(itemID);
-  //     // console.log(`http://localhost:7777/items/${itemID}`);
-  //     browser.visit('/');
-  //     done();
-  //   });
-  //
-  //   it('should display the item heading', (done) => {
-  //     browser.dump();
-  //     browser.assert.text('h1', 'First Item');
-  //     done();
-  //   });
-  // });
-
-  // describe('User creation', () => {
-  //   it('creates user', (done) => {
-  //     User.find({}, (err, users) => {
-  //       expect(users[0].name).to.equal('user');
-  //       done();
-  //     });
-  //   });
-  // });
-    // User.find({}, (err, users) => {
-    //   expect(users[0].name).to.equal('user');
-    //   done();
-    // });
-
-
-
 });
