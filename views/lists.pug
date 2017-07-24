@@ -13,14 +13,14 @@ block content
                 a.button.is-primary(href='/lists/new')
                   span.icon
                     i.fa.fa-plus-square-o
-                  span Create List
-        each list, index in lists
+                  span Create List       
+        each list, index in currentUserAuthoredLists
           .tile.is-parent.column.is-one-third
             .card.tile.is-child
               header.card-header
                 p.card-header-title
                   a(href=`lists/${list._id}`)=list.name
-                p.card-header-title.author= list.author.name
+                p.card-header-title.author= `Assigned to ${list.mentee.name}`
               .card-content
                 .content
                   p This is the list description
