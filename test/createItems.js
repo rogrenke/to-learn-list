@@ -59,7 +59,7 @@ describe('Item creation page', () => {
     });
 
     it('should display the item on the list', () => {
-      browser.assert.text('li', 'First Item');
+      browser.assert.text('a.incomplete', 'First Item');
     });
   });
 
@@ -95,17 +95,12 @@ describe('Item creation page', () => {
         .pressButton('Add Item', done);
     })
 
+    before((done) => {
+      browser.clickLink('(Show details)', done);
+    })
+
     it('should get the new list page', () => {
-      browser.assert.text('a.incomplete', 'doing gangsta stuff');
-    });
-
-    it('should display the items form', () => {
-      browser.assert.element('form');
-    });
-
-    it('should have an input field for new items', () => {
-      browser.assert.element('form input[name=text]');
-      browser.assert.element('form button');
+      browser.assert.text('h1', 'doing gangsta stuff');
     });
   });
 
