@@ -136,7 +136,7 @@ describe('User sign in', function() {
     });
   });
 
-  after((done) =>  {
+  after((done) => {
     mongoose.connection.db.dropDatabase(() => {
       done();
     });
