@@ -84,7 +84,7 @@ describe('User sign out', function() {
   });
 
   after((done) =>  {
-    mongoose.connection.collections.users.drop(() => {
+    mongoose.connection.db.dropDatabase(() => {
       done();
     });
   });
