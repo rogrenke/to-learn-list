@@ -28,23 +28,19 @@ describe('Item creation page', () => {
   });
 
   before((done) => {
-    console.log(browser.location.href);
     browser.clickLink('Sign Out', done);
   })
 
   before((done) => {
-    console.log(-1)
     helpers.createUser("Jeff Jones", "jeff@mail.com", "password", browser, done);
   });
 
   before((done) => {
-    console.log(0)
     browser
       .clickLink('Create List', done);
   });
 
   before((done) => {
-    console.log(2)
     browser
       .fill('name', 'Reading List')
       .fill('mentee', 'Chris')
