@@ -20,6 +20,7 @@ block content
               header.card-header
                 p.card-header-title
                   a(href=`lists/${list._id}`)=list.name
+                p.card-header-title.author= list.author.name
               .card-content
                 .content
                   p This is the list description
