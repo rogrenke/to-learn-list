@@ -1,21 +1,26 @@
 const mongoose = require('mongoose');
 const List = mongoose.model('List');
 const Item = mongoose.model('Item');
+const User = mongoose.model('User');
 
 exports.createForm = (req, res) => {
   res.render('listForm', { title: 'Create List' });
 };
 
 exports.createList = async (req, res) => {
-  req.body.author = req.user._id;
-  const newList = new List(req.body);
+  const listName = req.body.name;
+  const listAuthor = req.user._id;
+  const mentee = await User.findOne({ name: req.body.mentee });
+  const newList = new List({name: listName, author: listAuthor, mentee: mentee._id});
   await newList.save();
   res.redirect(`/lists/${newList._id}`);
 };
 
 exports.getLists = async (req, res) => {
-  const lists = await List.find().populate('author', 'name');
-  res.render('lists', { lists, title: 'Lists' });
+  const currentUserId = req.user._id;
+  const currentUserAuthoredLists = await List.find({author: currentUserId}).populate('mentee', 'name');
+  const listsAssignedToCurrentUser = await List.find({mentee: currentUserId}).populate('author', 'name');
+  res.render('lists', { currentUserAuthoredLists, listsAssignedToCurrentUser, title: 'Lists' });
 };
 
 exports.getListById = async (req, res) => {

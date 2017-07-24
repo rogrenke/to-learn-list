@@ -2,8 +2,9 @@ extends layout
 
 block content
   section.section
-    .container
+    .container.authored_lists
       h1.title.is-2= title
+      h2.title.is-4 Authored Lists
       .tile.is-ancestor.wrap-line
         .tile.is-parent.column.is-one-third
           .card.tile.is-child.create-list-info
@@ -14,18 +15,38 @@ block content
                   span.icon
                     i.fa.fa-plus-square-o
                   span Create List
-        if lists.length > 0 
-          each list, index in lists
-            .tile.is-parent.column.is-one-third
-              .card.tile.is-child
-                header.card-header
-                  p.card-header-title
-                    a(href=`lists/${list._id}`)=list.name
-                  p.card-header-title.author= list.author.name
-                .card-content
-                  .content
-                    p This is the list description
-                //-   .content
+        each list, index in currentUserAuthoredLists
+          .tile.is-parent.column.is-one-third
+            .card.tile.is-child
+              header.card-header
+                p.card-header-title
+                  a(href=`lists/${list._id}`)=list.name
+                p.card-header-title.author= `Assigned to ${list.mentee.name}`
+              .card-content
+                .content
+                  p This is the list description
+              //-   .content
+              //-     p.progress-label Progress:
+              //-     progress.progress.is-small.is-success(value=index, max='3') #{index}%
+              //- footer.card-footer
+              //-   a.card-footer-item Save
+              //-   a.card-footer-item Edit
+              //-   a.card-footer-item Delete
+    br
+    .container.assigned_lists
+      h2.title.is-4 Lists assigned to me
+      .tile.is-ancestor.wrap-line
+        each list, index in listsAssignedToCurrentUser
+          .tile.is-parent.column.is-one-third
+            .card.tile.is-child
+              header.card-header
+                p.card-header-title
+                  a(href=`lists/${list._id}`)=list.name
+                p.card-header-title.author= `Author ${list.author.name}`
+              .card-content
+                .content
+                  p This is the list description
+              //-   .content
               //-     p.progress-label Progress:
               //-     progress.progress.is-small.is-success(value=index, max='3') #{index}%
               //- footer.card-footer

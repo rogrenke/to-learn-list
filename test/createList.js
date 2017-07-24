@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Browser = require('zombie');
+const helpers = require('./helpers');
 const chai = require('chai'),
   assert = chai.assert,
   expect = chai.expect;
@@ -11,16 +12,11 @@ describe('List creation page', () => {
   const browser = new Browser();
 
   before((done) => {
-    browser.visit('/users/new', done);
+    helpers.createUserAndSignOut("Ghetto Chris", "chris@mail.com", "gangsta", browser, done);
   });
 
   before((done) => {
-    browser
-      .fill("name", "Ghetto Chris")
-      .fill("email", "ghettochris@gmail.com")
-      .fill("password", "gangsta")
-      .fill("password-confirm", "gangsta")
-      .pressButton("Sign Up", done);
+    helpers.createUser("Jeff Jones", "jeff@mail.com", "password", browser, done);
   });
 
   after((done) => {
@@ -50,16 +46,11 @@ describe('List Creation form', () => {
   const browser = new Browser();
 
   before((done) => {
-    browser.visit('/users/new', done);
+    helpers.createUserAndSignOut("Ghetto Chris", "chris@mail.com", "gangsta", browser, done);
   });
 
   before((done) => {
-    browser
-      .fill("name", "G Chris")
-      .fill("email", "gchris@gmail.com")
-      .fill("password", "gangsta")
-      .fill("password-confirm", "gangsta")
-      .pressButton("Sign Up", done);
+    helpers.createUser("Jeff Jones", "jeff@mail.com", "password", browser, done);
   });
 
   after((done) =>  {
@@ -76,6 +67,7 @@ describe('List Creation form', () => {
     before((done) => {
       browser
         .fill('name', 'Reading List')
+        .fill('mentee', 'Ghetto Chris')
         .pressButton('Create', done);
     });
 
