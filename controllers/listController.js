@@ -19,12 +19,6 @@ exports.getLists = async (req, res) => {
 
 exports.getListById = async (req, res) => {
   const list = await List.findOne({ _id: req.params.id });
-  const items = await Item.find({});
+  const items = await Item.find({ list: req.params.id });
   res.render('list', { list, items, name: list.name });
 };
-
-exports.createItem = async (req, res) => {
-  const newItem = new Item(req.body);
-  await newItem.save();
-  res.redirect(`/lists/${req.params.id}`);
-}

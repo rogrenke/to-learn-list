@@ -19,7 +19,9 @@ const Item = require('./models/Item');
 // Routes
 const index = require('./routes/index');
 const users = require('./routes/users');
+const sessions = require('./routes/sessions');
 const lists = require('./routes/lists');
+const items = require('./routes/items');
 
 require('./handlers/passport');
 
@@ -60,13 +62,20 @@ app.use(session({
   secret: 'password',
   key: 'keys',
   resave: false,
-  saveUninitialized: false,
+  saveUninitialized: false
 }));
 
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(flash());
+
+app.use((req, res, next) => {
+  res.locals.flashes = req.flash();
+  res.locals.user = req.user || null;
+  res.locals.currentPath = req.path;
+  next();
+});
 
 app.use(sassMiddleware({
   src: path.join(__dirname, 'public'),
@@ -78,7 +87,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/sessions', sessions);
 app.use('/lists', lists);
+app.use('/items', items);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
