@@ -4,9 +4,14 @@ mongoose.promise = global.Promise;
 const itemSchema = new mongoose.Schema({
 
   text: {
-      type: String,
-      trim: true,
-      required: 'Please enter the item text'
+    type: String,
+    trim: true,
+    required: 'Please enter the item text'
+  },
+
+  description: {
+    type: String,
+    trim: true,
   },
 
   status: {

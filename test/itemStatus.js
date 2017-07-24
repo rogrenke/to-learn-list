@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Browser = require('zombie');
+const helpers = require('./helpers');
 const chai = require('chai'),
   assert = chai.assert,
   expect = chai.expect;
@@ -13,23 +14,22 @@ describe('Item status', () => {
   const browser = new Browser();
 
   before((done) => {
-    browser.visit('/users/new', done);
+    helpers.createUserAndSignOut("Ghetto Chris", "chris@mail.com", "gangsta", browser, done);
+  });
+
+  before((done) => {
+    helpers.createUser("Jeff Jones", "jeff@mail.com", "password", browser, done);
   });
 
   before((done) => {
     browser
-      .fill("name", "Test User")
-      .fill("email", "testuser@gmail.com")
-      .fill("password", "gangsta")
-      .fill("password-confirm", "gangsta")
-      .pressButton("Sign Up", () => {
-        browser.visit('/lists/new', done);
-      });
+      .clickLink('Create List', done);
   });
 
   before((done) => {
     browser
       .fill('name', 'Reading List')
+      .fill('mentee', 'Ghetto Chris')
       .pressButton('Create', done);
   });
 

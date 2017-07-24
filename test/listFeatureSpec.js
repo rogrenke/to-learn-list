@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Browser = require('zombie');
+const helpers = require('./helpers');
 const chai = require('chai'),
   assert = chai.assert,
   expect = chai.expect;
@@ -11,42 +12,45 @@ describe('User creates list and is assigned as author', function() {
   const browser = new Browser();
 
   before((done) => {
-    browser.visit('/users/new', done);
+    helpers.createUserAndSignOut("Ghetto Chris", "chris@mail.com", "gangsta", browser, done);
   });
 
-  describe('User creates a new list', () => {
-    before((done) => {
-      browser
-        .fill("name", "Jeff Chris")
-        .fill("email", "jeff@gmail.com")
-        .fill("password", "gangsta")
-        .fill("password-confirm", "gangsta")
-        .pressButton("Sign Up", done);
-    });
+  before((done) => {
+    helpers.createUser("Jeff Jones", "jeff@mail.com", "password", browser, done);
+  });
 
-    before((done) => {
-      browser
-        .clickLink('Create List', done);
-    });
+  before((done) => {
+    browser
+      .clickLink('Create List', done);
+  });
 
-    before((done) => {
-      browser
-        .fill('name', 'Reading List')
-        .pressButton('Create', done);
-    });
+  before((done) => {
+    browser
+      .fill('name', 'Reading List')
+      .fill('mentee', 'Ghetto Chris')
+      .pressButton('Create', done);
+  });
 
-    before((done)=> {
-      browser.visit('/lists', done);
-    });
+  before((done)=> {
+    browser
+      .clickLink('Sign Out', done)
+  });
 
-    after((done) =>  {
-      mongoose.connection.db.dropDatabase(() => {
-        done();
-      });
-    });
+  before((done)=> {
+    helpers.signIn('chris@mail.com', 'gangsta', browser, done)
+  })
 
-    it('should display the new list and author', () => {
-      browser.assert.text('p.card-header-title.author', 'Jeff Chris');
+  before((done)=> {
+    browser.visit('/lists', done);
+  });
+
+  after((done) =>  {
+    mongoose.connection.db.dropDatabase(() => {
+      done();
     });
+  });
+
+  it('should display the new list and author', () => {
+    browser.assert.text('.assigned_lists p.author', 'Author Jeff Jones');
   });
 });

@@ -8,9 +8,13 @@ block content
         .column.is-half
           form(method='POST')
             .field
-              label.label(for="name") Name
+              label.label(for="name") List Name
               .control
                 input.input(type="text" name="name")
+            .field
+              label.label(for="mentee") Mentee Name
+              .control
+                input.input(type="text" name="mentee")
             .field
               .control
                 button.button.is-primary(type="submit") Create
