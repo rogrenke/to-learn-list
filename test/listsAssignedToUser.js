@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
-const User = require('../models/User');
 const Browser = require('zombie');
+const helpers = require('./helpers');
+const User = mongoose.model('User');
 const chai = require('chai'),
   assert = chai.assert,
   expect = chai.expect;
@@ -14,33 +15,13 @@ describe('Assign a list to a mentee', function() {
   describe('Mentee Sign Up', () => {
 
     before((done) => {
-      browser.visit('/users/new', done);
-    });
-
-    before((done) => {
-      browser
-        .fill("name", "Ghetto Chris")
-        .fill("email", "ghettochris@gmail.com")
-        .fill("password", "gangsta")
-        .fill("password-confirm", "gangsta")
-        .pressButton("Sign Up", () => {
-          browser.clickLink('Sign Out', done);
-        });
+      helpers.createUserAndSignOut("Ghetto Chris", "chris@mail.com", "gangsta", browser, done);
     });
 
     describe('Mentor Sign Up and create a new list', () => {
 
       before((done) => {
-        browser.visit('/users/new', done);
-      });
-
-      before((done) => {
-        browser
-          .fill("name", "Jeff Chris")
-          .fill("email", "jeff@gmail.com")
-          .fill("password", "gangsta")
-          .fill("password-confirm", "gangsta")
-          .pressButton("Sign Up", done);
+        helpers.createUser("Jeff Jones", "jeff@mail.com", "password", browser, done);
       });
 
       before((done) => {
@@ -57,10 +38,10 @@ describe('Assign a list to a mentee', function() {
 
       before((done) => {
         browser.visit('/lists', done);
-      })
+      });
 
       it('Shows the list with the name of the mentee', () => {
-        browser.assert.text('.atuhored_list > p.card-header-title.author', 'Ghetto Chris');
+        browser.assert.text('.authored_lists p.author', 'Assigned to Ghetto Chris');
       });
     });
   });
