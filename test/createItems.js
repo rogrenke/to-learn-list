@@ -13,7 +13,6 @@ describe('Item creation page', () => {
   const browser = new Browser();
 
   before((done) => {
-    browser.visit('/')
     browser.visit('/lists/new', done)
   });
 
@@ -66,6 +65,7 @@ describe('Item creation page', () => {
 
   describe('User can only see items associated with that list', () => {
 
+    // TODO: The following test is not really working. Refactoring needed. Kind regards, Ghetto Chris & Rappin' Roland
     before((done) => {
       const seedList = new List({name: 'Seed List'}).save()
       const seedItem = new Item({text: 'Seed text', list: seedList._id}).save()
@@ -86,5 +86,67 @@ describe('Item creation page', () => {
       expect(browser.html('h2')).to.not.be
     });
   });
+
+  describe('User can visit the item details page', () => {
+
+    before((done) => {
+      browser
+        .fill('text', 'doing gangsta stuff')
+        .pressButton('Add Item', done);
+    })
+
+    it('should get the new list page', () => {
+      browser.assert.text('a.incomplete', 'doing gangsta stuff');
+    });
+
+    it('should display the items form', () => {
+      browser.assert.element('form');
+    });
+
+    it('should have an input field for new items', () => {
+      browser.assert.element('form input[name=text]');
+      browser.assert.element('form button');
+    });
+  });
+
+  // describe('User can visit item details page', () => {
+  //
+  //   var itemID;
+  //
+  //   before((done) => {
+  //     Item.find({}, (err, items) => {
+  //       itemID = items[0]._id;
+  //       done();
+  //     });
+  //   })
+  //
+  //   before((done) => {
+  //     console.log(itemID);
+  //     // console.log(`http://localhost:7777/items/${itemID}`);
+  //     browser.visit('/');
+  //     done();
+  //   });
+  //
+  //   it('should display the item heading', (done) => {
+  //     browser.dump();
+  //     browser.assert.text('h1', 'First Item');
+  //     done();
+  //   });
+  // });
+
+  // describe('User creation', () => {
+  //   it('creates user', (done) => {
+  //     User.find({}, (err, users) => {
+  //       expect(users[0].name).to.equal('user');
+  //       done();
+  //     });
+  //   });
+  // });
+    // User.find({}, (err, users) => {
+    //   expect(users[0].name).to.equal('user');
+    //   done();
+    // });
+
+
 
 });
