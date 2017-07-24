@@ -37,7 +37,7 @@ describe('Item creation page', () => {
   });
 
   after((done) => {
-    mongoose.connection.collections.items.drop(() => {
+    mongoose.connection.db.dropDatabase(() => {
       done();
     });
   });
