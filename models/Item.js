@@ -15,6 +15,11 @@ const itemSchema = new mongoose.Schema({
     default: 'incomplete'
   },
 
+  youtubeVideo: {
+    type: String,
+    trim: true
+  },
+
   list: {
     type: mongoose.Schema.ObjectId,
     ref: 'List',
