@@ -36,15 +36,16 @@ html
                     span.icon
                       i.fa.fa-user
                     span Sign In
-      
     .container
-      if locals.flashes
-        .inner
-         .flash-messages
-           - const categories = Object.keys(locals.flashes)
-           each category in categories
-             each message in flashes[category]
-               .flash(class=`flash--${category}`)
-                 p.flash__text!= message
-                 button.flash__remove(onClick="this.parentElement.remove()") &times;
+      .columns
+        .column.is-half.is-offset-3
+          if locals.flashes
+            .inner
+            .flash-messages
+              - const categories = Object.keys(locals.flashes)
+              each category in categories
+                each message in flashes[category]
+                  .flash(class=`flash--${category}`)
+                    p.flash__text!= message
+                    button.flash__remove(onClick="this.parentElement.remove()") &times;
     block content

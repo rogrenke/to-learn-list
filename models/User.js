@@ -14,7 +14,7 @@ const userSchema = new Schema({
     required: 'Please provide an email address',
     lowercase: true,
     trim: true,
-    validate: [validator.isEmail, 'Invalid email address']
+    validate: value => [validator.isEmail, 'Invalid email address']
   },
   name: {
     type: String,
@@ -22,6 +22,7 @@ const userSchema = new Schema({
     trim: true
   }
 });
+
 
 userSchema.plugin(passportLocalMongoose, { usernameField: 'email'});
 userSchema.plugin(mongodbErrorHandler);
