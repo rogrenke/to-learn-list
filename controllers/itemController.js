@@ -11,7 +11,6 @@ exports.createItem = async (req, res, next) => {
 };
 
 exports.updateItem = async (req, res, next) => {
-  console.log(req.query.feedback);
   let newStatus = req.query.status == 'incomplete' ? 'complete' : 'incomplete';
       const firstUpdatedItem = await Item.findOneAndUpdate(
         { _id: req.query.item },
