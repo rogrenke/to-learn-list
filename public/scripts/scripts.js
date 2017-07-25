@@ -19,8 +19,17 @@ function addFeedbackTextToLink(text) {
   $sendButton.href += string;
 }
 
-function closeFeedbackPopup() {
+function closeItemFeedbackPopup() {
   document.getElementById("feedback-popup").className = "modal";
+}
+
+function closeListFeedbackPopup() {
+  document.getElementById("overall-feedback-popup").className = "modal";
+}
+
+function listCompletenessCheck(items) {
+  console.log("Hello")
+  console.log(items);
 }
 
 document.addEventListener('DOMContentLoaded', function () {

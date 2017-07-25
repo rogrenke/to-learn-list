@@ -39,8 +39,21 @@ block content
     .modal-card
       header.modal-card-head
         p.modal-card-title Give feedback on the task
-        button(onclick="closeFeedbackPopup()").delete
+        button(onclick="closeItemFeedbackPopup()").delete
       section.modal-card-body
+        textarea(onkeypress="addFeedbackTextToLink(this)").textarea.task-feedback 
+      footer.modal-card-foot
+        a(href='').button.is-primary#send-feedback-button Submit feedback
+        a(href='').button#not-now-feedback-button Not now
+  div(class="modal"+complete)#overall-feedback-popup
+    .modal-background
+    .modal-card
+      header.modal-card-head
+        p.modal-card-title Congratiulations! You've completed the list! 
+        button(onclick="closeListFeedbackPopup()").delete
+      section.modal-card-body
+        p Give feedback on your learnings, successes and struggles. This helps your mentor to provide even better guidance in the future.
+        br
         textarea(onkeypress="addFeedbackTextToLink(this)").textarea.task-feedback 
       footer.modal-card-foot
         a(href='').button.is-primary#send-feedback-button Submit feedback

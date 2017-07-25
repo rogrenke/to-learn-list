@@ -26,7 +26,11 @@ exports.getLists = async (req, res) => {
 exports.getListById = async (req, res) => {
   const list = await List.findOne({ _id: req.params.id });
   const items = await Item.find({ list: req.params.id });
-  res.render('list', { list, items, name: list.name });
+  const completeItems = await Item.find({ list: req.params.id, status: "complete" });
+  let complete;
+  items.length === completeItems.length ? complete = ".is-active" : complete = "";
+  console.log(complete);
+  res.render('list', { list, items, complete, name: list.name });
 };
 
 exports.createItem = async (req, res) => {
