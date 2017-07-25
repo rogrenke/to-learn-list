@@ -54,7 +54,12 @@ block content
       section.modal-card-body
         p Give feedback on your learnings, successes and struggles. This helps your mentor to provide even better guidance in the future.
         br
-        textarea(onkeypress="addFeedbackTextToLink(this)").textarea.task-feedback 
-      footer.modal-card-foot
-        a(href='').button.is-primary#send-feedback-button Submit feedback
-        a(href='').button#not-now-feedback-button Not now
+        form(method='POST')
+          .field
+            label.label(for="feedback") Feedback on the list
+            .control
+              input.textarea(type="textarea" name="feedback")
+          .field
+            .control
+              button.button.is-primary(type="submit") Submit Feedback
+        a(href='').button#not-now-feedback-button Not now  
