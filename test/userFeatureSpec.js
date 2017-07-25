@@ -30,6 +30,16 @@ describe('User signup', () => {
     browser.assert.text('h1','Welcome to Ductu');
   })
 
+  it('should throw an error if name left blank', async() => {
+    await browser
+      .fill("email", 'featureTest@user.com')
+      .fill("password", 'featureTestPassword')
+      .fill("password-confirm", 'featureTestPassword')
+      .pressButton("Sign Up")
+    await browser.assert.success();
+    browser.assert.text('p.flash__text','Please supply a name!');
+  });
+
   describe('Testing', () => {
     it('passed', () => {
       assert.true
