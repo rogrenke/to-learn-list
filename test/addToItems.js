@@ -13,20 +13,22 @@ Browser.localhost('localhost', 7777);
 describe('Add items to list', () => {
   const browser = new Browser();
 
-
   before((done) => {
     helpers.createUserAndSignOut("Sandy Meats", "sandymeats@gmail.com", "gangsta", browser, done);
   });
 
   before((done) => {
-    console.log(1)
+    helpers.createUser("Sandwich Eatz", "eatzsandwich@gmail.com", 'gangsta', browser, done);
+  });
+
+  before((done) => {
     browser.clickLink('Create List', done);
   });
 
   before((done) => {
-    console.log(2)
     browser
       .fill('name', 'Reading List')
+      .fill('mentee', 'Sandy Meats')
       .pressButton('Create', done);
   });
 
@@ -36,9 +38,8 @@ describe('Add items to list', () => {
     });
   });
 
-  describe('Add video item to list', () => {
+  describe('Add item types to list', () => {
     before((done) => {
-      console.log(3)
       browser
         .fill('text', 'Refactoring')
         .fill('description', 'Sandi Metz tackles the infamous Gilded Rose kata')
@@ -56,14 +57,14 @@ describe('Add items to list', () => {
       });
 
     });
-  });
 
-  it('Add description to list', (done) => {
-    Item.find({}, (err, items) => {
-      expect(item[0].description).to.equal(
-        'Sandi Metz tackles the infamous Gilded Rose kata'
-      );
-      done();
+    it('Add description to list', (done) => {
+      Item.find({}, (err, items) => {
+        expect(items[0].description).to.equal(
+          'Sandi Metz tackles the infamous Gilded Rose kata'
+        );
+        done();
+      });
     });
   });
 });

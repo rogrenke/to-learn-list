@@ -1,4 +1,5 @@
 const Browser = require('zombie');
+const helpers = require('./helpers');git 
 var mongoose = require('mongoose');
 var app = require('../app');
 var chai = require('chai'),
@@ -99,14 +100,7 @@ describe('User sign in', function() {
   });
 
   before((done) => {
-    browser
-      .fill("name", "Ghetto Chris")
-      .fill("email", "ghettochris@gmail.com")
-      .fill("password", "gangsta")
-      .fill("password-confirm", "gangsta")
-      .pressButton("Sign Up", () => {
-        browser.clickLink('Sign Out', done);
-      });
+    helpers.createUserAndSignOut('Ghetto Chris', 'ghettochris@gmail.com', 'gangsta', browser, done)
   });
 
   describe('redirects to sign in form', () => {
