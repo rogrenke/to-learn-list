@@ -29,7 +29,6 @@ exports.getListById = async (req, res) => {
   const completeItems = await Item.find({ list: req.params.id, status: "complete" });
   let complete;
   items.length === completeItems.length ? complete = ".is-active" : complete = "";
-  console.log(complete);
   res.render('list', { list, items, complete, name: list.name });
 };
 
@@ -37,4 +36,13 @@ exports.createItem = async (req, res) => {
   const newItem = new Item(req.body);
   await newItem.save();
   res.redirect(`/lists/${req.params.id}`);
+};
+
+exports.updateList = async (req, res, next) => {
+  const listToBeUpdated = await List.findOneAndUpdate(
+    { _id: req.body.id },
+    { feedback: req.body.feedback },
+    { new: true }
+  );
+  next();
 };

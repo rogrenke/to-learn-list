@@ -13,4 +13,6 @@ router.get('/:id', listController.getListById)
 
 router.post('/:id', itemController.createItem, listController.getListById)
 
+router.post('/:id/edit', listController.updateList, listController.getListById)
+
 module.exports = router;

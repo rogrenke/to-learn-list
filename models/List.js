@@ -16,6 +16,10 @@ const listSchema = new mongoose.Schema({
     type: mongoose.Schema.ObjectId,
     ref: 'User'
   },
+  feedback: {
+    type: String,
+    trim: true
+  }
 });
 
 module.exports = mongoose.model('List', listSchema);

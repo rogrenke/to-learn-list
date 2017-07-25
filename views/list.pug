@@ -54,11 +54,14 @@ block content
       section.modal-card-body
         p Give feedback on your learnings, successes and struggles. This helps your mentor to provide even better guidance in the future.
         br
-        form(method='POST')
+        form(method='POST' action=`/lists/${list.id}/edit`)
           .field
             label.label(for="feedback") Feedback on the list
             .control
               input.textarea(type="textarea" name="feedback")
+          .field
+            .control
+              input(type="hidden" name="id" value=`${list.id}`)
           .field
             .control
               button.button.is-primary(type="submit") Submit Feedback
