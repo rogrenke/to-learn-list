@@ -12,7 +12,8 @@ block content
               ul
               each item in items
                 li
-                  a(href=`/items/edit?item=${item._id}&status=${item.status}` class=item.status)=item.text
+                  - var string = `updateItem("/items/edit?item=${item._id}&status=${item.status}")`
+                  a(onclick=string class=item.status)=item.text
                   span
                   a(href=`/items/${item._id}`).itemDetail   (Show details)
           form(method='POST')
@@ -23,7 +24,7 @@ block content
             .field
               .control
               button.button.is-primary(type="submit") Add Item
-  .modal.is-active
+  #feedback-popup.modal
     .modal-background
     .modal-card
       header.modal-card-head
@@ -33,5 +34,5 @@ block content
         <!-- Content ... -->
 
       footer.modal-card-foot
-        a.button.is-success Save changes
-        a.button Cancel
+        a(href='').button.is-success#send-feedback-button Save changes
+        a(href='').button#cancel-feedback-button Cancel
