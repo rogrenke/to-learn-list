@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 mongoose.promise = global.Promise;
-
 const itemSchema = new mongoose.Schema({
 
   text: {
