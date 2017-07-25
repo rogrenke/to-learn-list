@@ -1,7 +1,7 @@
 const passport = require('passport');
 
 exports.signin = passport.authenticate('local', {
-  failureRedirect: '/sessions/new',
+  failureRedirect: '/sessions/signin',
   failureFlash: 'Failed Sign in!',
   successRedirect: '/',
   successFlash: 'Signed in!'

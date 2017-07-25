@@ -38,10 +38,10 @@ describe('User', () => {
       password: 'testPassword'
     })).to.throw
   })
+})
 
-  after((done) => {
-    dbCleaner.clean(mongoose.connection.db, () => {
-      done()
-    })
+after((done) => {
+  dbCleaner.clean(mongoose.connection.db, () => {
+    done()
   })
 })
