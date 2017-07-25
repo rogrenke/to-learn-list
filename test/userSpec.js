@@ -4,15 +4,14 @@ const chai = require('chai'),
   assert = chai.assert,
   expect = chai.expect;
 
+afterEach((done) => {
+  dbCleaner.clean(mongoose.connection.db, () => {
+    done()
+  })
+})
 
 describe('User', () => {
   const User = mongoose.model('User');
-
-  afterEach((done) => {
-    dbCleaner.clean(mongoose.connection.db, () => {
-      done()
-    })
-  })
 
   it('Creates a new user', async () => {
     var user = await new User({
@@ -37,11 +36,5 @@ describe('User', () => {
       email: 'user@test.com',
       password: 'testPassword'
     })).to.throw
-  })
-})
-
-describe('Testing', () => {
-  it('passed', () => {
-    assert.true
   })
 })
