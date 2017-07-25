@@ -14,9 +14,19 @@ describe('User', () => {
       password: 'testPassword'
     }).save()
     const users = User.find({}, (err, users) => {
-      expect(users[0].name).to.equal(user)
+      expect(users[0].name).to.equal(user.name)
     })
   })
+
+  // it('throws an error if an email is not provided', async () => {
+  //   const user = await new User({
+  //     name: 'test_user',
+  //     password: 'testPassword'
+  //   }).save()
+  //   const users = User.find({}, (err, users) => {
+  //     expect(users[0].name).to.equal(user)
+  //   })
+  // })
 })
 
 describe('Testing', () => {
@@ -25,34 +35,12 @@ describe('Testing', () => {
   })
 })
 
-after((done) => {
+afterEach((done) => {
   dbCleaner.clean(mongoose.connection.db, () => {
     done()
   })
 })
-//
-//
-//
-// describe('User', () => {
-//   const User = mongoose.model('User');
-//
-//   before((done) => {
-//     var existingUser = new User({
-//       name: 'user',
-//       email: 'test@test.com',
-//       password: 'whatever'
-//     });
-//     existingUser.save(done);
-//   });
-//
-//   describe('User creation', () => {
-//     it('creates user', (done) => {
-//       User.find({}, (err, users) => {
-//         expect(users[0].name).to.equal('user');
-//         done();
-//       });
-//     });
-//   });
+
 //
 //   describe('User validation', () => {
 //
