@@ -14,6 +14,11 @@ const itemSchema = new mongoose.Schema({
     trim: true,
   },
 
+  linkToResource: {
+    type: String,
+    trim: true,
+  },
+
   status: {
     type: String,
     trim: true,
@@ -22,7 +27,8 @@ const itemSchema = new mongoose.Schema({
 
   youtubeVideo: {
     type: String,
-    trim: true
+    trim: true,
+    default: ''
   },
 
   list: {
