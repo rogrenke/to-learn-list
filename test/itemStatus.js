@@ -39,12 +39,6 @@ describe('Item status', () => {
       .pressButton('Add Item', done);
   });
 
-  after((done) => {
-    mongoose.connection.db.dropDatabase(() => {
-      done();
-    });
-  });
-
   it('has a default status of incomplete', (done) => {
     Item.find({}, (err, items) => {
       expect(items[0].status).equal('incomplete');
@@ -65,4 +59,11 @@ describe('Item status', () => {
       });
     });
   });
+
+  after((done) => {
+    mongoose.connection.db.dropDatabase(() => {
+      done();
+    });
+  });
+
 });
