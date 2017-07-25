@@ -25,18 +25,5 @@ describe('Become a mentor', () => {
     it('should display a button to become a mentor', () => {
       browser.assert.text('a.become-a-mentor', 'Become a Mentor');
     });
-
-    describe('fills the form with the information', () => {
-      before(done => {
-        browser
-          .visit('/mentors/new')
-          .fill('bio', 'I want to help people getting the most of their lives')
-          .pressButton('Submit', done);
-      });
-
-      it('should display the new mentor in the list of mentors', () => {
-        browser.assert.text('p', 'I want to help people getting the most of their lives')
-      })
-    });
   });
 });

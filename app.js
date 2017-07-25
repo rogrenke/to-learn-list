@@ -23,6 +23,7 @@ const users = require('./routes/users');
 const sessions = require('./routes/sessions');
 const lists = require('./routes/lists');
 const items = require('./routes/items');
+const mentors = require('./routes/mentors');
 
 require('./handlers/passport');
 
@@ -94,6 +95,7 @@ app.use('/users', users);
 app.use('/sessions', sessions);
 app.use('/lists', lists);
 app.use('/items', items);
+app.use('/mentors', mentors);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

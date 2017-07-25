@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  .section
+    .container
+      form(method='POST')
+        .field
+          label.label(for="bio") Bio
+          .control
+            textarea.textarea.is-primary(type="text", name="bio" placeholder="How can you help?")
+            button.button.is-primary(type="submit") Submit
