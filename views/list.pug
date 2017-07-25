@@ -24,6 +24,16 @@ block content
             .field
               .control
               button.button.is-primary(type="submit") Add Item
+        .column
+          if items.length > 0
+            p Feedback on the items:
+            .content
+              ul
+              each item in items
+                if item.feedback 
+                  li= item.feedback
+                else
+                  li (no feedback yet)
   #feedback-popup.modal
     .modal-background
     .modal-card
