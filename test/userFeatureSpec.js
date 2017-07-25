@@ -1,18 +1,36 @@
-// const Browser = require('zombie');
-// var mongoose = require('mongoose');
-// var app = require('../app');
-// var chai = require('chai'),
-//   assert = chai.assert,
-//   expect = chai.expect;
-//
-// Browser.localhost('localhost', 7777);
-//
-// describe('User signup', function() {
-//   const browser = new Browser();
-//
-//   before((done) => {
-//     return browser.visit('/users/new', done);
-//   });
+const app = require('../app');
+const Browser = require('zombie');
+const chai = require('chai'),
+  assert = chai.assert,
+  expect = chai.expect;
+const helpers = require('./helpers');
+const mongoose = require('mongoose');
+
+Browser.localhost('localhost', 7777);
+
+describe('User signup', () => {
+  const browser = new Browser();
+
+  before((done) => {
+    return browser.visit('/users/new', done);
+  });
+
+  it ('should have a sign up form', () => {
+    browser.assert.element('form');
+  });
+  // 
+  // it('allows sign up', async() => {
+  //   await helpers.createUser('testUser', 'test@user.com', 'testPassword', browser)
+  //   browser.assert.success();
+  //   browser.assert.text('h1','Welcome to Ductu');
+  // })
+
+  describe('Testing', () => {
+    it('passed', () => {
+      assert.true
+    })
+  })
+})
 //
 //   describe('normal sign up', function() {
 //     it ('should have a sign up form', () => {
