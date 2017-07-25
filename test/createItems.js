@@ -15,21 +15,8 @@ describe('Item creation page', () => {
   const browser = new Browser();
 
   before((done) => {
-    browser.visit('/users/new', done)
+    helpers.createUserAndSignOut("Chris", "e@email.com", "1", browser, done);
   });
-
-  before((done) => {
-    browser
-      .fill("name", 'Chris')
-      .fill("email", 'e@mail.com')
-      .fill("password", '1')
-      .fill("password-confirm", '1')
-      .pressButton("Sign Up", done);
-  });
-
-  before((done) => {
-    browser.clickLink('Sign Out', done);
-  })
 
   before((done) => {
     helpers.createUser("Jeff Jones", "jeff@mail.com", "password", browser, done);
