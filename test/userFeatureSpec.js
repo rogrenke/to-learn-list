@@ -1,5 +1,5 @@
 const Browser = require('zombie');
-const helpers = require('./helpers');git 
+const helpers = require('./helpers'); 
 var mongoose = require('mongoose');
 var app = require('../app');
 var chai = require('chai'),
