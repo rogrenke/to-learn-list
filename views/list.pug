@@ -21,9 +21,15 @@ block content
               .control
                 input.input(type="text" name="text")
             .field
-              label.label(for="text") Description
+              label.label(for="description") Description
               .control
                 input.input(type="text" name="description")
+            .field 
+              label.label(for="linkToResource") Resource Link
+              p.control.has-icons-left
+                input.input(type="text" name="linkToResource")
+                span.icon.is-small.is-left
+                  i.fa.fa-external-link
             .field
               label.label(for="youtubeVideo") Youtube Video
               p.control.has-icons-left

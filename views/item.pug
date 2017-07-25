@@ -6,7 +6,9 @@ block content
       h1= itemToGet.text
     .container
       p= itemToGet.description
-  unless !youtubeVideoIframe
+    .container 
+      a(href=`${itemToGet.linkToResource}`)= itemToGet.linkToResource
+  if youtubeVideoIframe
     .section
       .container
       p !{youtubeVideoIframe}
