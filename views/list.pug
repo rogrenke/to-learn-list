@@ -12,7 +12,7 @@ block content
               ul
               each item in items
                 li
-                  - var string = `updateItem("/items/edit?item=${item._id}&status=${item.status}")`
+                  - var string = `updateItem(this, "/items/edit?item=${item._id}&status=${item.status}")`
                   a(onclick=string class=item.status)=item.text
                   span
                   a(href=`/items/${item._id}`).itemDetail   (Show details)

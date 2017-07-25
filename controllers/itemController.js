@@ -18,13 +18,11 @@ exports.updateItem = async (req, res, next) => {
         { status: newStatus },
         { new: true }
       );
-      console.log(firstUpdatedItem);
       const updatedItem = await Item.findOneAndUpdate(
         { _id: req.query.item },
         { feedback: req.query.feedback},
         { new: true }
       );
-  console.log(updatedItem);
   res.redirect(`/lists/${updatedItem.list}`);
   next();
 };

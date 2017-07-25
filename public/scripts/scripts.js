@@ -1,10 +1,15 @@
-function updateItem(link) {
-  var $feedbackOverlay = document.getElementById("feedback-popup");
-  $feedbackOverlay.className += " is-active";
-  var $sendButton = document.getElementById("send-feedback-button");
-  var $notNowButton = document.getElementById("not-now-feedback-button");
-  $sendButton.href = link+"&feedback=";
-  $notNowButton.href = link;
+function updateItem(element, link) {
+  if (element.className !== "complete") {
+  // var $statusOfItem =
+    var $feedbackOverlay = document.getElementById("feedback-popup");
+    $feedbackOverlay.className += " is-active";
+    var $sendButton = document.getElementById("send-feedback-button");
+    var $notNowButton = document.getElementById("not-now-feedback-button");
+    $sendButton.href = link+"&feedback=";
+    $notNowButton.href = link;
+  } else {
+      window.location.replace(link);
+  }
 };
 
 function addFeedbackTextToLink(text) {
