@@ -1,10 +1,10 @@
 function updateItem(link) {
   var $feedbackOverlay = document.getElementById("feedback-popup");
   $feedbackOverlay.className += " is-active";
-  var $successButton = document.getElementById("send-feedback-button");
-  var $cancelButton = document.getElementById("cancel-feedback-button");
-  $successButton.href = link;
-  $cancelButton.href = link;
+  var $sendButton = document.getElementById("send-feedback-button");
+  var $notNowButton = document.getElementById("not-now-feedback-button");
+  $sendButton.href = link;
+  $notNowButton.href = link;
   console.log(link)
 };
 
@@ -31,6 +31,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
       });
     });
+
+    var $closeFeedbackPopup = document.getElementById("close-feedback")
+
+    $closeFeedbackPopup.addEventListener('click', () => {
+      document.getElementById("feedback-popup").className = "modal"
+    })
   }
 
 

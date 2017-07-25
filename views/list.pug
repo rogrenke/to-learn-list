@@ -28,11 +28,10 @@ block content
     .modal-background
     .modal-card
       header.modal-card-head
-        p.modal-card-title Modal title
-        button.delete
+        p.modal-card-title Give feedback on the task
+        button.delete#close-feedback
       section.modal-card-body
-        <!-- Content ... -->
-
+        textarea.textarea.task-feedback 
       footer.modal-card-foot
-        a(href='').button.is-success#send-feedback-button Save changes
-        a(href='').button#cancel-feedback-button Cancel
+        a(href='').button.is-primary#send-feedback-button Submit feedback
+        a(href='').button#not-now-feedback-button Not now
