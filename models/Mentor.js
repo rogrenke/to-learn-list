@@ -8,6 +8,9 @@ const mentorSchema = new mongoose.Schema({
   },
   bio: {
     type: String,
+  },
+  mentees: {
+    type: [String]
   }
 });
 

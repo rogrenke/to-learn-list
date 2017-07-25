@@ -9,5 +9,10 @@ exports.createMentor = async (req, res) => {
   const currentUserId = req.user._id;
   const mentor = new Mentor({ user: currentUserId, bio: req.body.bio });
   await mentor.save();
-  res.render('mentorNew');
+  res.redirect('/');
+}
+
+exports.listMentors = async (req, res) => {
+  const mentors = await Mentor.find().populate('user', 'name');
+  res.render('mentors', { mentors });
 }
