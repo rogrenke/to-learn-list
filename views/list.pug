@@ -39,7 +39,7 @@ block content
     .modal-card
       header.modal-card-head
         p.modal-card-title Give feedback on the task
-        button.delete#close-feedback
+        button(onclick="closeFeedbackPopup()").delete
       section.modal-card-body
         textarea(onkeypress="addFeedbackTextToLink(this)").textarea.task-feedback 
       footer.modal-card-foot

@@ -58,6 +58,10 @@ describe('Item status', () => {
       browser.clickLink('Item to be completed', done);
     });
 
+    before((done) => {
+      browser.clickLink("#not-now-feedback-button", done);
+    })
+
     it('has a status of complete', (done) => {
       Item.find({}, (err, items) => {
         expect(items[0].status).equal('complete');

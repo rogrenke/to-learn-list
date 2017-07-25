@@ -19,6 +19,10 @@ function addFeedbackTextToLink(text) {
   $sendButton.href += string;
 }
 
+function closeFeedbackPopup() {
+  document.getElementById("feedback-popup").className = "modal";
+}
+
 document.addEventListener('DOMContentLoaded', function () {
 
   // Get all "navbar-burger" elements
@@ -43,13 +47,6 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
   };
-
-  var $closeFeedbackPopup = document.getElementById("close-feedback")
-
-  $closeFeedbackPopup.addEventListener('click', () => {
-    document.getElementById("feedback-popup").className = "modal"
-  })
-
 });
 
 

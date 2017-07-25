@@ -15,10 +15,12 @@ describe('Item creation page', () => {
   const browser = new Browser();
 
   before((done) => {
+    console.log("1");
     browser.visit('/users/new', done)
   });
 
   before((done) => {
+    console.log("2");
     browser
       .fill("name", 'Chris')
       .fill("email", 'e@mail.com')
@@ -28,19 +30,23 @@ describe('Item creation page', () => {
   });
 
   before((done) => {
+    console.log("3");
     browser.clickLink('Sign Out', done);
   })
 
   before((done) => {
+    console.log("4");
     helpers.createUser("Jeff Jones", "jeff@mail.com", "password", browser, done);
   });
 
   before((done) => {
+    console.log("5");
     browser
       .clickLink('Create List', done);
   });
 
   before((done) => {
+    console.log("6");
     browser
       .fill('name', 'Reading List')
       .fill('mentee', 'Chris')
