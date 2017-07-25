@@ -3,10 +3,16 @@ function updateItem(link) {
   $feedbackOverlay.className += " is-active";
   var $sendButton = document.getElementById("send-feedback-button");
   var $notNowButton = document.getElementById("not-now-feedback-button");
-  $sendButton.href = link;
+  $sendButton.href = link+"&feedback=";
   $notNowButton.href = link;
-  console.log(link)
 };
+
+function addFeedbackTextToLink(text) {
+  var $sendButton = document.getElementById("send-feedback-button");
+  var string = String(text.value);
+  $sendButton.href = document.getElementById("not-now-feedback-button").href+"&feedback=";
+  $sendButton.href += string;
+}
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -31,13 +37,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
       });
     });
+  };
 
-    var $closeFeedbackPopup = document.getElementById("close-feedback")
+  var $closeFeedbackPopup = document.getElementById("close-feedback")
 
-    $closeFeedbackPopup.addEventListener('click', () => {
-      document.getElementById("feedback-popup").className = "modal"
-    })
-  }
+  $closeFeedbackPopup.addEventListener('click', () => {
+    document.getElementById("feedback-popup").className = "modal"
+  })
+
+});
 
 
   // var $listItems = Array.prototype.slice.call(document.getElementsByClassName("incomplete"));
@@ -56,5 +64,3 @@ document.addEventListener('DOMContentLoaded', function () {
   //   // });
   //
   // };
-
-});

@@ -31,7 +31,7 @@ block content
         p.modal-card-title Give feedback on the task
         button.delete#close-feedback
       section.modal-card-body
-        textarea.textarea.task-feedback 
+        textarea(onkeypress="addFeedbackTextToLink(this)").textarea.task-feedback 
       footer.modal-card-foot
         a(href='').button.is-primary#send-feedback-button Submit feedback
         a(href='').button#not-now-feedback-button Not now
