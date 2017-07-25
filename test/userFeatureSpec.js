@@ -11,19 +11,24 @@ Browser.localhost('localhost', 7777);
 describe('User signup', () => {
   const browser = new Browser();
 
-  before((done) => {
-    return browser.visit('/users/new', done);
+  beforeEach( async () => {
+    await browser.visit('/users/new');
   });
 
   it ('should have a sign up form', () => {
     browser.assert.element('form');
   });
-  // 
-  // it('allows sign up', async() => {
-  //   await helpers.createUser('testUser', 'test@user.com', 'testPassword', browser)
-  //   browser.assert.success();
-  //   browser.assert.text('h1','Welcome to Ductu');
-  // })
+
+  it('allows sign up', async() => {
+    await browser
+      .fill("name", 'featureTestUser')
+      .fill("email", 'featureTest@user.com')
+      .fill("password", 'featureTestPassword')
+      .fill("password-confirm", 'featureTestPassword')
+      .pressButton("Sign Up")
+    await browser.assert.success();
+    browser.assert.text('h1','Welcome to Ductu');
+  })
 
   describe('Testing', () => {
     it('passed', () => {
