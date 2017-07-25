@@ -10,7 +10,7 @@ const mentorSchema = new mongoose.Schema({
     type: String,
   },
   mentees: {
-    type: [String]
+    type: [String],
   }
 });
 

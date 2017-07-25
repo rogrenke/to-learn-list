@@ -25,5 +25,10 @@ describe('Become a mentor', () => {
     it('should display a button to become a mentor', () => {
       browser.assert.text('a.become-a-mentor', 'Become a Mentor');
     });
+    
+    it('should display a button to search for mentors', () => {
+      browser.assert.text('a.search-for-a-mentor', 'Search for a Mentor')
+    });
   });
+
 });
