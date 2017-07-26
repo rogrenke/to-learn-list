@@ -13,5 +13,7 @@ router.get('/invite/:id', mentorController.inviteMentor);
 router.get('/invites', mentorController.listInvites);
 router.get('/invites/accept/:id', mentorController.acceptInvite);
 router.get('/invites/decline/:id', mentorController.declineInvite);
+router.get('/mentees', mentorController.listAssignedMentees)
+router.get('/my', mentorController.listAssignedMentors)
 
 module.exports = router;

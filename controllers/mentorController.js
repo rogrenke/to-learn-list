@@ -59,3 +59,13 @@ exports.declineInvite = async (req, res) => {
   }
   res.redirect('/mentors/invites');
 };
+
+exports.listAssignedMentors = async (req, res) => {
+  const mentorships = await Mentorship.find({mentee: req.user._id}).populate('mentor', 'name');
+  res.render('assignedMentors', { mentorships });
+}
+
+exports.listAssignedMentees = async (req, res) => {
+  const mentorships = await Mentorship.find({mentor: req.user._id}).populate('mentee', 'name');
+  res.render('assignedMentees', { mentorships });
+}
