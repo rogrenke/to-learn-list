@@ -10,20 +10,20 @@ exports.createItem = async (req, res, next) => {
   next();
 };
 
-exports.updateItem = async (req, res, next) => {
+exports.updateItem = async (req, res) => {
   let newStatus = req.query.status == 'incomplete' ? 'complete' : 'incomplete';
       const firstUpdatedItem = await Item.findOneAndUpdate(
         { _id: req.query.item },
         { status: newStatus },
         { new: true }
       );
+      console.log(req.query.feedback)
       const updatedItem = await Item.findOneAndUpdate(
         { _id: req.query.item },
-        { feedback: req.query.feedback},
+        { feedback: req.query.feedback },
         { new: true }
       );
   res.redirect(`/lists/${updatedItem.list}`);
-  next();
 };
 
 exports.getItemById = async (req, res, next) => {

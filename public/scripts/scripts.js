@@ -15,6 +15,7 @@ function updateItem(element, link) {
 function addFeedbackTextToLink(text) {
   var $sendButton = document.getElementById("send-feedback-button");
   var string = String(text.value);
+  console.log(string)
   $sendButton.href = document.getElementById("not-now-feedback-button").href+"&feedback=";
   $sendButton.href += string;
 }
@@ -25,6 +26,10 @@ function closeItemFeedbackPopup() {
 
 function closeListFeedbackPopup() {
   document.getElementById("overall-feedback-popup").className = "modal";
+}
+
+function closeGetInTouchPopup() {
+  document.getElementById("get-in-touch-popup").className = "modal";
 }
 
 
@@ -52,5 +57,11 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
   }
-});
 
+  var $getInTouch = document.getElementById('get-in-touch');
+
+  $getInTouch.addEventListener('click', () => {
+    let listId = window.location.pathname.slice(7,)
+    window.location.replace(window.location.pathname + "/book_face_to_face?listId=" + listId);
+  });
+});

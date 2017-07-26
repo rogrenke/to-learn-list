@@ -13,6 +13,8 @@ router.get('/:id', listController.getListById)
 
 router.post('/:id', itemController.createItem, listController.getListById)
 
-router.post('/:id/edit', listController.updateList, listController.getListById)
+router.post('/:id/edit', listController.updateList)
+
+router.get('/:id/book_face_to_face', listController.bookFaceToFaceOnListCompleted)
 
 module.exports = router;

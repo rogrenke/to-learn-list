@@ -17,7 +17,6 @@ const itemSchema = new mongoose.Schema({
 
   status: {
     type: String,
-    trim: true,
     default: 'incomplete'
   },
 

@@ -24,11 +24,13 @@ exports.getLists = async (req, res) => {
 };
 
 exports.getListById = async (req, res) => {
-  const list = await List.findOne({ _id: req.params.id });
+  const list = await List.findOne({ _id: req.params.id }).populate('author', 'email');
   const items = await Item.find({ list: req.params.id });
   const completeItems = await Item.find({ list: req.params.id, status: "complete" });
+  console.log(completeItems);
   let complete;
   (items.length === completeItems.length && items.length!==0 && !list.feedback) ? complete = " is-active" : complete = "";
+  console.log(complete)
   res.render('list', { list, items, complete, name: list.name });
 };
 
@@ -38,11 +40,20 @@ exports.createItem = async (req, res) => {
   res.redirect(`/lists/${req.params.id}`);
 };
 
-exports.updateList = async (req, res, next) => {
+exports.updateList = async (req, res) => {
   const listToBeUpdated = await List.findOneAndUpdate(
     { _id: req.body.id },
     { feedback: req.body.feedback },
     { new: true }
   );
-  next();
+  res.redirect(`/lists/${req.body.id}`)
+};
+
+exports.bookFaceToFaceOnListCompleted = async (req, res) => {
+  const listToBeUpdated = await List.findOneAndUpdate(
+    { _id: req.query.listId },
+    { faceToFaceBooked: true },
+    { new: true }
+  );
+  res.redirect(`/lists/${req.query.listId}`)
 };

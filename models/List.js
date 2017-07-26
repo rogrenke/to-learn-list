@@ -19,6 +19,10 @@ const listSchema = new mongoose.Schema({
   feedback: {
     type: String,
     trim: true
+  },
+  faceToFaceBooked: {
+    type: Boolean,
+    default: false
   }
 });
 

@@ -16,7 +16,7 @@ block content
                   a(onclick=string class=item.status)=item.text
                   span
                   a(href=`/items/${item._id}`).itemDetail   (Show details)
-          if String(user._id) == String(list.author)
+          if String(user._id) == String(list.author._id)
             form(method='POST')
               .field
                 label.label(for="text") Item
@@ -27,7 +27,7 @@ block content
                 button.button.is-primary(type="submit") Add Item
         .column
           if items.length > 0
-            p Feedback on the items:
+            h4.is-4 Feedback on the items:
             .content
               ul
               each item in items
@@ -35,7 +35,10 @@ block content
                   li= item.feedback
                 else
                   li (no feedback yet)
-
+          if list.feedback
+            h4.is-4 List completion feedback
+            .content
+              p= list.feedback
   #feedback-popup.modal
     .modal-background
     .modal-card
@@ -45,7 +48,7 @@ block content
       section.modal-card-body
         .field
           .control
-            textarea(onkeypress="addFeedbackTextToLink(this)").textarea.task-feedback
+            textarea(onkeyup="addFeedbackTextToLink(this)", placeholder="Your feedback").textarea.task-feedback
         .field.is-grouped
           .control
             a(href='').button.is-primary#send-feedback-button Submit feedback
@@ -56,7 +59,7 @@ block content
     .modal-background
     .modal-card
       header.modal-card-head.is-success
-        p.modal-card-title Congratiulations! You've completed the list!
+        p.modal-card-title Congratulations! You've completed the list!
         button(onclick="closeListFeedbackPopup()").delete
       section.modal-card-body
         p Give feedback on your learnings, successes and struggles. This helps your mentor to provide even better guidance in the future.
@@ -73,14 +76,12 @@ block content
             .control
               a(onclick="closeListFeedbackPopup()").button#not-now-feedback-button Not now
 
-  #get-in-touch.modal
-    .modal-background
-    .modal-card
-      header.modal-card-head.
-        p.modal-card-title Now it's the perfect time to get in touch with you mentor!
-        button(onclick="closeItemFeedbackPopup()").delete
-      section.modal-card-body
-        textarea(onkeypress="addFeedbackTextToLink(this)").textarea.task-feedback
-      footer.modal-card-foot
-        a(href='').button.is-primary#send-feedback-button Submit feedback
-        a(href='').button#not-now-feedback-button Not now
+  if (list.feedback && !list.faceToFaceBooked)
+    #get-in-touch-popup.modal.is-active
+      .modal-background
+      .modal-card
+        header.modal-card-head
+          p.modal-card-title Now it's the perfect time to get in touch with you mentor!
+          button(onclick="closeGetInTouchPopup()").delete
+        section.modal-card-body
+          a(href=`mailto:${list.author.email}?Subject=Request%20for%20a%20face%20to%20face%20from%20your%20beloved%20mentee`).button.is-primary#get-in-touch Get in touch
