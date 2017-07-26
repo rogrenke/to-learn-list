@@ -3,7 +3,6 @@ const chai = require('chai'),
   assert = chai.assert,
   expect = chai.expect;
 const mongoose = require('mongoose');
-// mongoose.createConnection('mongodb://localhost/7777');
 
 describe('User', () => {
   const User = mongoose.model('User');
