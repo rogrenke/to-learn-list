@@ -16,14 +16,15 @@ block content
                   a(onclick=string class=item.status)=item.text
                   span
                   a(href=`/items/${item._id}`).itemDetail   (Show details)
-          form(method='POST')
-            .field
-              label.label(for="text") Item
-              .control
-                input.input(type="text" name="text")
-            .field
-              .control
-              button.button.is-primary(type="submit") Add Item
+          if String(user._id) == String(list.author)
+            form(method='POST')
+              .field
+                label.label(for="text") Item
+                .control
+                  input.input(type="text" name="text")
+              .field
+                .control
+                button.button.is-primary(type="submit") Add Item
         .column
           if items.length > 0
             p Feedback on the items:
@@ -34,6 +35,7 @@ block content
                   li= item.feedback
                 else
                   li (no feedback yet)
+
   #feedback-popup.modal
     .modal-background
     .modal-card
@@ -41,16 +43,20 @@ block content
         p.modal-card-title Give feedback on the task
         button(onclick="closeItemFeedbackPopup()").delete
       section.modal-card-body
-        textarea(onkeypress="addFeedbackTextToLink(this)").textarea.task-feedback
-      footer.modal-card-foot
-        a(href='').button.is-primary#send-feedback-button Submit feedback
-        a(href='').button#not-now-feedback-button Not now
+        .field
+          .control
+            textarea(onkeypress="addFeedbackTextToLink(this)").textarea.task-feedback
+        .field.is-grouped
+          .control
+            a(href='').button.is-primary#send-feedback-button Submit feedback
+          .control
+            a(href='').button#not-now-feedback-button Not now
 
   div(class="modal"+complete)#overall-feedback-popup
     .modal-background
     .modal-card
-      header.modal-card-head
-        p.modal-card-title Congratiulations! You've completed the list! 
+      header.modal-card-head.is-success
+        p.modal-card-title Congratiulations! You've completed the list!
         button(onclick="closeListFeedbackPopup()").delete
       section.modal-card-body
         p Give feedback on your learnings, successes and struggles. This helps your mentor to provide even better guidance in the future.
@@ -66,3 +72,15 @@ block content
               button.button.is-primary(type="submit") Submit Feedback
             .control
               a(onclick="closeListFeedbackPopup()").button#not-now-feedback-button Not now
+
+  #get-in-touch.modal
+    .modal-background
+    .modal-card
+      header.modal-card-head.
+        p.modal-card-title Now it's the perfect time to get in touch with you mentor!
+        button(onclick="closeItemFeedbackPopup()").delete
+      section.modal-card-body
+        textarea(onkeypress="addFeedbackTextToLink(this)").textarea.task-feedback
+      footer.modal-card-foot
+        a(href='').button.is-primary#send-feedback-button Submit feedback
+        a(href='').button#not-now-feedback-button Not now
