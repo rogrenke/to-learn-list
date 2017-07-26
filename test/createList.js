@@ -46,6 +46,12 @@ describe('List', () => {
   //     }
   //   })
 
+  // after( () => {
+  //   User.remove({ name: 'Mentor' }, (err, user) => {
+  //     if (!err) { return user }
+  //   });
+  // })
+
 })
 
 describe('Testing', () => {
