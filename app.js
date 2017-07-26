@@ -17,6 +17,7 @@ const User = require('./models/User');
 const List = require('./models/List');
 const Item = require('./models/Item');
 const Mentor = require('./models/Mentor');
+const Mentorship = require('./models/Mentorship');
 
 // Routes
 const index = require('./routes/index');
