@@ -8,35 +8,42 @@ const mongoose = require('mongoose');
 
 const browser = new Browser();
 const User = mongoose.model('User');
+const List = mongoose.model('List');
 
 Browser.localhost('localhost', 7777);
 
 describe('List', () => {
 
   before( async() => {
-    var mentor = await new User({
+    const mentor = await new User({
       name: 'listMentor',
       email: 'listMentor@test.com',
       password: 'listTestPassword'
-    }).save()
+    })
 
-    var mentee = await new User({
+    const mentee = await new User({
       name: 'listMentee',
       email: 'listMentee@test.com',
       password: 'listTestPassword'
-    }).save()
+    })
+
+    const list = await new List({
+      name: 'New List',
+      mentor: mentor.name,
+      mentee: mentee.name
+    })
+  })
+
+  it('creates a list', () => {
+    var lists = List.find({}, (err, lists) => {
+      expect(lists[0].name).to.equal(list.name)
+    })
   })
 })
 
 describe('Testing', () => {
   it('passed', () => {
     assert.true
-  })
-})
-
-after((done) => {
-  dbCleaner.clean(mongoose.connection.db, () => {
-    done()
   })
 })
 

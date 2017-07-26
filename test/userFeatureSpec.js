@@ -5,6 +5,7 @@ const chai = require('chai'),
   expect = chai.expect;
 const helpers = require('./helpers');
 const mongoose = require('mongoose');
+const User = mongoose.model('User');
 
 const browser = new Browser();
 
@@ -26,7 +27,7 @@ describe('User signup', () => {
       .fill("email", 'featureTest@user.com')
       .fill("password", 'featureTestPassword')
       .fill("password-confirm", 'featureTestPassword')
-      .pressButton("Sign Up")
+    await browser.pressButton("Sign Up")
     await browser.assert.success();
     browser.assert.text('h1','Welcome to Ductu');
   })
@@ -75,10 +76,10 @@ describe('User signup edge-cases', () => {
       .pressButton("Sign Up")
     browser.assert.text('p.flash__text','Please supply a name!');
   })
-})
 
-after((done) => {
-  dbCleaner.clean(mongoose.connection.db, () => {
-    done()
+  after( () => {
+    User.findOneAndRemove({ name: 'featureTestUser'}, (err, user) => {
+      if (!err) { return user }
+    })
   })
 })
