@@ -3,19 +3,26 @@ const chai = require('chai'),
   assert = chai.assert,
   expect = chai.expect;
 const mongoose = require('mongoose');
+// mongoose.createConnection('mongodb://localhost/7777');
 
 describe('User', () => {
   const User = mongoose.model('User');
 
   it('Creates a new user', async() => {
-    var user = await new User({
+    const user = await new User({
       name: 'testUser',
-      email: 'user@test.com',
-      password: 'testPassword'
+      email: 'user@test.com'
     }).save()
-    var users = User.find({}, (err, users) => {
-      expect(users[0].name).to.equal(user.name)
-    })
+
+    console.log(user);
+
+    // find({}, (err, users) => {
+    //   console.log('2', users[0])
+    //   if (err) {
+    //   } else {
+    //     expect(users[0].name).to.equal('testUser')
+    //   }
+    // })
   })
 
   it('throws an error if an email is not unique', () => {
@@ -38,10 +45,10 @@ describe('User', () => {
       password: 'testPassword'
     })).to.throw
   })
-
-  after( () => {
-    User.findOneAndRemove({ name: 'testUser'}, (err, user) => {
-      if (!err) { return user }
-    });
-  })
+  //
+  // after( () => {
+  //   User.findOneAndRemove({ name: 'testUser'}, (err, user) => {
+  //     if (!err) { return user }
+  //   });
+  // })
 })
