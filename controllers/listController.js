@@ -10,10 +10,22 @@ exports.createForm = (req, res) => {
 exports.createList = async (req, res) => {
   const listName = req.body.name;
   const listAuthor = req.user._id;
-  const mentee = await User.findOne({ name: req.body.mentee });
-  const newList = new List({name: listName, author: listAuthor, mentee: mentee._id});
-  await newList.save();
-  res.redirect(`/lists/${newList._id}`);
+  try {
+    const mentee = await User.findOne({ name: req.body.mentee });
+    if(String(req.user._id) == String(mentee._id)) {
+      console.log("went wrong")
+      req.flash('error', "You cannot assign a list to yourself!");
+      res.redirect('/lists/new');
+    } else {
+      const newList = new List({name: listName, author: listAuthor, mentee: mentee._id});
+      await newList.save();
+      res.redirect(`/lists/${newList._id}`);
+    }
+  } catch (err) {
+    console.log("flash")
+    req.flash('error', `The user ${req.body.mentee} does not exist.`);
+    res.redirect('/lists/new');
+  }
 };
 
 exports.getLists = async (req, res) => {
