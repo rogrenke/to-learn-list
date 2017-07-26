@@ -14,15 +14,13 @@ describe('User', () => {
       email: 'user@test.com'
     }).save()
 
-    console.log(user);
-
-    // find({}, (err, users) => {
-    //   console.log('2', users[0])
-    //   if (err) {
-    //   } else {
-    //     expect(users[0].name).to.equal('testUser')
-    //   }
-    // })
+    User.find({}, (err, users) => {
+      if (err) {
+        console.log('Error in finding users', err);
+      } else {
+        expect(users[0].name).to.equal('testUser')
+      }
+    })
   })
 
   it('throws an error if an email is not unique', () => {
@@ -45,10 +43,10 @@ describe('User', () => {
       password: 'testPassword'
     })).to.throw
   })
-  //
-  // after( () => {
-  //   User.findOneAndRemove({ name: 'testUser'}, (err, user) => {
-  //     if (!err) { return user }
-  //   });
-  // })
+
+  after( () => {
+    User.findOneAndRemove({ name: 'testUser'}, (err, user) => {
+      if (!err) { return user }
+    });
+  })
 })
