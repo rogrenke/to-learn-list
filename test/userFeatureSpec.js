@@ -7,7 +7,6 @@ const helpers = require('./helpers');
 const mongoose = require('mongoose');
 
 const browser = new Browser();
-const User = mongoose.model('User');
 
 Browser.localhost('localhost', 7777);
 
@@ -57,7 +56,6 @@ describe('User signin', () => {
       .fill("email", 'featureTest@user.com')
       .fill("password", 'featureTestPassword')
       .pressButton("Sign In")
-    await browser.assert.success();
     browser.assert.text('p.flash__text','Signed in!')
   })
 })
@@ -76,12 +74,6 @@ describe('User signup edge-cases', () => {
       .fill("password-confirm", 'featureTestPassword')
       .pressButton("Sign Up")
     browser.assert.text('p.flash__text','Please supply a name!');
-  })
-})
-
-describe('Testing', () => {
-  it('passed', () => {
-    assert.true
   })
 })
 

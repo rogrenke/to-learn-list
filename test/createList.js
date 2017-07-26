@@ -1,29 +1,45 @@
-// const mongoose = require('mongoose');
-// const Browser = require('zombie');
-// const helpers = require('./helpers');
-// const chai = require('chai'),
-//   assert = chai.assert,
-//   expect = chai.expect;
-// var app = require('../app');
-//
-// Browser.localhost('localhost', 7777);
-//
-// describe('List creation page', () => {
-//   const browser = new Browser();
-//
-//   before((done) => {
-//     helpers.createUserAndSignOut("Ghetto Chris", "chris@mail.com", "gangsta", browser, done);
-//   });
-//
-//   before((done) => {
-//     helpers.createUser("Jeff Jones", "jeff@mail.com", "password", browser, done);
-//   });
-//
-//   after((done) => {
-//     mongoose.connection.db.dropDatabase(() => {
-//       done();
-//     });
-//   });
+const app = require('../app');
+const Browser = require('zombie');
+const chai = require('chai'),
+  assert = chai.assert,
+  expect = chai.expect;
+const helpers = require('./helpers');
+const mongoose = require('mongoose');
+
+const browser = new Browser();
+const User = mongoose.model('User');
+
+Browser.localhost('localhost', 7777);
+
+describe('List', () => {
+
+  before( async() => {
+    var mentor = await new User({
+      name: 'listMentor',
+      email: 'listMentor@test.com',
+      password: 'listTestPassword'
+    }).save()
+
+    var mentee = await new User({
+      name: 'listMentee',
+      email: 'listMentee@test.com',
+      password: 'listTestPassword'
+    }).save()
+  })
+})
+
+describe('Testing', () => {
+  it('passed', () => {
+    assert.true
+  })
+})
+
+after((done) => {
+  dbCleaner.clean(mongoose.connection.db, () => {
+    done()
+  })
+})
+
 //
 //   describe('User visits the create list page from the homepage', () => {
 //
