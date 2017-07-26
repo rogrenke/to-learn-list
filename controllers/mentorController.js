@@ -30,7 +30,7 @@ exports.inviteMentor = async (req, res) => {
 };
 
 exports.listInvites = async (req, res) => {
-  const invites = await Mentorship.find({ mentor: req.user._id })
+  const invites = await Mentorship.find({ mentor: req.user._id, status:'pending'})
     .populate('mentor', 'name')
     .populate('mentee', 'name');
   res.render('invites', { invites });
@@ -40,7 +40,7 @@ exports.acceptInvite = async (req, res) => {
   const mentorship = await Mentorship.findById(req.params.id);
   if (String(mentorship.mentor) == String(req.user._id)) {
     await Mentorship.findByIdAndUpdate(req.params.id, {
-      active: true
+      status: 'active'
     });
   } else {
     throw Error('You are not the assigned mentor')
@@ -52,21 +52,10 @@ exports.declineInvite = async (req, res) => {
   const mentorship = await Mentorship.findById(req.params.id);
   if (String(mentorship.mentor) == String(req.user._id)) {
     await Mentorship.findByIdAndUpdate(req.params.id, {
-      active: false
+      status: 'declined'
     });
   } else {
     throw Error('You are not the assigned mentor')
   }
   res.redirect('/mentors/invites');
 };
-
-// exports.acceptInvite = async (req, res) => {
-//   const invite = await Mentorship.findById(req.params.id);
-//   // console.log(invite);
-//   // console.log(req.user._id);
-//   if (invite.mentor === req.user._id) {
-//     Mentorship.findOneAndUpdate(invite, {active: true});
-//   } else {
-//     throw Error('You are not the mentor')
-//   }
-// };

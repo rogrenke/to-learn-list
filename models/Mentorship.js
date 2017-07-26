@@ -12,9 +12,9 @@ const mentorshipSchema = new mongoose.Schema({
     ref: 'User',
     required: 'Please assign a mentor'
   },
-  active: {
-    type: Boolean,
-    default: false
+  status: {
+    type: String,
+    default: 'pending'
   }
 });
 

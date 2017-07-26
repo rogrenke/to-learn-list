@@ -25,7 +25,12 @@ html
                 a.navbar-link(href='/lists') Lists
                 .navbar-dropdown.is-boxed
                   a.navbar-item(href='/lists/new') Create List
-              a.navbar-item(href='/mentors/invites') Invites
+              .navbar-item.has-dropdown.is-hoverable
+                a.navbar-link Mentorships
+                .navbar-dropdown.is-boxed
+                  a.navbar-item Your Mentees
+                  a.navbar-item Your Mentors
+                  a.navbar-item(href='/mentors/invites') Pending Invites
             .navbar-end
               .navbar-item
                 if user

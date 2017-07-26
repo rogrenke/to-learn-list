@@ -3,17 +3,17 @@ extends layout
 block content
   section.section
     .container
-    h1.title.is-2 Your Invites
+    h1.title.is-2 Pending Invites
     .tile.is-ancestor.wrap-line
-      each invite in invites
+    each invite in invites
+      if !(invite.status == 'active')
         .tile.is-parent.column.is-one-third
           .card.tile.is-child
             header.card-header
               p.card-header-title=invite.mentee.name
               .card-content
                 .content
-                  p This is the message from the mentee
-                  p Active: #{invite.active}
+                  p Status: #{invite.status}
             footer.card-footer
               a.card-footer-item(href=`/mentors/invites/accept/${invite._id}`)
                 span.icon
