@@ -28,7 +28,7 @@ exports.getListById = async (req, res) => {
   const items = await Item.find({ list: req.params.id });
   const completeItems = await Item.find({ list: req.params.id, status: "complete" });
   let complete;
-  (items.length === completeItems.length && items.length!==0 && !list.feedback) ? complete = ".is-active" : complete = "";
+  (items.length === completeItems.length && items.length!==0 && !list.feedback) ? complete = " is-active" : complete = "";
   res.render('list', { list, items, complete, name: list.name });
 };
 

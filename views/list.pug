@@ -41,10 +41,11 @@ block content
         p.modal-card-title Give feedback on the task
         button(onclick="closeItemFeedbackPopup()").delete
       section.modal-card-body
-        textarea(onkeypress="addFeedbackTextToLink(this)").textarea.task-feedback 
+        textarea(onkeypress="addFeedbackTextToLink(this)").textarea.task-feedback
       footer.modal-card-foot
         a(href='').button.is-primary#send-feedback-button Submit feedback
         a(href='').button#not-now-feedback-button Not now
+
   div(class="modal"+complete)#overall-feedback-popup
     .modal-background
     .modal-card
@@ -53,16 +54,15 @@ block content
         button(onclick="closeListFeedbackPopup()").delete
       section.modal-card-body
         p Give feedback on your learnings, successes and struggles. This helps your mentor to provide even better guidance in the future.
-        br
         form(method='POST' action=`/lists/${list.id}/edit`)
           .field
-            label.label(for="feedback") Feedback on the list
             .control
-              input.textarea(type="textarea" name="feedback")
+              textarea.textarea(type="textarea" name="feedback", placeholder="Feedback on the list")
           .field
             .control
               input(type="hidden" name="id" value=`${list.id}`)
-          .field
+          .field.is-grouped
             .control
               button.button.is-primary(type="submit") Submit Feedback
-        a(href='').button#not-now-feedback-button Not now  
+            .control
+              a(onclick="closeListFeedbackPopup()").button#not-now-feedback-button Not now

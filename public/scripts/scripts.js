@@ -8,9 +8,9 @@ function updateItem(element, link) {
     $sendButton.href = link+"&feedback=";
     $notNowButton.href = link;
   } else {
-      window.location.replace(link);
+    window.location.replace(link);
   }
-};
+}
 
 function addFeedbackTextToLink(text) {
   var $sendButton = document.getElementById("send-feedback-button");
@@ -27,10 +27,6 @@ function closeListFeedbackPopup() {
   document.getElementById("overall-feedback-popup").className = "modal";
 }
 
-function listCompletenessCheck(items) {
-  console.log("Hello")
-  console.log(items);
-}
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -55,23 +51,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
       });
     });
-  };
+  }
 });
 
-
-  // var $listItems = Array.prototype.slice.call(document.getElementsByClassName("incomplete"));
-  // var $feedbackOverlay = document.getElementById("feedback-popup");
-  //
-  // if ($listItems.length > 0) {
-  //
-  //   console.log($listItems);
-  //
-  //   // $listItems.forEach(function ($item) {
-  //   //   console.log($item.className);
-  //   //   $item.addEventListener('click', () => {
-  //   //     $feedbackOverlay.className += " is-active";
-  //   //
-  //   //   });
-  //   // });
-  //
-  // };
