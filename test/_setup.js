@@ -11,8 +11,5 @@ console.log( '--------SETUP TIME--------')
 
 mongoose.connect('mongodb://127.0.0.1/to-learn-list_test', {useMongoClient: true}, async () => {
   await mongoose.connection.db.dropDatabase()
-  await console.log('--------PARTY TIME--------')
+  await console.log('--------HAMMER TIME--------')
 })
-
-
-//TODO DROP EVERYTHING / - if next CREATE A USER / CREATE A LIST / CREATE AN ITEM / REMOVE EVERYTHING AGAIN / DONE

@@ -43,9 +43,4 @@ describe('User', () => {
     })).to.throw
   })
 
-  // after( () => {
-  //   User.findOneAndRemove({ name: 'testUser'}, (err, user) => {
-  //     if (!err) { return user }
-  //   });
-  // })
 })

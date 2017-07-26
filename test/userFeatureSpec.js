@@ -59,11 +59,6 @@ describe('User signin', () => {
     browser.assert.text('p.flash__text','Signed in!')
   })
 
-  // after( () => {
-  //   User.findOneAndRemove({ name: 'featureTestUser'}, (err, user) => {
-  //     if (!err) { return user }
-  //   })
-  // })
 })
 
 describe('User signup edge-cases', () => {
