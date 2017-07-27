@@ -41,6 +41,11 @@ function updateInTouch() {
   window.location.replace(window.location.pathname + "/book_face_to_face?listId=" + listId);
 }
 
+function closeFlash(element) {
+  element.parentElement.remove()
+  document.getElementById('flash-container').style.display="none"
+}
+
 document.addEventListener('DOMContentLoaded', function () {
 
   // Get all "navbar-burger" elements

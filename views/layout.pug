@@ -46,16 +46,16 @@ html
                       span Sign In
     block messages
       if Object.keys(locals.flashes).length > 0
-        .container
+        .container#flash-container
           .columns
             .column.is-half.is-offset-3
               if locals.flashes
-                .inner
+                .inner.inner--flashes
                 .flash-messages
                   - const categories = Object.keys(locals.flashes)
                   each category in categories
                     each message in flashes[category]
                       .flash(class=`flash--${category}`)
                         p.flash__text!= message
-                        button.flash__remove(onClick="this.parentElement.remove()") &times;
+                        button.flash__remove(onClick="closeFlash(this)") &times;
     block content
