@@ -37,7 +37,6 @@ describe('Item', () => {
       if (err) {
         console.log('Error in finding items', err);
       } else {
-        console.log(items[0]);
         expect(items[0].name).to.equal('New Item')
       }
     })
