@@ -13,7 +13,6 @@ exports.createList = async (req, res) => {
   try {
     const mentee = await User.findOne({ name: req.body.mentee });
     if(String(req.user._id) == String(mentee._id)) {
-      console.log("went wrong")
       req.flash('error', "You cannot assign a list to yourself!");
       res.redirect('/lists/new');
     } else {
@@ -22,7 +21,6 @@ exports.createList = async (req, res) => {
       res.redirect(`/lists/${newList._id}`);
     }
   } catch (err) {
-    console.log("flash")
     req.flash('error', `The user ${req.body.mentee} does not exist.`);
     res.redirect('/lists/new');
   }
@@ -39,10 +37,8 @@ exports.getListById = async (req, res) => {
   const list = await List.findOne({ _id: req.params.id }).populate('author', 'email');
   const items = await Item.find({ list: req.params.id });
   const completeItems = await Item.find({ list: req.params.id, status: "complete" });
-  console.log(completeItems);
   let complete;
   (items.length === completeItems.length && items.length!==0 && !list.feedback) ? complete = " is-active" : complete = "";
-  console.log(complete)
   res.render('list', { list, items, complete, name: list.name });
 };
 

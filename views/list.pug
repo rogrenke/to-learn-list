@@ -84,4 +84,5 @@ block content
           p.modal-card-title Now it's the perfect time to get in touch with you mentor!
           button(onclick="closeGetInTouchPopup()").delete
         section.modal-card-body
-          a(href=`mailto:${list.author.email}?Subject=Request%20for%20a%20face%20to%20face%20from%20your%20beloved%20mentee`).button.is-primary#get-in-touch Get in touch
+          a(href=`mailto:${list.author.email}?Subject=Request%20for%20a%20face%20to%20face%20from%20your%20beloved%20mentee` onclick="getInTouch()").button.is-primary#get-in-touch Get in touch
+          a(onclick="updateInTouch()").button.is-primary.none-display-element#update-in-touch Done

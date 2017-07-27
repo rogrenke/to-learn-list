@@ -17,7 +17,6 @@ exports.updateItem = async (req, res) => {
         { status: newStatus },
         { new: true }
       );
-      console.log(req.query.feedback)
       const updatedItem = await Item.findOneAndUpdate(
         { _id: req.query.item },
         { feedback: req.query.feedback },
