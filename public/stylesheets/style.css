@@ -5189,4 +5189,7 @@ p.card-header-title.author {
   #overall-feedback-popup .modal-card-head p {
     color: #fff; }
 
+.author {
+  cursor: default; }
+
 /*# sourceMappingURL=style.css.map */

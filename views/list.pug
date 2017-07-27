@@ -40,10 +40,13 @@ block content
                   .tile.is-parent.is-vertical
                     .card.tile.is-child
                       header.card-header
-                        - var string = `updateItem(this, "/items/edit?item=${item._id}&status=${item.status}")`
+                        - var string = `updateItem(this, "/items/edit?item=${item._id}&status=${item.status}", "${item.status}")`
                         a.card-header-icon(onclick=string)
                           span.icon
-                            i.fa.fa-square-o  
+                            if item.status === "complete"
+                              i.fa.fa-check-square-o
+                            else 
+                              i.fa.fa-square-o
                         p.card-header-title.has-text-success(class=item.status)=item.text
                         a(href=`/items/${item._id}`).card-header-icon.itemDetail Show details
                       if item.feedback
@@ -66,7 +69,7 @@ block content
             textarea(onkeyup="addFeedbackTextToLink(this)", placeholder="Your feedback").textarea.task-feedback
         .field.is-grouped
           .control
-            a(href='').button.is-primary#send-feedback-button Submit feedback
+            a(href='').button.is-primary#send-feedback-button Send Feedback
           .control
             a(href='').button#not-now-feedback-button Not now
 
@@ -87,7 +90,7 @@ block content
               input(type="hidden" name="id" value=`${list.id}`)
           .field.is-grouped
             .control
-              button.button.is-primary(type="submit") Submit Feedback
+              button.button.is-primary(type="submit") Send Feedback
             .control
               a(onclick="closeListFeedbackPopup()").button#not-now-feedback-button Not now
 
