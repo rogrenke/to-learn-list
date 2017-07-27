@@ -9,31 +9,31 @@ block content
               .column
                 h1.title.is-2= item.text
                 p= item.description
-              .column
-                a(href=`${item.linkToResource}`)
-                  p Link to resource 
+              if item.linkToResource
+                .column
+                  a(href=`${item.linkToResource}`)
+                    p Link to resource 
             .column
-              p !{youtubeVideoIframe}  
-          .columns 
-            .column              
+              p !{youtubeVideoIframe}
+          .columns
+            .column
               .field
                 a.button.is-medium.is-primary(href=`/lists/${item.list}`)
                   span.icon.is-medium
                     i.fa.fa-arrow-left
                   span Back
-    
-      else 
+      else
         .container
-          .columns 
+          .columns
             .column.is-half.is-offset-one-quarter
               .column
                 h1.title.is-2= item.text
                 p= item.description
+              if item.linkToResource
+                .column
+                  a(href=`${item.linkToResource}`)
+                    p Link to resource 
               .column
-                a(href=`${item.linkToResource}`)
-                  p Link to resource 
-            .columns 
-              .column              
                 .field
                   a.button.is-medium.is-primary(href=`/lists/${item.list}`)
                     span.icon.is-medium
