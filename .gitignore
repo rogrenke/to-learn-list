@@ -31,7 +31,7 @@ npm-debug.log
 
 # CSS
 public/stylesheets/style.css
-public/stylesheets/style.map
+public/stylesheets/style.css.map
 
 # The annoying stuff
 .DS_Store
