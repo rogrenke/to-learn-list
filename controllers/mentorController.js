@@ -36,6 +36,7 @@ exports.inviteMentor = async (req, res) => {
     mentor: mentor.user
   });
   await mentorship.save();
+  req.flash('success', 'Invite Sent!');
   res.redirect('/mentors');
 };
 
