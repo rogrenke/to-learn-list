@@ -1,14 +1,34 @@
 extends layout
 
 block content
-  .section
-    .container
-      h1= itemToGet.text
-    .container
-      p= itemToGet.description
-    .container 
-      a(href=`${itemToGet.linkToResource}`)= itemToGet.linkToResource
-  if youtubeVideoIframe
-    .section
-      .container
-      p !{youtubeVideoIframe}
+  section.section
+      if youtubeVideoIframe
+        .container
+          .columns 
+            .column.is-one-third
+              .column
+                h1.title.is-2= item.text
+                p= item.description
+              .column
+                a(href=`${item.linkToResource}`)
+                  p Link to resource 
+            .column
+              p !{youtubeVideoIframe}  
+          .columns 
+            .column              
+              .field
+                a.button.is-medium.is-primary(href=`/lists/${item.list}`)
+                  span.icon.is-medium
+                    i.fa.fa-arrow-left
+                  span Back
+    
+      else 
+        .container
+          .columns 
+            .column.is-half.is-offset-one-quarter
+              .column
+                h1.title.is-2= item.text
+                p= item.description
+              .column
+                a(href=`${item.linkToResource}`)
+                  p Link to resource 
