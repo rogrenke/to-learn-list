@@ -1,138 +1,79 @@
+const app = require('../app');
 const Browser = require('zombie');
-const helpers = require('./helpers'); 
-var mongoose = require('mongoose');
-var app = require('../app');
-var chai = require('chai'),
+const chai = require('chai'),
   assert = chai.assert,
   expect = chai.expect;
+const helpers = require('./helpers');
+const mongoose = require('mongoose');
+const User = mongoose.model('User');
+
+const browser = new Browser();
 
 Browser.localhost('localhost', 7777);
 
-describe('User signup', function() {
-  const browser = new Browser();
+describe('User signup', () => {
 
-  before((done) => {
-    return browser.visit('/users/new', done);
+  beforeEach( async () => {
+    await browser.visit('/users/new');
   });
 
-  describe('normal sign up', function() {
-    it ('should have a sign up form', () => {
-      browser.assert.element('form');
-    });
+  it ('should have a sign up form', () => {
+    browser.assert.element('form');
   });
 
-  describe('user leaves name blank', () => {
-    before((done) => {
-      browser
-        .fill("email", "ghettochris@gmail.com")
-        .fill("password", "gangsta")
-        .fill("password-confirm", "gangsta")
-        .pressButton("Sign Up", done);
-    });
+  it('allows sign up', async() => {
+    await browser
+      .fill("name", 'featureTestUser')
+      .fill("email", 'featureTest@user.com')
+      .fill("password", 'featureTestPassword')
+      .fill("password-confirm", 'featureTestPassword')
+    await browser.pressButton("Sign Up")
+    await browser.assert.success();
+    browser.assert.text('h1','Welcome to Ductu');
+  })
+})
 
-    it('should throw an error if name left blank', () => {
-      browser.assert.text('p.flash__text','Please supply a name!');
-    });
-  });
+describe('User signout', () => {
+  before( async() => {
+    await browser.visit('/');
+    await browser.clickLink("Sign Out");
+  })
 
-  describe('normal signup', () => {
-    before((done) => {
-      browser
-        .fill("name", "Ghetto Christopher")
-        .fill("email", "ghetto.c@gmail.com")
-        .fill("password", "gangsta")
-        .fill("password-confirm", "gangsta")
-        .pressButton("Sign Up", done);
-    });
+  it('should redirect to the sign-in page', () => {
+    browser.assert.text('p.flash__text','You signed out successfully')
+  })
+})
 
-    it('should redirect to index page after successfully signing up', () => {
-      browser.assert.text('h1','Welcome to Ductu');
-    });
+describe('User signin', () => {
 
-    after((done) =>  {
-      mongoose.connection.collections.users.drop(() => {
-        done();
-      });
-    });
-  });
-});
+  before( async() => {
+    await browser.clickLink("Sign In")
+  })
 
-describe('User sign out', function() {
+  it('allows sign in', async() => {
+    await browser
+      .fill("email", 'featureTest@user.com')
+      .fill("password", 'featureTestPassword')
+    await browser.pressButton("Sign In")
+    await browser.assert.success();
+    browser.assert.text('p.flash__text','Signed in!')
+  })
 
-  const browser = new Browser();
+})
 
-  before((done) => {
-    browser.visit('/users/new', done);
-  });
+describe('User signup edge-cases', () => {
 
-  before((done) => {
-    browser
-      .fill("name", "Ghetto Chris")
-      .fill("email", "ghettochris@gmail.com")
-      .fill("password", "gangsta")
-      .fill("password-confirm", "gangsta")
-      .pressButton("Sign Up", done);
-  });
+  before( async() => {
+    await browser.visit('/users/new')
+    await browser.assert.success();
+  })
 
-  describe('user signs out successfully', () => {
-    before((done) => {
-      browser.clickLink("Sign Out", done);
-    });
-
-    it('should redirect to the sign-in page', () => {
-      browser.assert.text('#signin','Sign In');
-    });
-  });
-
-  after((done) =>  {
-    mongoose.connection.db.dropDatabase(() => {
-      done();
-    });
-  });
-});
-
-describe('User sign in', function() {
-
-  const browser = new Browser();
-
-  before((done) => {
-    return browser.visit('/users/new', done);
-  });
-
-  before((done) => {
-    helpers.createUserAndSignOut('Ghetto Chris', 'ghettochris@gmail.com', 'gangsta', browser, done)
-  });
-
-  describe('redirects to sign in form', () => {
-    before((done) => {
-      browser.clickLink("Sign In", done);
-    });
-
-    it ('should have a sign in form', () => {
-      browser.assert.element('form');
-    });
-  });
-
-  describe('successfully signs in', () => {
-    before((done) => {
-      browser.clickLink("Sign In", done);
-    });
-
-    before((done) => {
-      browser
-        .fill("email", "ghettochris@gmail.com")
-        .fill("password", "gangsta")
-        .pressButton("Sign In", done);
-    });
-
-    it('should have signed in user', () => {
-      browser.assert.text('#signout','Sign Out');
-    });
-  });
-
-  after((done) => {
-    mongoose.connection.db.dropDatabase(() => {
-      done();
-    });
-  });
-});
+  it('should throw an error if name left blank', async() => {
+    await browser
+      .fill("email", 'featureTest2@user.com')
+      .fill("password", 'featureTestPassword')
+      .fill("password-confirm", 'featureTestPassword')
+      .pressButton("Sign Up")
+    browser.assert.text('p.flash__text','Please supply a name!');
+  })
+})

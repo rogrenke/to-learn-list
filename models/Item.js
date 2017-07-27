@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 mongoose.promise = global.Promise;
-
 const itemSchema = new mongoose.Schema({
 
   text: {
@@ -19,9 +18,14 @@ const itemSchema = new mongoose.Schema({
     trim: true,
   },
 
+  feedback: {
+      type: String,
+      trim: true,
+      default: ""
+  },
+
   status: {
     type: String,
-    trim: true,
     default: 'incomplete'
   },
 

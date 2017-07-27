@@ -3,39 +3,102 @@ extends layout
 block content
   section.section
     .container
-      h1.title.is-2=name
       .columns
-        .column.is-half
+        .column.is-half.is-offset-one-quarter
+          h1.title.is-2=name
+          if String(user._id) == String(list.author._id)
+            form(method='POST')
+              .field
+                label.label(for="text") Item
+                .control
+                  input.input(type="text" name="text")
+              .field
+                label.label(for="description") Description
+                .control
+                  input.input(type="text" name="description")
+              .field 
+                label.label(for="linkToResource") Resource Link
+                p.control.has-icons-left
+                  input.input(type="text" name="linkToResource")
+                  span.icon.is-small.is-left
+                    i.fa.fa-external-link
+              .field
+                label.label(for="youtubeVideo") Youtube Video
+                p.control.has-icons-left
+                  input.input(type="text" name="youtubeVideo")
+                  span.icon.is-small.is-left
+                    i.fa.fa-youtube
+              .field
+                .control
+                button.button.is-primary(type="submit") Add Item
+      .columns
+        .column.is-half.is-offset-one-quarter      
           if items.length > 0
-            p Your list items:
+            .tile.is-ancestor
+              .tile.is-12.is-vertical
+                each item in items
+                  .tile.is-parent.is-vertical
+                    .card.tile.is-child
+                      header.card-header
+                        a.card-header-icon
+                          span.icon
+                            i.fa.fa-square-o  
+                        p.card-header-title.has-text-success
+                          - var string = `updateItem(this, "/items/edit?item=${item._id}&status=${item.status}")`
+                          a(onclick=string class=item.status)=item.text
+                        a(href=`/items/${item._id}`).card-header-icon.itemDetail Show details
+                      if item.feedback
+                        .card-footer
+                          p.card-footer-item.feedback-text= `Feedback: ${item.feedback}`
+        .column
+          if list.feedback
+            h4.is-4 List completion feedback
             .content
-              ul
-              each item in items
-                li
-                  a(href=`/items/edit?item=${item._id}&status=${item.status}` class=item.status)=item.text
-                  span
-                  a(href=`/items/${item._id}`).itemDetail (Show details)
-          form(method='POST')
-            .field
-              label.label(for="text") Item
-              .control
-                input.input(type="text" name="text")
-            .field
-              label.label(for="description") Description
-              .control
-                input.input(type="text" name="description")
-            .field 
-              label.label(for="linkToResource") Resource Link
-              p.control.has-icons-left
-                input.input(type="text" name="linkToResource")
-                span.icon.is-small.is-left
-                  i.fa.fa-external-link
-            .field
-              label.label(for="youtubeVideo") Youtube Video
-              p.control.has-icons-left
-                input.input(type="text" name="youtubeVideo")
-                span.icon.is-small.is-left
-                  i.fa.fa-youtube
-            .field
-              .control
-              button.button.is-primary(type="submit") Add Item
+              p= list.feedback
+  #feedback-popup.modal
+    .modal-background
+    .modal-card
+      header.modal-card-head
+        p.modal-card-title Give feedback on the task
+        button(onclick="closeItemFeedbackPopup()").delete
+      section.modal-card-body
+        .field
+          .control
+            textarea(onkeyup="addFeedbackTextToLink(this)", placeholder="Your feedback").textarea.task-feedback
+        .field.is-grouped
+          .control
+            a(href='').button.is-primary#send-feedback-button Submit feedback
+          .control
+            a(href='').button#not-now-feedback-button Not now
+
+  div(class="modal"+complete)#overall-feedback-popup
+    .modal-background
+    .modal-card
+      header.modal-card-head.is-success
+        p.modal-card-title Congratulations! You've completed the list!
+        button(onclick="closeListFeedbackPopup()").delete
+      section.modal-card-body
+        p Give feedback on your learnings, successes and struggles. This helps your mentor to provide even better guidance in the future.
+        form(method='POST' action=`/lists/${list.id}/edit`)
+          .field
+            .control
+              textarea.textarea(type="textarea" name="feedback", placeholder="Feedback on the list")
+          .field
+            .control
+              input(type="hidden" name="id" value=`${list.id}`)
+          .field.is-grouped
+            .control
+              button.button.is-primary(type="submit") Submit Feedback
+            .control
+              a(onclick="closeListFeedbackPopup()").button#not-now-feedback-button Not now
+
+  if (list.feedback && !list.faceToFaceBooked)
+    #get-in-touch-popup.modal.is-active
+      .modal-background
+      .modal-card
+        header.modal-card-head
+          p.modal-card-title Now it's the perfect time to get in touch with you mentor!
+          button(onclick="closeGetInTouchPopup()").delete
+        section.modal-card-body
+          a(href=`mailto:${list.author.email}?Subject=Request%20for%20a%20face%20to%20face%20from%20your%20beloved%20mentee` onclick="getInTouch()").button.is-primary#get-in-touch Get in touch
+          a(onclick="updateInTouch()").button.is-primary.none-display-element#update-in-touch Done

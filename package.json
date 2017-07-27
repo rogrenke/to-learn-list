@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "env NODE_ENV=development node ./app.js",
-    "test": "env NODE_ENV=test nyc mocha"
+    "test": "env NODE_ENV=test mocha"
   },
   "nyc": {
     "check-coverage": true,

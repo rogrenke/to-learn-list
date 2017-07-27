@@ -9,34 +9,41 @@ html
 
   body
     block header
-      .container
-        .navbar.is-transparent
-          .navbar-brand
-            a.navbar-item(href='/')
-              img.navbar-logo(src='/images/ductu.png')
-            .navbar-burger.burger(data-target='navMenu')
-              span
-              span
-              span
-          #navMenu.navbar-menu
-            .navbar-start
-              a.navbar-item Home
-              .navbar-item.has-dropdown.is-hoverable
-                a.navbar-link(href='/lists') Lists
-                .navbar-dropdown.is-boxed
-                  a.navbar-item(href='/lists/new') Create List
-            .navbar-end
-              .navbar-item
-                if user
-                  a#signout.button.is-primary(href='/sessions/signout')
-                    span.icon
-                      i.fa.fa-sign-out
-                    span Sign Out
-                else  
-                  a#signin.button.is-primary(href='/sessions/signin')
-                    span.icon
-                      i.fa.fa-user
-                    span Sign In
+      .navbar-container
+        .container
+          .navbar.is-transparent
+            .navbar-brand
+              a.navbar-item(href='/')
+                img.navbar-logo(src='/images/ductu.png')
+              .navbar-burger.burger(data-target='navMenu')
+                span
+                span
+                span
+            #navMenu.navbar-menu
+              .navbar-start
+                a.navbar-item Home
+                .navbar-item.has-dropdown.is-hoverable
+                  a.navbar-link(href='/lists') Lists
+                  .navbar-dropdown.is-boxed
+                    a.navbar-item(href='/lists/new') Create List
+                .navbar-item.has-dropdown.is-hoverable
+                  a.navbar-link Mentorships
+                  .navbar-dropdown.is-boxed
+                    a.navbar-item(href='/mentors/mentees') Your Mentees
+                    a.navbar-item(href='/mentors/my') Your Mentors
+                    a.navbar-item(href='/mentors/invites') Pending Invites
+              .navbar-end
+                .navbar-item
+                  if user
+                    a#signout.button.is-primary(href='/sessions/signout')
+                      span.icon
+                        i.fa.fa-sign-out
+                      span Sign Out
+                  else  
+                    a#signin.button.is-primary(href='/sessions/signin')
+                      span.icon
+                        i.fa.fa-user
+                      span Sign In
     block messages
       if Object.keys(locals.flashes).length > 0
         .container

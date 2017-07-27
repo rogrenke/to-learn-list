@@ -11,15 +11,19 @@ exports.createItem = async (req, res, next) => {
   next();
 };
 
-exports.updateItem = async (req, res, next) => {
+exports.updateItem = async (req, res) => {
   let newStatus = req.query.status == 'incomplete' ? 'complete' : 'incomplete';
-    const updatedItem = await Item.findOneAndUpdate(
-    { _id: req.query.item },
-    { status: newStatus },
-    { new: true }
-  );
+      const firstUpdatedItem = await Item.findOneAndUpdate(
+        { _id: req.query.item },
+        { status: newStatus },
+        { new: true }
+      );
+      const updatedItem = await Item.findOneAndUpdate(
+        { _id: req.query.item },
+        { feedback: req.query.feedback },
+        { new: true }
+      );
   res.redirect(`/lists/${updatedItem.list}`);
-  next();
 };
 
 exports.getItemById = async (req, res, next) => {

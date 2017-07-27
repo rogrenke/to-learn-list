@@ -10,10 +10,20 @@ exports.createForm = (req, res) => {
 exports.createList = async (req, res) => {
   const listName = req.body.name;
   const listAuthor = req.user._id;
-  const mentee = await User.findOne({ name: req.body.mentee });
-  const newList = new List({name: listName, author: listAuthor, mentee: mentee._id});
-  await newList.save();
-  res.redirect(`/lists/${newList._id}`);
+  try {
+    const mentee = await User.findOne({ name: req.body.mentee });
+    if(String(req.user._id) == String(mentee._id)) {
+      req.flash('error', "You cannot assign a list to yourself!");
+      res.redirect('/lists/new');
+    } else {
+      const newList = new List({name: listName, author: listAuthor, mentee: mentee._id});
+      await newList.save();
+      res.redirect(`/lists/${newList._id}`);
+    }
+  } catch (err) {
+    req.flash('error', `The user ${req.body.mentee} does not exist.`);
+    res.redirect('/lists/new');
+  }
 };
 
 exports.getLists = async (req, res) => {
@@ -24,13 +34,34 @@ exports.getLists = async (req, res) => {
 };
 
 exports.getListById = async (req, res) => {
-  const list = await List.findOne({ _id: req.params.id });
+  const list = await List.findOne({ _id: req.params.id }).populate('author', 'email');
   const items = await Item.find({ list: req.params.id });
-  res.render('list', { list, items, name: list.name });
+  const completeItems = await Item.find({ list: req.params.id, status: "complete" });
+  let complete;
+  (items.length === completeItems.length && items.length!==0 && !list.feedback) ? complete = " is-active" : complete = "";
+  res.render('list', { list, items, complete, name: list.name });
 };
 
 exports.createItem = async (req, res) => {
   const newItem = new Item(req.body);
   await newItem.save();
   res.redirect(`/lists/${req.params.id}`);
+};
+
+exports.updateList = async (req, res) => {
+  const listToBeUpdated = await List.findOneAndUpdate(
+    { _id: req.body.id },
+    { feedback: req.body.feedback },
+    { new: true }
+  );
+  res.redirect(`/lists/${req.body.id}`)
+};
+
+exports.bookFaceToFaceOnListCompleted = async (req, res) => {
+  const listToBeUpdated = await List.findOneAndUpdate(
+    { _id: req.query.listId },
+    { faceToFaceBooked: true },
+    { new: true }
+  );
+  res.redirect(`/lists/${req.query.listId}`)
 };
