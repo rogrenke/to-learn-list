@@ -28,7 +28,7 @@ exports.updateItem = async (req, res) => {
 
 exports.getItemById = async (req, res, next) => {
   const itemToGet = await Item.findById(req.params.id)
-  if (itemToGet.youtubeVideo) {
+  if (itemToGet.youtubeVideo !== "") {
       youtubeVideoIframe = embed(itemToGet.youtubeVideo,{ attr: { width:800, height: 400}});
     res.render('item', { itemToGet, youtubeVideoIframe });
   } else {
