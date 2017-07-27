@@ -3,19 +3,9 @@ extends layout
 block content
   section.section
     .container
-      h1.title.is-2=name
       .columns
-        .column.is-half
-          if items.length > 0
-            p Your list items:
-            .content
-              ul
-              each item in items
-                li
-                  - var string = `updateItem(this, "/items/edit?item=${item._id}&status=${item.status}")`
-                  a(onclick=string class=item.status)=item.text
-                  span
-                  a(href=`/items/${item._id}`).itemDetail   (Show details)
+        .column.is-half.is-offset-one-quarter
+          h1.title.is-2=name
           if String(user._id) == String(list.author._id)
             form(method='POST')
               .field
@@ -25,16 +15,39 @@ block content
               .field
                 .control
                 button.button.is-primary(type="submit") Add Item
-        .column
+      .columns
+        .column.is-half.is-offset-one-quarter      
           if items.length > 0
-            h4.is-4 Feedback on the items:
-            .content
-              ul
-              each item in items
-                if item.feedback 
-                  li= item.feedback
-                else
-                  li (no feedback yet)
+            .tile.is-ancestor
+              .tile.is-12.is-vertical
+                each item in items
+                  .tile.is-parent.is-vertical
+                    .card.tile.is-child
+                      header.card-header
+                        a.card-header-icon
+                          span.icon
+                            i.fa.fa-square-o  
+                        p.card-header-title.has-text-success
+                          - var string = `updateItem(this, "/items/edit?item=${item._id}&status=${item.status}")`
+                          a(onclick=string class=item.status)=item.text
+                        a(href=`/items/${item._id}`).card-header-icon.itemDetail Show details
+                      if item.feedback
+                        .card-footer
+                          p.card-footer-item.feedback-text= `Feedback: ${item.feedback}`
+                      //- .card-footer
+                      //-   p.card-footer-item.item
+                      //-   p.card-footer-item.item
+                      //-   a(href=`/items/${item._id}`).card-footer-item.item.itemDetail Show details
+            //- p Your list items:
+            //- .content
+            //-   ul
+            //-   each item in items
+            //-     li
+            //-       - var string = `updateItem(this, "/items/edit?item=${item._id}&status=${item.status}")`
+            //-       a(onclick=string class=item.status)=item.text
+            //-       span
+            //-       a(href=`/items/${item._id}`).itemDetail   (Show details)
+        .column
           if list.feedback
             h4.is-4 List completion feedback
             .content
