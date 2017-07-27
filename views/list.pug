@@ -40,12 +40,11 @@ block content
                   .tile.is-parent.is-vertical
                     .card.tile.is-child
                       header.card-header
-                        a.card-header-icon
+                        - var string = `updateItem(this, "/items/edit?item=${item._id}&status=${item.status}")`
+                        a.card-header-icon(onclick=string)
                           span.icon
                             i.fa.fa-square-o  
-                        p.card-header-title.has-text-success
-                          - var string = `updateItem(this, "/items/edit?item=${item._id}&status=${item.status}")`
-                          a(onclick=string class=item.status)=item.text
+                        p.card-header-title.has-text-success(class=item.status)=item.text
                         a(href=`/items/${item._id}`).card-header-icon.itemDetail Show details
                       if item.feedback
                         .card-footer
