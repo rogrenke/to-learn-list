@@ -31,6 +31,30 @@ I want to be able to earn points for completing learning tasks.
 
 ```
 
+##Features
+
+Ductu is a tool for managing mentor/mentor relationships,
+
+It allows Mentors to:
+
+- Connect with Mentees
+- Make themselves available as Mentors to other users online
+- Build interactive lists of tasks & useful resources
+- Embed videos and links into tasks
+- Confirm completion of tasks and lists
+- Manage feedback from mentees in the platform and over email
+- Facilitate face to face meetings with agendas
+
+It allows Mentee to:
+
+- Find and connect with Mentors
+- Receive guidance from Mentors through interactive lists of tasks and resources
+- Mark tasks completed to track their progress
+- Watch videos and read material
+- Give feedback on tasks and resources to their Mentor
+- Arrange face to face meetings
+- Build agendas to facilitate productive meetings
+
 ### Technologies used
 - Node.js
 - Express

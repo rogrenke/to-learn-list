@@ -13,6 +13,22 @@ block content
                 .control
                   input.input(type="text" name="text")
               .field
+                label.label(for="description") Description
+                .control
+                  input.input(type="text" name="description")
+              .field 
+                label.label(for="linkToResource") Resource Link
+                p.control.has-icons-left
+                  input.input(type="text" name="linkToResource")
+                  span.icon.is-small.is-left
+                    i.fa.fa-external-link
+              .field
+                label.label(for="youtubeVideo") Youtube Video
+                p.control.has-icons-left
+                  input.input(type="text" name="youtubeVideo")
+                  span.icon.is-small.is-left
+                    i.fa.fa-youtube
+              .field
                 .control
                 button.button.is-primary(type="submit") Add Item
       .columns
@@ -34,19 +50,6 @@ block content
                       if item.feedback
                         .card-footer
                           p.card-footer-item.feedback-text= `Feedback: ${item.feedback}`
-                      //- .card-footer
-                      //-   p.card-footer-item.item
-                      //-   p.card-footer-item.item
-                      //-   a(href=`/items/${item._id}`).card-footer-item.item.itemDetail Show details
-            //- p Your list items:
-            //- .content
-            //-   ul
-            //-   each item in items
-            //-     li
-            //-       - var string = `updateItem(this, "/items/edit?item=${item._id}&status=${item.status}")`
-            //-       a(onclick=string class=item.status)=item.text
-            //-       span
-            //-       a(href=`/items/${item._id}`).itemDetail   (Show details)
         .column
           if list.feedback
             h4.is-4 List completion feedback

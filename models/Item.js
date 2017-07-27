@@ -3,9 +3,19 @@ mongoose.promise = global.Promise;
 const itemSchema = new mongoose.Schema({
 
   text: {
-      type: String,
-      trim: true,
-      required: 'Please enter the item text'
+    type: String,
+    trim: true,
+    required: 'Please enter the item text'
+  },
+
+  description: {
+    type: String,
+    trim: true,
+  },
+
+  linkToResource: {
+    type: String,
+    trim: true,
   },
 
   feedback: {
@@ -17,6 +27,12 @@ const itemSchema = new mongoose.Schema({
   status: {
     type: String,
     default: 'incomplete'
+  },
+
+  youtubeVideo: {
+    type: String,
+    trim: true,
+    default: ''
   },
 
   list: {

@@ -1,4 +1,14 @@
 extends layout
 
 block content
-  h1= itemToGet.text
+  .section
+    .container
+      h1= itemToGet.text
+    .container
+      p= itemToGet.description
+    .container 
+      a(href=`${itemToGet.linkToResource}`)= itemToGet.linkToResource
+  if youtubeVideoIframe
+    .section
+      .container
+      p !{youtubeVideoIframe}
