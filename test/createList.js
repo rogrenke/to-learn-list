@@ -36,11 +36,4 @@ describe('List', () => {
       }
     })
   })
-
-})
-
-describe('Testing', () => {
-  it('passed', () => {
-    assert.true
-  })
 })

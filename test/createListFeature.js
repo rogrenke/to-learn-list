@@ -1,67 +1,46 @@
-const app = require('../app');
-const Browser = require('zombie');
-const chai = require('chai'),
-  assert = chai.assert,
-  expect = chai.expect;
-const helpers = require('./helpers');
-const mongoose = require('mongoose');
-
-const browser = new Browser();
-const User = mongoose.model('User');
-const List = mongoose.model('List');
-
-Browser.localhost('localhost', 7777);
-
-
-describe('User creates list', () => {
-
-  before( async () => {
-    await browser.visit('/users/new');
-    await browser.clickLink('Create List');
-  });
-
-  it('visits the new list page', () => {
-    browser.assert.text('h1', 'Create List');
-    browser.assert.url({ pathname: '/lists/new' });
-  });
-
-  it('should display the form', () =>{
-    browser.assert.element('form');
-  });
-});
-
+// const app = require('../app');
+// const Browser = require('zombie');
+// const chai = require('chai'),
+//   assert = chai.assert,
+//   expect = chai.expect;
+// const helpers = require('./helpers');
+// const mongoose = require('mongoose');
 //
-// describe('List Creation form', () => {
-//   const browser = new Browser();
+// const browser = new Browser();
+// const User = mongoose.model('User');
+// const List = mongoose.model('List');
 //
-//   before((done) => {
-//     helpers.createUserAndSignOut("Ghetto Chris", "chris@mail.com", "gangsta", browser, done);
-//   });
+// Browser.localhost('localhost', 7777);
 //
-//   before((done) => {
-//     helpers.createUser("Jeff Jones", "jeff@mail.com", "password", browser, done);
-//   });
 //
-//   after((done) =>  {
-//     mongoose.connection.db.dropDatabase(() => {
-//       done();
+// describe('User creates a new list', () => {
+//
+//   before( async () => {
+//     await helpers.createUserAndSignOut("Ghetto Chris", "chris@mail.com", "gangsta", browser);
+//     await helpers.createUser('Jebb', 'jebadiah@springfield.com', 'cromulent', browser)
+//     await browser.clickLink('Create List', () => {
+//       console.log('Create List link pressed')
 //     });
 //   });
 //
-//   describe('User creates a new list', () => {
-//     before((done) => {
-//       browser.clickLink('Create List', done);
-//     });
+//   it('visits the new list page', () => {
+//     browser.assert.text('h1', 'Create List');
+//     browser.assert.url({ pathname: '/lists/new' });
+//   });
 //
-//     before((done) => {
+//   it('should display the form', () =>{
+//     browser.assert.element('form');
+//   });
+//
+//   it('should display the new list', () => {
+//     browser.clickLink('Create List', ()=>{
 //       browser
 //         .fill('name', 'Reading List')
 //         .fill('mentee', 'Ghetto Chris')
-//         .pressButton('Create', done);
-//     });
-//
-//     it('should display the new list', () => {
-//       browser.assert.text('h1', 'Reading List');
+//         .pressButton('Create', () => {
+//           console.log('Create Button Pressed')
+//           browser.assert.text('h1', 'Reading List');
+//         });
 //     });
 //   });
 // });
