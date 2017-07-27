@@ -21,7 +21,7 @@ block content
               header.card-header
                 p.card-header-title
                   a(href=`lists/${list._id}`)=list.name
-                p.card-header-icon.author= `Assigned to ${list.mentee.name}`
+                p.card-header-icon= `Assigned to ${list.mentee.name}`
               .card-content
                 .content
                   p This is the list description
@@ -36,7 +36,7 @@ block content
               header.card-header
                 p.card-header-title
                   a(href=`lists/${list._id}`)=list.name
-                p.card-header-title.author= `Author ${list.author.name}`
+                p.card-header-icon= `Author ${list.author.name}`
               .card-content
                 .content
                   p This is the list description
