@@ -14,12 +14,12 @@ describe('Item', () => {
   it( 'creates an item', async() => {
     const mentor = await new User({
       name: 'Mentor',
-      email: 'mentor@listtest.com'
+      email: 'mentor@itemtest.com'
     }).save()
 
     const mentee = await new User({
       name: 'Mentee',
-      email: 'mentee@listtest.com'
+      email: 'mentee@itemtest.com'
     }).save()
 
     const list = await new List({
