@@ -7,20 +7,28 @@ block content
           .columns 
             .column.is-one-third
               .column
-                h1.title.is-2= itemToGet.text
-                p= itemToGet.description
+                h1.title.is-2= item.text
+                p= item.description
               .column
-                a(href=`${itemToGet.linkToResource}`)
+                a(href=`${item.linkToResource}`)
                   p Link to resource 
             .column
-              p !{youtubeVideoIframe}
+              p !{youtubeVideoIframe}  
+          .columns 
+            .column              
+              .field
+                a.button.is-medium.is-primary(href=`/lists/${item.list}`)
+                  span.icon.is-medium
+                    i.fa.fa-arrow-left
+                  span Back
+    
       else 
         .container
           .columns 
             .column.is-half.is-offset-one-quarter
               .column
-                h1.title.is-2= itemToGet.text
-                p= itemToGet.description
+                h1.title.is-2= item.text
+                p= item.description
               .column
-                a(href=`${itemToGet.linkToResource}`)
+                a(href=`${item.linkToResource}`)
                   p Link to resource 

@@ -31,10 +31,10 @@ exports.getItemById = async (req, res, next) => {
   console.log(itemToGet.youtubeVideo !== "")
   if (itemToGet.youtubeVideo !== "") {
       youtubeVideoIframe = embed(itemToGet.youtubeVideo,{ attr: { width:800, height: 400}});
-    res.render('item', { itemToGet, youtubeVideoIframe });
+    res.render('item', { item: itemToGet, youtubeVideoIframe });
   } else {
       youtubeVideoIframe = null
-    res.render('item', { itemToGet, youtubeVideoIframe });
+    res.render('item', { item: itemToGet, youtubeVideoIframe });
   }
   next();
 
