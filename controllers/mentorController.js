@@ -14,9 +14,20 @@ exports.createMentor = async (req, res) => {
 };
 
 exports.listMentors = async (req, res) => {
-  const mentors = await Mentor.find().populate('user', 'name');
+  const mentors = await Mentor.find({ mentor: { $not: /req.user._id/  } }).populate('user', 'name');
   res.render('mentors', { mentors });
 };
+
+exports.checkMentor = async (req, res, next) => {
+  const mentor = await Mentor.findById(req.params.id);
+  // console.log(mentor.user);
+  // console.log(req.user._id);
+  if (String(mentor.user) == String(req.user._id)) {
+    throw Error("You can't invite yourself");
+  }
+  return;
+  next();
+}
 
 exports.inviteMentor = async (req, res) => {
   const mentor = await Mentor.findById(req.params.id);
@@ -26,7 +37,6 @@ exports.inviteMentor = async (req, res) => {
   });
   await mentorship.save();
   res.redirect('/mentors');
-  console.log(mentor);
 };
 
 exports.listInvites = async (req, res) => {

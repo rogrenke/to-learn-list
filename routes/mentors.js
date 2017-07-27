@@ -8,7 +8,7 @@ router.post('/new', mentorController.createMentor);
 
 router.get('/', mentorController.listMentors);
 
-router.get('/invite/:id', mentorController.inviteMentor);
+router.get('/invite/:id', mentorController.checkMentor, mentorController.inviteMentor);
 
 router.get('/invites', mentorController.listInvites);
 router.get('/invites/accept/:id', mentorController.acceptInvite);
