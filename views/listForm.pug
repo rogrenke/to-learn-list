@@ -3,9 +3,9 @@ extends layout
 block content
   section.section
     .container
-      h1.title.is-3= title
       .columns
-        .column.is-half
+        .column.is-half.is-offset-one-quarter
+          h1.title.is-3= title
           form(method='POST')
             .field
               label.label(for="name") List Name
