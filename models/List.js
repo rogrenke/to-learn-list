@@ -16,6 +16,14 @@ const listSchema = new mongoose.Schema({
     type: mongoose.Schema.ObjectId,
     ref: 'User'
   },
+  feedback: {
+    type: String,
+    trim: true
+  },
+  faceToFaceBooked: {
+    type: Boolean,
+    default: false
+  }
 });
 
 module.exports = mongoose.model('List', listSchema);

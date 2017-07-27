@@ -9,9 +9,14 @@ const itemSchema = new mongoose.Schema({
       required: 'Please enter the item text'
   },
 
+  feedback: {
+      type: String,
+      trim: true,
+      default: ""
+  },
+
   status: {
     type: String,
-    trim: true,
     default: 'incomplete'
   },
 
