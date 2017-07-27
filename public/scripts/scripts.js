@@ -65,11 +65,4 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
   }
-
-  // var $getInTouch = document.getElementById('get-in-touch');
-  //
-  // $getInTouch.addEventListener('click', (event) => {
-  //
-  //   event.resume();
-  // });
 });
