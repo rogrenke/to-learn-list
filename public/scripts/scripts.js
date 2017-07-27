@@ -1,6 +1,5 @@
-function updateItem(element, link) {
-  if (element.className !== "complete") {
-  // var $statusOfItem =
+function updateItem(element, link, status) {
+  if (status === "incomplete") {
     var $feedbackOverlay = document.getElementById("feedback-popup");
     $feedbackOverlay.className += " is-active";
     var $sendButton = document.getElementById("send-feedback-button");
