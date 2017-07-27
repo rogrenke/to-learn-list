@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  section.section
+    .container
+      h1.title.is-2 Mentors
+      .columns
+        .column.is-4
+         nav.panel
+          p.panel-heading Mentors
+          .panel-block
+            p.control.has-icons-left
+              input.input.is-small(type="text", placeholder="Search")
+              span.icon.is-small.is-left
+                i.fa.fa-search
+        .column
+          each mentor in mentors
+            .card
+              header.card-header
+              p.card-header-title=mentor.user.name
+              .card-content
+                .content
+                  p=mentor.bio
+              footer.card-footer
+                a.card-footer-item(href=`/mentors/invite/${mentor._id}`) Invite

@@ -16,6 +16,8 @@ const helpers = require('./helpers');
 const User = require('./models/User');
 const List = require('./models/List');
 const Item = require('./models/Item');
+const Mentor = require('./models/Mentor');
+const Mentorship = require('./models/Mentorship');
 
 // Routes
 const index = require('./routes/index');
@@ -23,6 +25,7 @@ const users = require('./routes/users');
 const sessions = require('./routes/sessions');
 const lists = require('./routes/lists');
 const items = require('./routes/items');
+const mentors = require('./routes/mentors');
 
 require('./handlers/passport');
 
@@ -94,6 +97,7 @@ app.use('/users', users);
 app.use('/sessions', sessions);
 app.use('/lists', lists);
 app.use('/items', items);
+app.use('/mentors', mentors);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
