@@ -1,38 +1,43 @@
 const app = require('../app');
-const Browser = require('zombie');
 const chai = require('chai'),
   assert = chai.assert,
   expect = chai.expect;
 const helpers = require('./helpers');
 const mongoose = require('mongoose');
 
-const browser = new Browser();
 const User = mongoose.model('User');
 const List = mongoose.model('List');
+const Item = mongoose.model('Item');
 
-Browser.localhost('localhost', 7777);
+describe('Item', () => {
 
-describe('List', () => {
-
-  it( 'creates a list', async() => {
+  it( 'creates an item', async() => {
     const mentor = await new User({
       name: 'Mentor',
-      email: 'mentor@test.com'
+      email: 'mentor@listtest.com'
     }).save()
+
     const mentee = await new User({
       name: 'Mentee',
-      email: 'mentee@test.com'
+      email: 'mentee@listtest.com'
     }).save()
+
     const list = await new List({
-      name: 'New List',
+      name: 'New Item',
       mentor: mentor._id,
       mentee: mentee._id
     }).save()
-    var lists = List.find({}, (err, lists) => {
+
+    const item = await new Item({
+      text: "I'm an Item",
+      list: list._id
+    })
+
+    var items = Item.find({}, (err, items) => {
       if (err) {
-        console.log('Error in finding lists', err);
+        console.log('Error in finding items', err);
       } else {
-        expect(lists[0].name).to.equal('New List')
+        expect(items[0].name).to.equal('New Item')
       }
     })
   })
