@@ -1,14 +1,22 @@
 function updateItem(element, link) {
-  if (element.className !== "complete") {
-  // var $statusOfItem =
+  console.log(element.nextSibling.className);
+  if (element.nextSibling.className === "card-header-title has-text-success incomplete") {
+
     var $feedbackOverlay = document.getElementById("feedback-popup");
     $feedbackOverlay.className += " is-active";
     var $sendButton = document.getElementById("send-feedback-button");
     var $notNowButton = document.getElementById("not-now-feedback-button");
     $sendButton.href = link+"&feedback=";
     $notNowButton.href = link;
+
+    element.nextSibling.className = ' card-header-title has-text-success complete'
+    element.children[0].firstChild.className = "fa fa-check-square-o"
+
   } else {
     window.location.replace(link);
+    console.log('hi');
+    element.nextSibling.className = 'card-header-title has-text-success incomplete'
+    element.children[0].firstChild.className = "fa fa-square-o"
   }
 }
 
