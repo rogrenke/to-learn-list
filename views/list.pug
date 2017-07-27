@@ -32,7 +32,7 @@ block content
                 .control
                 button.button.is-primary(type="submit") Add Item
       .columns
-        .column.is-half.is-offset-one-quarter      
+        .column.is-half.is-offset-one-quarter
           if items.length > 0
             .tile.is-ancestor
               .tile.is-12.is-vertical
@@ -41,12 +41,13 @@ block content
                     .card.tile.is-child
                       header.card-header
                         - var string = `updateItem(this, "/items/edit?item=${item._id}&status=${item.status}", "${item.status}")`
-                        a.card-header-icon(onclick=string)
-                          span.icon
-                            if item.status === "complete"
-                              i.fa.fa-check-square-o
-                            else 
-                              i.fa.fa-square-o
+                        if user.id !== list.author.id
+                          a.card-header-icon(onclick=string)
+                            span.icon
+                              if item.status === "complete"
+                                i.fa.fa-check-square-o
+                              else 
+                                i.fa.fa-square-o
                         p.card-header-title.has-text-success(class=item.status)=item.text
                         a(href=`/items/${item._id}`).card-header-icon.itemDetail Show details
                       if item.feedback
