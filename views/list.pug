@@ -6,7 +6,7 @@ block content
       .columns
         .column.is-half.is-offset-one-quarter
           h1.title.is-2=name
-          if String(user._id) == String(list.author._id)
+          if user.id == list.author._id
             form(method='POST')
               .field
                 label.label(for="text") Item
@@ -15,8 +15,8 @@ block content
               .field
                 label.label(for="description") Description
                 .control
-                  input.input(type="text" name="description")
-              .field 
+                  textarea.textarea(type="text" name="description")
+              .field
                 label.label(for="linkToResource") Resource Link
                 p.control.has-icons-left
                   input.input(type="text" name="linkToResource")
@@ -36,6 +36,13 @@ block content
           if items.length > 0
             .tile.is-ancestor
               .tile.is-12.is-vertical
+                if list.feedback
+                  .tile.is-parent.is-vertical
+                    .card.tile.is-child
+                      header.card-header
+                        p.card-header-title.overall-feedback List completed
+                      .card-footer
+                        p.card-footer-item.feedback-text= `Feedback: ${list.feedback}`
                 each item in items
                   .tile.is-parent.is-vertical
                     .card.tile.is-child
@@ -46,18 +53,13 @@ block content
                             span.icon
                               if item.status === "complete"
                                 i.fa.fa-check-square-o
-                              else 
+                              else
                                 i.fa.fa-square-o
                         p.card-header-title.has-text-success(class=item.status)=item.text
                         a(href=`/items/${item._id}`).card-header-icon.itemDetail Show details
                       if item.feedback
                         .card-footer
                           p.card-footer-item.feedback-text= `Feedback: ${item.feedback}`
-        .column
-          if list.feedback
-            h4.is-4 List completion feedback
-            .content
-              p= list.feedback
   #feedback-popup.modal
     .modal-background
     .modal-card
@@ -96,12 +98,12 @@ block content
               a(onclick="closeListFeedbackPopup()").button#not-now-feedback-button Not now
 
   if (list.feedback && !list.faceToFaceBooked)
-    #get-in-touch-popup.modal.is-active
+    .modal.is-active#get-in-touch-popup
       .modal-background
       .modal-card
         header.modal-card-head
-          p.modal-card-title Now it's the perfect time to get in touch with you mentor!
+          p.modal-card-title Now it's the perfect time to get in touch with your mentor!
           button(onclick="closeGetInTouchPopup()").delete
-        section.modal-card-body
+        section.modal-card-body.has-text-centered
           a(href=`mailto:${list.author.email}?Subject=Request%20for%20a%20face%20to%20face%20from%20your%20beloved%20mentee` onclick="getInTouch()").button.is-primary#get-in-touch Get in touch
           a(onclick="updateInTouch()").button.is-primary.none-display-element#update-in-touch Done
