@@ -3,7 +3,8 @@
 [![Test Coverage](https://codeclimate.com/github/rogrenke/to-learn-list/badges/coverage.svg)](https://codeclimate.com/github/rogrenke/to-learn-list/coverage)
 
 
-# To-Learn-List
+Ductu
+=====
 
 Final Project of the ProjectX Group. Makers Academy, May 2017 Cohort.
 
@@ -18,20 +19,16 @@ So that I have a personalized experience on the platform,
 I want to have a personal account.
 
 As a mentor,
-So that I can personalize To-Learn list,
+So that I can personalize a To-Learn list,
 I want to be able to assign the To-Learn list to a mentee.
 
 As a mentee,
 So that I can document my progress,
 I want to be able to mark a learning task as complete.
 
-As a mentee,
-So that I am incentivized,
-I want to be able to earn points for completing learning tasks.
-
 ```
 
-##Features
+## Features
 
 Ductu is a tool for managing mentor/mentor relationships,
 
@@ -61,6 +58,7 @@ It allows Mentee to:
 - MongoDB
 - Pug
 - Mocha, Chai, Zombie
+- Passport
 
 ## Team
-Chris, Daniele, Mario, Roland, Sam, Toby
+[Chris](https://github.com/bannastre), [Daniele](https://github.com/y0m0), [Mário](https://github.com/marioribeiro), [Roland](https://github.com/rogrenke), [Sam](https://github.com/sampritchard), [Toby](https://github.com/tobywinter)
